@@ -40,12 +40,41 @@ p = 10, j = 5, o = p + j;
 
 c = 10, m = 5, i = c * m;
 
-console.log (10 * 5)
+console.log (10 * 5);
 
-console.log(10 / 2)
+console.log(10 / 2);
 
-console.log (15 / 9)
+console.log (15 / 9);
 
-console.log(o)
+console.log(o);
 
-console.log(i)
+console.log(i);
+
+const avengers = ["HULK", "SPIDERMAN", "BLACK PANTHER"];
+
+avengers[1] = "IRONMAN";
+
+console.log(avengers[0]);
+
+console.log(avengers[1]);
+
+console.log(avengers.length)
+
+const rickAndMortyCharacters = ["Rick", "Beth", "Jerry"];
+rickAndMortyCharacters.push("Morty" , "Summer");
+console.log(rickAndMortyCharacters[4]);
+
+const rickAndMorty = ["Rick", "Jerry", "Morty", "Summer", "Lapiz Lopez"];
+console.log(rickAndMorty);
+
+const number1 = 10;
+const number2 = 20;
+const number3 = 2;
+
+if (number1 === 10){
+    console.log('number1 es estrictamente igual a 10')
+}
+
+if (number1 / number2) {
+    console.log("number2 dividido entre number1 es igual a 2")
+}
