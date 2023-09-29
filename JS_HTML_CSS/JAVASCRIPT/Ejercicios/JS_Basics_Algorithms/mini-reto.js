@@ -4,7 +4,7 @@ let isInnerPlanet = true;
  
 let hasAtmophere = true;
 
-let isHabitable = isInnerPlanet && hasAtmophere
+let isHabitable = isInnerPlanet && hasAtmophere;
 console.log(isHabitable)
 
 
