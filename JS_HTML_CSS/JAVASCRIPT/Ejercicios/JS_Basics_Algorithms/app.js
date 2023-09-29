@@ -1,19 +1,14 @@
-let myFavoriteHero; 
-myFavoriteHero = "Hulk"
+let myFavoriteHero = "Hulk"; 
 
 console.log (myFavoriteHero)
 
-let x;
-x = 50;
+let x = 50;
 
-let h;
-h = 5;
+let h = 5;
 
-let y;
-y = 10;
+let y = 10;
 
-let z;
-z = h + y;
+let z = h + y;
 
 console.log (z)
 
@@ -42,14 +37,9 @@ const car2 = {name: 'Chevrolet Corbina', basePrice: 70000, finalPrice: 95000};
 
 15 / 9; // 1,6
 
-p = 10;
-j = 5;
-o = p + j
+p = 10, j = 5, o = p + j;
 
-
-c = 10;
-m = 5;
-i = c * m
+c = 10, m = 5, i = c * m;
 
 console.log (10 * 5)
 
