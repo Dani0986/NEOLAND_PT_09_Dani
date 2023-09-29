@@ -23,7 +23,6 @@ console.log ("soy",  firstname, "tengo", lastname,  age + " y me gustan los lobo
 const toy1 = {name: 'Buss myYear', price: 19};
 const toy2 = {name: 'Rallo mcKing', price: 29};
 
-
 console.log (toy1,toy2,19+29)
 
 let globalBasePrice = 25000
