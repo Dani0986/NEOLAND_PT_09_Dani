@@ -105,17 +105,25 @@ if (number2 === number1 && number1 === number3); {
   console.log("number2 entre 2 es igual a number1 O number1 entre 5 es igual a number3");
 }
 
-for (let a = 0; a <=9; a++) {
+for (let a=0; a<=9; a++) {
   console.log(a)
 } 
 
-for (let x = 0; x <= 18; x++) {
-  console.log(x / 2)
+for (let b=0; b<= 9; b++) {
+  if (b % 2 == 0);
+  console.log(b);
 }
 
-let s = 0;
 
-while (s <= 9) {
-  console.log("intentando dormir");
-  s++;
+let s = [];
+let i = 0;
+
+console.log(s);
+
+while (i <= 10) {
+  s.push(i);
+  i++;
+
 }
+
+console.log(s)
