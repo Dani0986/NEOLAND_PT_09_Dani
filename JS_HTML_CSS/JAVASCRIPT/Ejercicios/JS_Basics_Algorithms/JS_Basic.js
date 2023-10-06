@@ -110,20 +110,17 @@ for (let a=0; a<=9; a++) {
 } 
 
 for (let b=0; b<= 9; b++) {
-  if (b % 2 == 0);
-  console.log(b);
+  if(b % 2 == 0){
+  console.log(b)
+  }
+}
+
+for (let x=0; x< 10; x++) {
+  if(x < 9) {
+    console.log("intentando dormir") 
+  } else {console.log ("dormir")
+}
+  
 }
 
 
-let s = [];
-let i = 0;
-
-console.log(s);
-
-while (i <= 10) {
-  s.push(i);
-  i++;
-
-}
-
-console.log(s)
