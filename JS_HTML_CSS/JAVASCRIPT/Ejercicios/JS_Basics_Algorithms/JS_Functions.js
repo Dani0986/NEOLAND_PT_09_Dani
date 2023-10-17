@@ -39,17 +39,12 @@ console.log(sumAll(numbers))
 
 const numeros = [1, 2, 3, 5, 45, 37, 58];
 function average(myArray) {
-    let i = 0, sum = 0, ArrayLen = myArray.length;
-    while (i < ArrayLen) {
-        sum = sum + myArray[i++];
+   let i = 0, sum = 0, ArrayLen = myArray.length;
+   while (i < ArrayLen) {
+      sum = sum + myArray[i++];
     }
    return sum / ArrayLen;
 }
 
 let a = average(numeros);
 console.log(a)
-
-
-
-const mixedElements = [6, 1, 'Rayo', 1, 'vallecano', '10', 'upgrade', 8, 'hub'];
-function  averageWords(obj){}
