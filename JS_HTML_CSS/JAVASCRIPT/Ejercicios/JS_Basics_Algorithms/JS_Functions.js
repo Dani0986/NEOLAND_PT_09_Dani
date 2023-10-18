@@ -54,16 +54,6 @@ function average(myArray) {
 let result = average(numeros);
 console.log(result);
 
-//--------------------- constante numeros con bucle while (hay que ir con cuidado)
-//   let i = 0, sum = 0, ArrayLen = myArray.length;
-//   while (i < ArrayLen) {
- //     sum = sum + myArray[i++];
-//    }
-//   return sum / ArrayLen;
-//}
-
-//let a = average(numeros);
-//console.log(a)
 
 const mixedElements = [6, 1, 'Rayo', 1, 'vallecano', '10', 'upgrade', 8, 'hub'];
 function averageWord(numLetras) {}
