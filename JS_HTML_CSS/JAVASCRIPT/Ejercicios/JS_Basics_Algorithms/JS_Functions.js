@@ -66,39 +66,6 @@ console.log(result);
 //console.log(a)
 
 const mixedElements = [6, 1, 'Rayo', 1, 'vallecano', '10', 'upgrade', 8, 'hub'];
-function averageWord(numLetras) {
-    if (numLetras.lenght === 0 ){
-        return 0;
-    }
+function averageWord(numLetras) {}
 
-    let todo = numLetras.reduce(function(acc, cadena) {
-   if (typeof cadena === "string") {                 
-      return acc + cadena.length;
-    } else {
-      return acc; 
-    }
-  }, 0);
 
-    let promedio = todo / numLetras.length;
-    return promedio;
-
-}
-
-let promedio = averageWord(mixedElements)
-console.log(promedio)
-
-const duplicates = [
-    'sushi',
-    'pizza',
-    'burger',
-    'potatoe',
-    'pasta',
-    'ice-cream',
-    'pizza',
-    'chicken',
-    'onion rings',
-    'pasta',
-    'soda'
-  ];
-
- 
