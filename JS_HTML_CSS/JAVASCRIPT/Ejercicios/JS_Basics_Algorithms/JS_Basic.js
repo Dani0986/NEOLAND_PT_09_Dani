@@ -1,3 +1,5 @@
+//?--- Iteración #1: Variables
+
 let myFavoriteHero = "Hulk"; 
 
 console.log (myFavoriteHero)
@@ -11,6 +13,8 @@ let y = 10;
 let z = h + y;
 
 console.log (z)
+
+//?-- Iteración #2: Variables avanzadas
 
 const character = {name: 'Jack sparrow', age: 10};
 
@@ -33,6 +37,7 @@ let globalBasePrice = 25000
 const car1 = {name: 'BMW m&m', basePrice: 50000, finalPrice: 75000};
 const car2 = {name: 'Chevrolet Corbina', basePrice: 70000, finalPrice: 95000};
 
+//?--- Iteración #3: Operadores
 
 10 * 5;
 
@@ -54,6 +59,8 @@ console.log(o);
 
 console.log(i);
 
+//?--- Iteración #4: Arrays
+
 const avengers = ["HULK", "SPIDERMAN", "BLACK PANTHER"];
 
 avengers[1] = "IRONMAN";
@@ -65,12 +72,15 @@ console.log(avengers[1]);
 console.log(avengers.length)
 
 const rickAndMortyCharacters = ["Rick", "Beth", "Jerry"];
-rickAndMortyCharacters.push("Morty" , "Summer");
+rickAndMortyCharacters.push("Morty", "Summer");
+console.log(rickAndMortyCharacters[3]);
 console.log(rickAndMortyCharacters[4]);
 
 const rickAndMorty = ["Rick", "Beth", "Jerry", "Morty", "Summer", "Lapiz Lopez"];
 rickAndMorty.splice(1,1);
 console.log(rickAndMorty);
+
+//?--- Iteración #5: Condicionales
 
 const number1 = 10;
 const number2 = 20;
@@ -104,6 +114,8 @@ if (number3 === number1 && number1 === number2); {
 if (number2 === number1 || number1 === number3); {
   console.log("number2 entre 2 es igual a number1 O number1 entre 5 es igual a number3");
 }
+
+//?--- Iteración #6: Bucles
 
 for (let a=0; a<=9; a++) {
   console.log(a)
