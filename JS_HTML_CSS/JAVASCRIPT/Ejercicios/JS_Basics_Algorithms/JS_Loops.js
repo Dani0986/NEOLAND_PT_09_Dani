@@ -31,4 +31,13 @@ alumns.forEach(alumno => {
 
 console.log(alumns);
 
+//?--- Iteración #3: Probando For...of
+
+const placesToTravel = ['Japon', 'Venecia', 'Murcia', 'Santander', 'Filipinas', 'Madagascar']
+
+for (let viajes of placesToTravel) {
+   console.log(placesToTravel);
+  }
+
+
 
