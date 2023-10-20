@@ -37,6 +37,12 @@ let globalBasePrice = 25000
 const car1 = {name: 'BMW m&m', basePrice: 50000, finalPrice: 75000};
 const car2 = {name: 'Chevrolet Corbina', basePrice: 70000, finalPrice: 95000};
 
+car1.finalPrice = car1.finalPrice + globalBasePrice;
+car2.finalPrice = car2.finalPrice + globalBasePrice;
+
+console.log(car1); 
+console.log(car2);
+
 //?--- Iteración #3: Operadores
 
 10 * 5;
@@ -77,7 +83,7 @@ console.log(rickAndMortyCharacters[3]);
 console.log(rickAndMortyCharacters[4]);
 
 const rickAndMorty = ["Rick", "Beth", "Jerry", "Morty", "Summer", "Lapiz Lopez"];
-rickAndMorty.splice(1,1);
+rickAndMorty.splice(1, 1);
 console.log(rickAndMorty);
 
 //?--- Iteración #5: Condicionales
