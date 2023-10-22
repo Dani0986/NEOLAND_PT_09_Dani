@@ -207,4 +207,6 @@ const counterWords = [
 
 const P = repeatCounter(counterWords);
 console.log(P)
+
+
   

@@ -32,12 +32,40 @@ alumns.forEach(alumno => {
 console.log(alumns);
 
 //?--- Iteración #3: Probando For...of
+//?--- Usa un bucle forof para recorrer todos los destinos del array. 
 
 const placesToTravel = ['Japon', 'Venecia', 'Murcia', 'Santander', 'Filipinas', 'Madagascar']
 
 for (let viajes of placesToTravel) {
-   console.log(placesToTravel);
+   console.log(`${viajes}`);
   }
 
+//?--- Iteración #4: Probando For...in
+//?--- Usa un for...in para imprimir por consola los datos del alienígena
+
+const alien = {
+  name: 'Wormuck',
+  race: 'Cucusumusu',
+  planet: 'Eden',
+  weight: '259kg'
+}
+
+for (let ufo in alien) {
+  console.log(`${ufo}: ${alien[ufo]}`);
+}
 
 
+//?--- Iteración #5: Probando For
+//?--- Usa un bucle for para recorrer todos los destinos del array y elimina los elementos que tengan el id 11 y 40
+
+const placesToTravel2 = [{id: 5, name: 'Japan'}, {id: 11, name: 'Venecia'}, {id: 23, name: 'Murcia'}, {id: 40, name: 'Santander'}, {id: 44, name: 'Filipinas'}, {id: 59, name: 'Madagascar'}];
+
+const destinos = [];
+
+for (let i = 0; i < placesToTravel.length; i++) {
+  if (placesToTravel[i].id !== 11 && placesToTravel[i].id !== 40) {
+    destinos.push(placesToTravel[i]);
+  }
+}
+
+console.log(destinos);
