@@ -21,7 +21,7 @@ sumar(20, 10)
 
 const avengers = ['Hulk', 'Thor', 'IronMan', 'Captain A.', 'Spiderman', 'Captain M.'];
 function findLongestWord(marvel){
-    let longestWord = "";
+    let longestWord = '';
   
     for (let i = 0; i < marvel.length; i++) {
       const word = marvel[i];
