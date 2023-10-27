@@ -65,7 +65,101 @@ console.log(name, itv[2]);
 
 //?--- Iteración #3: Spread Operator
 
+//!--- 3.1 Dado el siguiente array, crea una copia usando spread operators.
+
+const pointsList = [32, 54, 21, 64, 75, 43]
+
+const newPointList = [...pointsList];
+
+console.log(newPointList);
+
+//!--- 3.2 Dado el siguiente objeto, crea una copia usando spread operators.
+
+const toy = {name: 'Bus laiyiar', date: '20-30-1995', color: 'multicolor'};
+
+const newToy = {...toy};
+
+console.log(newToy);
+
+//!--- 3.3 Dado los siguientes arrays, crea un nuevo array juntandolos usando spread operatos.
+
+const pointsList1 = [32, 54, 21, 64, 75, 43];
+const pointsLis2 = [54,87,99,65,32];
+
+const doublePointList = [...pointsList1, ...pointsLis2];
+
+console.log(doublePointList);
+
+//!--- 3.5 Dado el siguiente array. Crear una copia de él eliminando la posición 2 pero sin editar el array inicial. De nuevo, usando spread operatos.
+
+const colors = ['rojo', 'azul', 'amarillo', 'verde', 'naranja'];
+
+const newColors = [...colors];
+newColors.splice(2,1);
+
+console.log(newColors);
 
 
+//?--- Iteración #4: Map
+
+//!--- 4.1 Dado el siguiente array, devuelve un array con sus nombres utilizando .map().
+
+const users = [
+	{id: 1, name: 'Abel'},
+	{id:2, name: 'Julia'},
+	{id:3, name: 'Pedro'},
+	{id:4, name: 'Amanda'}
+];
+
+const newUsers = users;
+newUsers.map((name, index) => {
+    console.log(name);
+});
 
 
+//!--- 4.2 Dado el siguiente array, devuelve una lista que contenga los valores de la propiedad .name y cambia el nombre a 'Anacleto' en caso de que empiece por 'A'.
+
+const users00 = [
+	{id: 1, name: 'Abel'},
+	{id:2, name: 'Julia'},
+	{id:3, name: 'Pedro'},
+	{id:4, name: 'Amanda'}
+];
+
+const cambioNombre = users00.map(user00 => {
+    const letraA = user00.name.charAt(0);
+    if (letraA === 'A') {
+        return {id: user00.id, name: 'Anacleto'};
+    } else {
+        return user00;
+    }
+
+});
+
+console.log(cambioNombre);
+
+
+//!--- 4.3 Dado el siguiente array, devuelve una lista que contenga los valores de la propiedad .name y añade al valor de .name el string ' (Visitado)' cuando el valor de la propiedad isVisited = true.
+
+const cities = [
+	{isVisited:true, name: 'Tokyo'}, 
+	{isVisited:false, name: 'Madagascar'},
+	{isVisited:true, name: 'Amsterdam'}, 
+	{isVisited:false, name: 'Seul'}
+];
+
+const newCities = cities.map(city => {
+   if (city.isVisited === true) {
+    return {...city, name: city.name + '(visitado)'};
+   } else {
+    return city;
+   }
+    
+    
+});
+    
+ 
+
+console.log(newCities);
+
+//---- revisarlo ------
