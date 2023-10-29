@@ -252,6 +252,152 @@ const streamers4 = [
 	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
 ];
 
-const index = document.getElementById('index_ES6');
 
 
+
+//!--- 5.7 Dado el siguiente html y javascript, utiliza .filter() para mostrar por consola los streamers que incluyan la palabra introducida en el input. De esta forma, 
+//!--- si introduzco 'Ru' me deberia de mostrar solo el streamer 'Rubius'. Si introduzco 'i', me deberia de mostrar el streamer 'Rubius' e 'Ibai'.En este caso, muestra 
+//!--- solo los streamers filtrados cuando hagamos click en el button.
+ 
+const streamers5 = [
+	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'},
+	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
+];
+
+
+
+//?--- Iteración #6: Find
+
+//!--- 6.1 Dado el siguiente array, usa .find() para econtrar el número 100.
+
+const numbers = [32, 21, 63, 95, 100, 67, 43];
+
+const numero100 = numbers.find(num => num === 100);
+console.log("🚀 ~ file: JS_ES6.js:278 ~ numero100:", numero100);
+
+
+//!--- 6.2 Dado el siguiente array, usa .find() para econtrar la pelicula del año 2010.
+
+const movies = [
+	{title: 'Madagascar', stars: 4.5, date: 2015},
+	{title: 'Origen', stars: 5, date: 2010},
+	{title: 'Your Name', stars: 5, date: 2016}
+];
+
+const añoPelis = movies.find(fecha => fecha.date === 2010);
+console.log("🚀 ~ file: JS_ES6.js:290 ~ añoPelis:", añoPelis);
+
+//!--- 6.3 Dado el siguiente javascript, usa .find() para econtrar el alien de nombre 
+//!--- 'Cucushumushu' y la mutación 'Porompompero'. Una vez que los encuentres, usa 
+//!--- spread operator para fusionarlos teniendo en cuenta que el objeto de la mutación 
+//!--- lo queremos meter en la propiedad .mutation del objeto fusionado.
+
+const aliens = [
+	{name: 'Zalamero', planet: 'Eden', age: 4029},
+	{name: 'Paktu', planet: 'Andromeda', age: 32},
+	{name: 'Cucushumushu', planet: 'Marte', age: 503021}
+];
+
+const mutacion = { mutacion: 'Porompompero'} ;
+
+const alienfusion = aliens.find(alien => alien.name === 'Cucushumushu');
+
+const fusedAlien = { ...alienfusion, ...mutacion };
+console.log(fusedAlien);
+console.log("🚀 ~ file: JS_ES6.js:309 ~ fusedAlien:", fusedAlien)
+
+
+//?--- Iteración #7: Reduce
+
+//!--- 7.1 Dado el siguiente array, haz una suma de todos las notas de los examenes de 
+//!--- los alumnos usando la función .reduce().
+
+const exams = [
+    {name: 'Yuyu Cabeza Crack', score: 5}, 
+    {name: 'Maria Aranda Jimenez', score: 1}, 
+    {name: 'Cristóbal Martínez Lorenzo', score: 6}, 
+    {name: 'Mercedez Regrera Brito', score: 7},
+    {name: 'Pamela Anderson', score: 3},
+    {name: 'Enrique Perez Lijó', score: 6},
+    {name: 'Pedro Benitez Pacheco', score: 8},
+    {name: 'Ayumi Hamasaki', score: 4},
+    {name: 'Robert Kiyosaki', score: 2},
+    {name: 'Keanu Reeves', score: 10}
+];
+
+
+const Alumnos = exams.reduce((total, exam) => total + exam.score, 0);
+console.log("🚀 ~ file: JS_ES6.js:332 ~ Alumnos:", Alumnos);
+
+
+//!--- 7.2 Dado el mismo array, haz una suma de todos las notas de los examenes de los 
+//!--- alumnos que esten aprobados usando la función .reduce().
+
+const exams0 = [
+    {name: 'Yuyu Cabeza Crack', score: 5}, 
+    {name: 'Maria Aranda Jimenez', score: 1}, 
+    {name: 'Cristóbal Martínez Lorenzo', score: 6}, 
+    {name: 'Mercedez Regrera Brito', score: 7},
+    {name: 'Pamela Anderson', score: 3},
+    {name: 'Enrique Perez Lijó', score: 6},
+    {name: 'Pedro Benitez Pacheco', score: 8},
+    {name: 'Ayumi Hamasaki', score: 4},
+    {name: 'Robert Kiyosaki', score: 2},
+    {name: 'Keanu Reeves', score: 10}
+];
+
+const aprobados = exams0.filter(exam => exam.score >= 5);
+const totalAprobados = aprobados.reduce((acc, exam) => acc + exam.score, 0);
+
+console.log(aprobados);
+console.log("🚀 ~ file: JS_ES6.js:355 ~ aprobados:", aprobados);
+
+//!--- 7.3 Dado el mismo array, haz la media de las notas de todos los examenes .reduce().
+
+const exams1 = [
+    {name: 'Yuyu Cabeza Crack', score: 5}, 
+    {name: 'Maria Aranda Jimenez', score: 1}, 
+    {name: 'Cristóbal Martínez Lorenzo', score: 6}, 
+    {name: 'Mercedez Regrera Brito', score: 7},
+    {name: 'Pamela Anderson', score: 3},
+    {name: 'Enrique Perez Lijó', score: 6},
+    {name: 'Pedro Benitez Pacheco', score: 8},
+    {name: 'Ayumi Hamasaki', score: 4},
+    {name: 'Robert Kiyosaki', score: 2},
+    {name: 'Keanu Reeves', score: 10}
+];
+
+const mediaAprobados = exams1.reduce((acc, exam) => acc + exam.score, 0);
+const media = mediaAprobados / exams1.length;
+console.log(media);
+console.log("🚀 ~ file: JS_ES6.js:375 ~ media:", media)
+
+
+//?--- Iteración #8: Bonus
+
+//!--- 6.1 Dado el siguiente javascript filtra los videojuegos por gender = 'RPG' usando 
+//!--- .filter() y usa .reduce() para conseguir la media de sus .score. 
+//!--- La función .find() también podría ayudarte para el contrar el genero 'RPG' en el 
+//!--- array .gender.
+
+const videogames = [
+    {name: 'Final Fantasy VII', genders: ['RPG'], score: 9.5},
+    {name: 'Assasins Creed Valhala', genders: ['Aventura', 'RPG'], score: 4.5},
+    {name: 'The last of Us 2', genders: ['Acción', 'Aventura'], score: 9.8},
+    {name: 'Super Mario Bros', genders: ['Plataforma'], score: 8.5},
+    {name: 'Genshin Impact', genders: ['RPG', 'Aventura'], score: 7.5},
+    {name: 'Legend of Zelda: Breath of the wild', genders: ['RPG', 'La cosa más puto bonita que he visto nunca'], score: 10},
+]
+
+const rpgGames = videogames.filter((game, index) =>
+  game.genders.includes("RPG")
+);
+console.log("🚀 ~ file: app.js:26 ~ rpgGames:", rpgGames);
+
+const suma = rpgGames.reduce((acc, game) => acc + game.score, 0);
+console.log("🚀 ~ file: app.js:30 ~ suma:", suma);
+
+const newMedia = suma / rpgGames.length;
+console.log("🚀 ~ file: app.js:34 ~ media:", media);
