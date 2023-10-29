@@ -1,14 +1,14 @@
 
 //?--- Iteración #1: Buscar el máximo ---
-//?--- Completa la función que tomando dos números como argumento devuelva el más alto.
-//!--- version 1 ---
+//!--- Completa la función que tomando dos números como argumento devuelva el más alto.
+//*--- version 1 ---
 
 function sum(numberOne, numberTwo) {
     console.log(numberOne > numberTwo ? numberOne : numberTwo);
 }
 sum(20, 10)
 
-//!--- version 2 ---
+//*--- version 2 ---
 
 function sumar(A, B){
     console.log(Math.max(A, B));
@@ -37,8 +37,8 @@ const longestWord = findLongestWord(avengers);
 console.log(longestWord); 
 
 //?--- Iteración #3: Calcular la suma ---
-//?--- Calcular una suma puede ser tan simple como iterar sobre un array y sumar cada uno de los elementos.
-//?--- Implemente la función denominada sumNumbers que toma un array de números como argumento y devuelve la suma de todos los números de la matriz. 
+//!--- Calcular una suma puede ser tan simple como iterar sobre un array y sumar cada uno de los elementos.
+//!--- Implemente la función denominada sumNumbers que toma un array de números como argumento y devuelve la suma de todos los números de la matriz. 
 
 
 const numbers = [1, 2, 3, 5, 45, 37, 58];
@@ -54,7 +54,7 @@ function sumAll(arr) {
 console.log(sumAll(numbers))
 
 //?--- Iteración #4: Calcular el promedio
-//?--- Calcular un promedio es una tarea extremadamente común. Puedes usar este array para probar tu función:
+//!--- Calcular un promedio es una tarea extremadamente común. Puedes usar este array para probar tu función:
 
 
 const numeros = [1, 2, 3, 5, 45, 37, 58];
@@ -71,9 +71,9 @@ let result = average(numeros);
 console.log(result);
 
 //?--- Iteración #5: Calcular promedio de strings
-//?--- Crea una función que reciba por parámetro un array y cuando es un valor number lo sume y de lo contrario cuente la longitud del string y lo sume.
+//!--- Crea una función que reciba por parámetro un array y cuando es un valor number lo sume y de lo contrario cuente la longitud del string y lo sume.
 
-//!--- version 1 ------
+//*--- version 1 ------
 
 const mixedElements = [6, 1, 'Rayo', 1, 'vallecano', '10', 'upgrade', 8, 'hub'];
 function averageWord(numLetras) {  
@@ -98,7 +98,7 @@ function averageWord(numLetras) {
 let totalMix = averageWord(mixedElements);
 console.log(totalMix);
 
-//!--- version 2 -------
+//*--- version 2 -------
 
 const mix = [6, 1, 'Rayo', 1, 'vallecano', '10', 'upgrade', 8, 'hub'];
 function averageWord(numLetras) {  
@@ -124,7 +124,8 @@ let tMix = averageWord(mix);
 console.log(tMix);
 
 //?--- Iteración #6: Valores únicos
-//?--- Crea una función que reciba por parámetro un array y compruebe si existen elementos duplicados, en caso que existan los elimina para retornar un array sin los elementos duplicados.
+//!--- Crea una función que reciba por parámetro un array y compruebe si existen elementos duplicados, en caso que existan los elimina para retornar un array sin 
+//!--- los elementos duplicados.
 
 
 const duplicates = [
@@ -150,8 +151,8 @@ const u = removeDuplicates(duplicates);
 console.log(u);
 
 //?--- Iteración #7: Buscador de nombres
-//?--- Crea una función que reciba por parámetro un array y el valor que desea comprobar que existe dentro de dicho array - 
-//?--- comprueba si existe el elemento, en caso que existan nos devuelve un true y la posición de dicho elemento y por la contra un false
+//!--- Crea una función que reciba por parámetro un array y el valor que desea comprobar que existe dentro de dicho array - 
+//!--- comprueba si existe el elemento, en caso que existan nos devuelve un true y la posición de dicho elemento y por la contra un false
 
 const nameFinder = [
     'Peter',
@@ -176,7 +177,7 @@ finderName(nameFinder,'Natasha')
 finderName(nameFinder,'wanda')
 
 //?--- Iteration #8: Contador de repeticiones
-//?--- Crea una función que nos devuelva el número de veces que se repite cada una de las palabras que lo conforma 
+//!--- Crea una función que nos devuelva el número de veces que se repite cada una de las palabras que lo conforma 
 
 const counterWords = [
     'code',
