@@ -20,7 +20,8 @@ arrowSum(10, 5);
 
 //?--- Iteración #2: Destructuring
 
-//!--- 2.1 En base al siguiente javascript, crea variables en base a las propiedades del objeto usando object destructuring e imprimelas por consola. Cuidado, no hace falta hacer destructuring del array, solo del objeto.
+//!--- 2.1 En base al siguiente javascript, crea variables en base a las propiedades del objeto usando object destructuring e imprimelas por consola. Cuidado, 
+//!--- no hace falta hacer destructuring del array, solo del objeto.
 
 const game = {title: 'The last us 2', gender: ['action', 'zombie', 'survival'], year: 2020}
 
@@ -32,7 +33,8 @@ console.log(`${year}`);
 
 
 
-//!--- 2.2 En base al siguiente javascript, usa destructuring para crear 3 variables llamadas fruit1, fruit2 y fruit3, con los valores del array. Posteriormente, imprimelo por consola.
+//!--- 2.2 En base al siguiente javascript, usa destructuring para crear 3 variables llamadas fruit1, fruit2 y fruit3, con los valores del array. Posteriormente, 
+//!--- imprimelo por consola.
 
 const fruits = ['Banana', 'Strawberry', 'Orange'];
 
@@ -53,7 +55,8 @@ const {names, race} = animalFunction();
 console.log(names);
 console.log(race);
 
-//!--- 2.4 En base al siguiente javascript, usa destructuring para crear las variables name y itv con sus respectivos valores. Posteriormente crea 3 variables usando igualmente el destructuring para cada uno de los años y comprueba que todo esta bien imprimiendolo.
+//!--- 2.4 En base al siguiente javascript, usa destructuring para crear las variables name y itv con sus respectivos valores. Posteriormente crea 3 variables usando
+//!--- igualmente el destructuring para cada uno de los años y comprueba que todo esta bien imprimiendolo.
 
 const car = {name: 'Mazda 6', itv: [2015, 2011, 2020] }
 
@@ -139,7 +142,9 @@ const cambioNombre = users00.map(user00 => {
 console.log(cambioNombre);
 
 
-//!--- 4.3 Dado el siguiente array, devuelve una lista que contenga los valores de la propiedad .name y añade al valor de .name el string ' (Visitado)' cuando el valor de la propiedad isVisited = true.
+
+//!--- 4.3 Dado el siguiente array, devuelve una lista que contenga los valores de la propiedad .name y añade al valor de .name el string ' (Visitado)' 
+//!--- cuando el valor de la propiedad isVisited = true.
 
 const cities = [
 	{isVisited:true, name: 'Tokyo'}, 
@@ -150,16 +155,87 @@ const cities = [
 
 const newCities = cities.map(city => {
    if (city.isVisited === true) {
-    return {...city, name: city.name + '(visitado)'};
+    return {...city, name: city.name + ' (visitado)'};
    } else {
     return city;
    }
     
     
 });
+
+console.log("🚀 ~ file: JS_ES6.js:160 ~ newCities ~ newCities:", newCities);
     
  
+//?--- Iteración #5: Filter 
+//!--- 5.1 Dado el siguiente array, utiliza .filter() para generar un nuevo array con los valores que sean mayor que 18.
 
-console.log(newCities);
+const ages = [22, 14, 24, 55, 65, 21, 12, 13, 90];
 
-//---- revisarlo ------
+const newAges = ages.filter(number => number > 18);
+console.log("🚀 ~ file: JS_ES6.js:171 ~ newAges:", newAges);
+
+
+
+//!--- 5.2 Dado el siguiente array, utiliza .filter() para generar un nuevo array con los valores que sean par.
+
+const ages0 = [22, 14, 24, 55, 65, 21, 12, 13, 90];
+
+const newAges0 = ages0.filter(number => number % 2 === 0);
+console.log("🚀 ~ file: JS_ES6.js:179 ~ newAges0:", newAges0);
+
+
+
+//!--- 5.3 Dado el siguiente array, utiliza .filter() para generar un nuevo array con los streamers que tengan el gameMorePlayed = 'League of Legends'.
+
+const streamers = [
+	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'}, 
+	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
+];
+
+const theStreamers = streamers.filter(stream => stream.gameMorePlayed === 'League of Legends');
+console.log("🚀 ~ file: JS_ES6.js:192 ~ theStreamers:", theStreamers);
+
+
+
+//!--- 5.4 Dado el siguiente array, utiliza .filter() para generar un nuevo array con los streamers que incluyan el caracter 'u' en su propiedad .name.
+//!--- Recomendamos usar la funcion .includes() para la comprobación.
+
+const streamers0 = [
+	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'},
+	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
+];
+
+const twitch = streamers0.filter(names => names.name.includes('u'));
+console.log("🚀 ~ file: JS_ES6.js:206 ~ twitch:", twitch);
+
+
+//!--- 5.5 utiliza .filter() para generar un nuevo array con los streamers que incluyan 
+//!--- el caracter 'Legends' en su propiedad .gameMorePlayed. Recomendamos usar la funcion 
+//!--- .includes() para la comprobación.
+//!--- Además, pon el valor de la propiedad .gameMorePlayed a MAYUSCULAS cuando 
+//!--- .age sea mayor que 35.
+
+const streamers1 = [
+	{name: 'Rubius', age: 32, gameMorePlayed: 'Minecraft'},
+	{name: 'Ibai', age: 25, gameMorePlayed: 'League of Legends'},
+	{name: 'Reven', age: 43, gameMorePlayed: 'League of Legends'},
+	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
+];
+
+
+const mayores = streamers1.filter(streamer => {
+    if (streamer.gameMorePlayed.includes('Legends') || streamer.age > 35) {
+        if (streamer.age > 35) {
+            streamer.gameMorePlayed = streamer.gameMorePlayed.toUpperCase();
+        }
+        return true;
+    }
+    return false;
+});
+
+console.log("🚀 ~ file: JS_ES6.js:239 ~ mayores ~ mayores:", mayores);
+

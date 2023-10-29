@@ -60,7 +60,7 @@ let volumenTotal = 0;
 let longitud = [];
 
 for (let user of users) {
-    const {favoritesSounds} = user    
+    const {favoritesSounds} = user;   
     for(let sonidos in favoritesSounds) {
 //   console.log(favoritesSounds[sonidos].volume);   
     volumenTotal += favoritesSounds[sonidos].volume;
