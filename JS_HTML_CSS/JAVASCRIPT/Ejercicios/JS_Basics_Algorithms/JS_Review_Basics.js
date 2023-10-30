@@ -126,6 +126,34 @@ for (let wave of users0) {
 
 console.log(mp3); 
 
+//*--- version 2 ---
+
+const allSound = []
+let acc = 0;
+for (usuario of users){
+    for (clave in usuario.favoritesSounds) {
+        let accRepeticiones = 0;
+        allSound.forEach((elemntocontado, index)=>{
+            clave === elemntocontado.name && accRepeticiones++
+        });
+        if (accRepeticiones==0) 
+        acc=0
+            for(usuarioContar of users) {
+                for(claveContar in usuarioContar.favoriteSounds){
+                    clave == claveContar && acc++
+                }}
+            allSound.push({
+                    name:clave,
+                    repeticiones: acc
+                })
+            }
+        }
+
+
+                 
+                
+    
+    
 
 
 //?--- Iteración #4: Métodos findArrayIndex

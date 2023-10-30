@@ -155,13 +155,14 @@ const cities = [
 
 const newCities = cities.map(city => {
    if (city.isVisited === true) {
-    return {...city, name: city.name + ' (visitado)'};
+    return {...city, name: city.name + ' is Visited'};
    } else {
     return city;
    }
     
     
 });
+
 
 console.log("🚀 ~ file: JS_ES6.js:160 ~ newCities ~ newCities:", newCities);
     

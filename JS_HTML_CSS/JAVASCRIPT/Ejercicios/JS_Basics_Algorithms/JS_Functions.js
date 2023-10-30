@@ -71,7 +71,8 @@ let result = average(numeros);
 console.log(result);
 
 //?--- Iteración #5: Calcular promedio de strings
-//!--- Crea una función que reciba por parámetro un array y cuando es un valor number lo sume y de lo contrario cuente la longitud del string y lo sume.
+//!--- Crea una función que reciba por parámetro un array y cuando es un valor 
+//!--- number lo sume y de lo contrario cuente la longitud del string y lo sume.
 
 //*--- version 1 ------
 
