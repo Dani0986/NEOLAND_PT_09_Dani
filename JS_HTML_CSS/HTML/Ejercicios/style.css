@@ -1,7 +1,91 @@
-
-
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
+  }
+  
+  body {
+    width: 100vw;
+    min-height: 100vh;
+    border: 1px dotted black;
+  }
+  
+  header {
+    width: 100vw;
+    height: 15vh;
+    border: 1px dotted black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+#fondo {
+    width: 400px;
+    height: 100px;
+  }
+  nav {
+    margin: 1rem;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  nav ul li {
+    width: 100px;
+  
+    text-align: center;
+  }
+  
+  nav ul li:hover {
+    border-bottom: 1px black dotted;
+  }
+  
+  footer {
+    width: 100vw;
+    height: 10vh;
+    border: 1px dotted black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  main {
+    width: 100vw;
+    min-height: 75vh;
+    border: 1px dotted black;
+    display: flex;
+  }
+  
+  main section {
+    width: 60vw;
+    border: 1px dotted black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  section article {
+    width: 80%;
+    border: 1px solid rgba(0, 0, 0, 0.164);
+    margin: 1rem 0 1rem 0;
+    height: 400px;
+  }
+  
+  main aside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  main aside p {
+    text-align: center;
+    width: 40vw;
+  }
+
+h1 {
+    text-align: center;
 }
