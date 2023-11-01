@@ -60,16 +60,31 @@ for (let ufo in alien) {
 
 const placesToTravel2 = [{id: 5, name: 'Japan'}, {id: 11, name: 'Venecia'}, {id: 23, name: 'Murcia'}, {id: 40, name: 'Santander'}, {id: 44, name: 'Filipinas'}, {id: 59, name: 'Madagascar'}];
 
+//*--- version 1 ---
+
 const destinos = [];
 
-for (let i = 0; i < placesToTravel.length; i++) {
-  if (placesToTravel[i].id !== 11 && placesToTravel[i].id !== 40) {
-    destinos.push(placesToTravel[i]);
+for (let i = 0; i < placesToTravel2.length; i++) {
+  if (placesToTravel2[i].id !== 11 && placesToTravel2[i].id !== 40) {
+    destinos.push(placesToTravel2[i]);
   }
 
 }
 
 console.log(destinos);
+
+//*--- version 2 ---
+
+const destiny = [];
+
+for (const place of placesToTravel2) {
+    if (place.id !== 11 && place.id !== 40) {
+        destiny.push(place);
+    }
+}
+
+console.log(destiny);
+
 
 //?--- Iteración #6: Mixed For...of e includes
 //!--- Usa un bucle for...of para recorrer todos los juguetes y elimina los que incluyan la palabra gato. Recuerda que puedes usar la función .includes() para comprobarlo
@@ -96,7 +111,7 @@ console.log(filteredToys);
 //?--- Iteración #7: For...of avanzado
 //!--- Usa un bucle for...of para recorrer todos los juguetes y añade los que tengan más de 15 ventas (sellCount) al array popularToys. Imprimelo por consola...
 
-const popularToys = [];
+
 
 const toys2 = [
 	{id: 5, name: 'Buzz MyYear', sellCount: 10}, 
@@ -105,6 +120,8 @@ const toys2 = [
 	{id: 40, name: 'El gato con Guantes', sellCount: 8},
 	{id: 40, name: 'El gato felix', sellCount: 35}
 ]
+
+const popularToys = [];
 
 for (const juguetes of toys2) {
   if (juguetes.sellCount > 15) {

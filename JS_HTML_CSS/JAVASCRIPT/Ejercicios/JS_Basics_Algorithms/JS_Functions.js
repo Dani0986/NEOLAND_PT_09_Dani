@@ -18,6 +18,7 @@ sumar(20, 10)
 //?--- Iteración #2: Buscar la palabra más larga ---
 //?--- Completa la función que tomando un array de strings como argumento devuelva el más largo, en caso de que dos strings tenga la misma longitud deberá devolver el primero.
 
+//*--- version 1 ---
 
 const avengers = ['Hulk', 'Thor', 'IronMan', 'Captain A.', 'Spiderman', 'Captain M.'];
 function findLongestWord(marvel){
@@ -35,6 +36,23 @@ function findLongestWord(marvel){
 
 const longestWord = findLongestWord(avengers);
 console.log(longestWord); 
+
+//*--- version 2 ---
+
+function findLongestWord(marvel) {
+  let longtWord = '';
+
+  for (const word of marvel) {
+      if (word.length > longtWord.length) {
+          longtWord = word;
+      }
+  }
+
+  return longtWord;
+}
+
+const longestAvenger = findLongestWord(avengers);
+console.log(longestAvenger);
 
 //?--- Iteración #3: Calcular la suma ---
 //!--- Calcular una suma puede ser tan simple como iterar sobre un array y sumar cada uno de los elementos.
@@ -193,6 +211,9 @@ const counterWords = [
     'upgrade',
     'code'
   ];
+
+  //*--- version 1 ---
+
   function repeatCounter(contador) {
     let acc = {};
     for (let i = 0; i < contador.length; i++) {
@@ -211,4 +232,22 @@ const P = repeatCounter(counterWords);
 console.log(P)
 
 
+//*--- version 2 ---
+
+function repeatCounter(contador) {
+  let acc = {};
+
+  for (const codes of contador) {
+      if (acc[codes]) {
+          acc[codes]++;
+      } else {
+          acc[codes] = 1;
+      }
+  }
+
+  return acc;
+}
+
+const P1 = repeatCounter(counterWords);
+console.log(P1);
   

@@ -11,9 +11,9 @@ const streamers = [
 	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
 ];
 
-//const searchInput = document.getElementById('ES6');
+document.getElementById('ES6');
 
-function filtrarStreamer(stream) {
+/*function filtrarStreamer(stream) {
 	const filtrar = streamers.filter(streamer => streamer.name.includes(stream));
 	return filtrarStreamer;
 }
@@ -23,7 +23,23 @@ ES6.addEventListener("click", () => document.getElementById("alert").show());
 const streamings = 'Ru'; 
 const filteredStreamers = filtrarStreamer(stream);
 
-console.log(streamings(stream));	
+console.log();	
+*/
+
+/*
+const ru = [];
+const twitch = streamers.filter(streamer => {
+    if (streamer.gameMorePlayed.toLowerCase().includes('ru')) {
+        ru.push(streamer);
+        return true;
+    }
+    return false;
+});
+*/
+
+
+
+
 
 
 //!--- 5.7 Dado el siguiente html y javascript, utiliza .filter() para mostrar por consola los streamers que incluyan la palabra introducida en el input. De esta forma, 
