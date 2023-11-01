@@ -126,7 +126,7 @@ for (let wave of users0) {
 
 console.log(mp3); 
 
-
+//*-- volver a hacer
 
 
 //?--- Iteración #4: Métodos findArrayIndex
@@ -154,6 +154,26 @@ console.log(`'Salamandra' posicion: ${indiceSalamandra}`);
 console.log(`'Ajolote' posicion: ${indiceAJolote}`);
 
 
+//*-- volver a hacer con otro bucle.
+
+function findArrayIndex (array, text) {
+    let i=0;
+    for(const insectos of array) {
+        if (insectos === text) {
+            return i;
+        } i++;
+    }
+}
+
+const indiceCaracol1 = findArrayIndex(insectos, 'Caracol')
+const indiceMosquito2 = findArrayIndex(insectos, 'Mosquito');
+const indiceSalamandra3 = findArrayIndex(insectos, 'Salamandra');
+const indiceAJolote4 = findArrayIndex(insectos, 'Ajolote');
+
+console.log(`'Caracol' posicion: ${indiceCaracol1}`);
+console.log(`'Mosquito' posicion: ${indiceMosquito2}`);
+console.log(`'Salamandra' posicion: ${indiceSalamandra3}`);
+console.log(`'Ajolote' posicion: ${indiceAJolote4}`);
 
 //?--- Iteración #5: Función rollDice
 //!--- Crea una función llamada rollDice() que reciba como parametro el numero de caras que queramos que tenga el dado que deberá silumar el codigo 
