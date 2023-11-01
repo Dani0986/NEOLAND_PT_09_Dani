@@ -126,7 +126,46 @@ for (let wave of users0) {
 
 console.log(mp3); 
 
-//*-- volver a hacer
+//*-- version 2 -- 
+
+// 1) Conseguir un array con todos los nombre repetidos de los sonidos
+const allSoundFavortie = []
+
+for ( let usuario of users0){
+    for ( let clave in usuario.favoritesSounds){
+        allSoundFavortie.push(clave)
+    }
+}
+console.log("🚀 ~ file: app.js:124 ~ allSoundFavortie:", allSoundFavortie)
+// 2) hacer un array con los elementos contados 
+// este array tiene objetos con la forma { name: 'waves', repeticiones: 3 }
+const results = []
+
+for (let sound of allSoundFavortie){
+    // aqui recorremos el array original de nombre y me paro en un nombre
+    acc = 0
+    // recorro el array dde resultados para comprobar que el nombre donde estoy parado "sound" no este contado
+    results.forEach((elementoContado, index)=>{
+        // si esta contado porque lo encuentre incrementa el contador
+        elementoContado.name === sound && acc++
+    })
+    // si el contador es igual a 0 eso quiere decir que en el array no esta contado el sound en el estamos parados
+    if(acc== 0){
+        // me pongo a contarlo con un segundo bucle recorriendo el array de nombres de nuevo y
+        // compruebo cuando el primer nombre el cual esto parado "sound" coincide con el segundo nombre del bucle segundo "soundCound"
+        for (let soundCound of  allSoundFavortie ){
+
+            // si tenemos una coincidencia-- incrementamos el contador que previammente se ha reinicializado arriba al entrar al bucle principal
+            soundCound == sound && acc++}
+
+        results.push({name: sound, repeticiones: acc })
+
+    }
+}
+
+console.log("🚀 ~ file: app.js:124 ~ results:", results)
+
+
 
 
 //?--- Iteración #4: Métodos findArrayIndex
@@ -154,7 +193,7 @@ console.log(`'Salamandra' posicion: ${indiceSalamandra}`);
 console.log(`'Ajolote' posicion: ${indiceAJolote}`);
 
 
-//*-- volver a hacer con otro bucle.
+//*--- version 2 --- 
 
 function findArrayIndex (array, text) {
     let i=0;
