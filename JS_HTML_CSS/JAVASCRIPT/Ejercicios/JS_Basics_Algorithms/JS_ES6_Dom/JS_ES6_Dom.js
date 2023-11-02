@@ -11,34 +11,16 @@ const streamers = [
 	{name: 'AuronPlay', age: 33, gameMorePlayed: 'Among Us'}
 ];
 
-document.getElementById('ES6');
-
-/*function filtrarStreamer(stream) {
-	const filtrar = streamers.filter(streamer => streamer.name.includes(stream));
-	return filtrarStreamer;
-}
-const ES6 = document.getElementById('ES6');
-ES6.addEventListener("click", () => document.getElementById("alert").show());
-
-const streamings = 'Ru'; 
-const filteredStreamers = filtrarStreamer(stream);
-
-console.log();	
-*/
-
-/*
-const ru = [];
-const twitch = streamers.filter(streamer => {
-    if (streamer.gameMorePlayed.toLowerCase().includes('ru')) {
-        ru.push(streamer);
-        return true;
-    }
-    return false;
-});
-*/
+const inputElement = document.getElementById('Es6');
 
 
+const ru = 'ru';
+const i = 'i';
+const stream = streamers.filter(names => names.name.toLowerCase().includes(ru));
+console.log(stream);
 
+const stream2 = streamers.filter(names => names.name.toLowerCase().includes(i));
+console.log(stream2);
 
 
 
