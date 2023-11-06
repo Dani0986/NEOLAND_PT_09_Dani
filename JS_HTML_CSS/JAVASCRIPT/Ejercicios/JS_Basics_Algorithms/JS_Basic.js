@@ -115,7 +115,7 @@ const number1 = 10;  //*- constantes con valores y vamos a ver como se pueden us
 const number2 = 20;
 const number3 = 2;
 
-if(number1 === 10) {         //*- aqui decimos que si numero 1 es igual a 10 muestramelo por consola, (si no es igual no lo mostraria porque no es verdadero)
+if(number1 === 10) {    //*- aqui decimos que si numero 1 es igual a 10 muestramelo por consola, (si no es igual no lo mostraria porque no es verdadero)
     console.log('number1 es estrictamente igual a 10')
 }
 
@@ -124,23 +124,23 @@ if (number2 >= number1) {  //*- aqui decimos que si numero 2 es mayor que numero
   
 }
 
-if (number1 != number2) {
+if (number1 !== number2) { //* aqui decimos si no es igual muestralo por consola. no igual estrico.
   console.log("number1 es estrictamente distinto a number2");
 }
 
-if (number3 !== number1) {
+if (number3 != number1) { //* aqui decimos que si no es igual muestalo por consola, np igual.
   console.log("number3 es distinto number1");
 }
 
-if (number3 <= number1) {
+if (number3 <= number1) { //* aqui decimos que 3 es menor que 1 muestralo por consola.
   console.log("number3 por 5 es igual a number1");
 }
 
-if (number3 === number1 && number1 === number2); {
+if (number3 * 5 === number1 && number1 * 2 === number2) {  //* aqui decimos que 3x5 es igual a number 1 y con un operador and juntamos otra condicion.  
   console.log("number3 por 5 es igual a number1 Y number1 por 2 es igual a number2");
 }
 
-if (number2 === number1 || number1 === number3); {
+if (number2 / 2 === number1 || number1 / 5 === number3) { //* aqui decimos que numero 2/2 es igual a numero 1 y usamos operador and para juntar otra condicion.
   console.log("number2 entre 2 es igual a number1 O number1 entre 5 es igual a number3");
 }
 
@@ -152,9 +152,11 @@ if (number2 === number1 || number1 === number3); {
 //!--- y cambia el mensaje en la décima vuelta a 'Dormido!'.
 
 
-for (let a=0; a<=9; a++) {
-  console.log(a)
-} 
+for (let a=0; a<=9; a++) {  //* aqui creamos un bucle for antiguo que cuenta del 1 al 10. 
+  console.log(a)            //* inicializacion, condicion, actualizacion
+}                           //* Inicializas una variable llamada a con el valor 0. Esto se hace antes de que comience el bucle.
+                            //* El bucle se ejecuta mientras la condición sea verdadera. el bucle continuará mientras "a" sea menor o igual a 9.
+                            //* a++: Esto es la actualización. En cada iteración del bucle, la variable a se incrementa en 1. Esto lo al final de cada iteración.
 
 for (let b=0; b<= 9; b++) {
   if(b % 2 == 0){
@@ -162,12 +164,12 @@ for (let b=0; b<= 9; b++) {
   }
 }
 
-for (let x=0; x< 10; x++) {
+/*for (let x=0; x< 10; x++) {
   if(x < 9) {
     console.log("intentando dormir 🐑") 
   } else {console.log ("dormir")
 }
   
 }
-
+*/
 
