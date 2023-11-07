@@ -24,7 +24,7 @@ console.log (z)
 //!--- 1.3 Dado el siguiente javascript, imprime con un console.log la suma del precio de ambos juguetes.
 //!--- 1.4 Dado el siguiente javascript, actualiza el valor de la variable globalBasePrice a 25000 y actualiza la propiedad finalPrice de todos los coches con el valor de su propiedad basePrice más el valor de la variable globalBasePrice.
 
-const character = {name: 'Jack sparrow', age: 10};  //*- crear variable con object y propiedades.
+const character = {name: 'Jack sparrow', age: 10};  //*- crear variable con object con clave-valor.
 
 character.age = 25;  //*- usando la variable y el punto podemos entrar en la propiedad del object y modificarla.
 
@@ -41,14 +41,14 @@ console.log ("soy",  firstname, "tengo", lastname,  age + " y me gustan los lobo
 const toy1 = {name: 'Buss myYear', price: 19}; //*- cramos variable con object y propiedades.
 const toy2 = {name: 'Rallo mcKing', price: 29};
 
-console.log (toy1.price + toy2.price); //*- usamos las variables con . entramos en la propiedad y las sumammos.
+console.log (toy1.price + toy2.price); //*- usamos las variables con . entramos en la clave y las sumammos.
 
 let globalBasePrice = 25000; //*- variable con valor
 const car1 = {name: 'BMW m&m', basePrice: 50000, finalPrice: 60000}; //*- variables con varios valores.
 const car2 = {name: 'Chevrolet Corbina', basePrice: 70000, finalPrice: 80000};
 
-car1.finalPrice = car1.finalPrice + globalBasePrice; //*- utilimaos la variable y accedemos a la propiedad con el punto y le decimos  
-car2.finalPrice = car2.finalPrice + globalBasePrice; //*- que sume la propiedad finalprice con globalprice que tambien tiene valor.
+car1.finalPrice = car1.finalPrice + globalBasePrice; //*- utilimaos la variable y accedemos a la clave con el punto y le decimos  
+car2.finalPrice = car2.finalPrice + globalBasePrice; //*- que sume la clave finalprice con globalprice que tambien tiene valor.
 
 console.log(car1); 
 console.log(car2);
@@ -158,18 +158,18 @@ for (let a=0; a<=9; a++) {  //* aqui creamos un bucle for antiguo que cuenta del
                             //* El bucle se ejecuta mientras la condición sea verdadera. el bucle continuará mientras "a" sea menor o igual a 9.
                             //* a++: Esto es la actualización. En cada iteración del bucle, la variable a se incrementa en 1. Esto lo al final de cada iteración.
 
-for (let b=0; b<= 9; b++) {
-  if(b % 2 == 0){
+for (let b=0; b<= 9; b++) { //* iteramos el bucle hasta 9
+  if(b % 2 == 0){           //* aqui le decimos que solo muetre los numeros pares (que el resto sea el numero divido entre 2)
   console.log(b)
   }
 }
 
-/*for (let x=0; x< 10; x++) {
-  if(x < 9) {
+for (let x=0; x< 10; x++) { //* iteramos el bucle y le decimos que cuente hasta 10.
+  if(x < 9) {               //* aqui le decimos que x es igual o menor a 9 (cuando llega a 10 no se cumple la condicion y se para, solo cuenta hasta 9)
     console.log("intentando dormir 🐑") 
-  } else {console.log ("dormir")
+  } else {console.log ("dormir")    //* aqui le decimos que si la condicion no se cumple muestrame dormir (cuando llega a 10 como ya no se cumple la condicion se nos mostrara dormir) 
 }
   
 }
-*/
+
 
