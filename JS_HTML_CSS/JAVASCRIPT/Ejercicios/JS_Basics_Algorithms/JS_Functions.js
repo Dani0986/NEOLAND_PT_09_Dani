@@ -3,16 +3,16 @@
 //!--- Completa la función que tomando dos números como argumento devuelva el más alto.
 //*--- version 1 ---
 
-function sum(numberOne, numberTwo) {
+function sum(numberOne, numberTwo) {      //* creamos una funcion con dos valores.
     console.log(numberOne > numberTwo ? numberOne : numberTwo);
 }
-sum(20, 10)
+sum(20, 10) //* ponemos los valores de la function sum (primero numberOne, segundo numberTwo)
 
 //*--- version 2 ---
 
 function sumar(A, B){
-    console.log(Math.max(A, B));
-}
+    console.log(Math.max(A, B));  //* usamos el metodo math.max (es una funcion que te permite hacer operaciones matematicas).
+}                                 //* math.max devuelve el valor mas alto de la lista de valores.
 sumar(20, 10)
 
 //?--- Iteración #2: Buscar la palabra más larga ---
@@ -21,15 +21,15 @@ sumar(20, 10)
 //*--- version 1 ---
 
 const avengers = ['Hulk', 'Thor', 'IronMan', 'Captain A.', 'Spiderman', 'Captain M.'];
-function findLongestWord(marvel){
-    let longestWord = '';
-  
-    for (let i = 0; i < marvel.length; i++) {
-      const word = marvel[i];
-      if (word.length > longestWord.length) {
-        longestWord = word;
-      }
-    }
+function findLongestWord(marvel){              //* funcion buscar palabra mas larga
+    let longestWord = '';                      //* creamos una variable con una cadena vacía. Esta variable se utiliza para almacenar la palabra más larga del array, se llena despues.
+                                              //*  iniciamos el bucle. Comienza con i igual a 0, y se repetite hasta que i es menor que la longitud del array(siempre es menor asi que lo lee entero). luego i se incrementa en 1
+    for (let i = 0; i < marvel.length; i++) { //*  creamos una variable llamada word que se utiliza para almacenar el elemento actual del array en la posición i.
+      const word = marvel[i];                 //* En cada iteración, word contendrá un nombre de un personaje de los Vengadores.
+      if (word.length > longestWord.length) { //* utilizamos una condicional verdadera para comparar la longitud de la palabra actual (word) esta variable guarda la palabra más larga hasta ese momento (longestWord). Si word es más largo que longestWord se seguira ejecutando el bucle.
+        longestWord = word;                   //* Si la longitud de word es mayor que la longitud de longestWord, se actualiza longestWord para que sea igual a word. Esto significa que longestWord tiene la palabra más larga encontrada hasta el momento.        
+      }                                       //* Después de que el bucle for haya iterado a través de todo el array, la función devuelve longestWord, que es la palabra más larga encontrada en el arreglo marvel.
+    }                                         //* alfinal creamos una variable para mostrala por consola que contiene la palabra mas larga de avengers.
   
     return longestWord;
   }
@@ -39,15 +39,15 @@ console.log(longestWord);
 
 //*--- version 2 ---
 
-function findLongestWord(marvel) {
-  let longtWord = '';
-
-  for (const word of marvel) {
-      if (word.length > longtWord.length) {
-          longtWord = word;
-      }
-  }
-
+function findLongestWord(marvel) {        //* este es igual al anterior usando un for of que es un metodo mas nuevo para bucles de object
+  let longtWord = '';                     //* es una version mas compacta que un for
+                                          //* creamos variable longtword que esta vacia y la llenamos despues
+  for (const word of marvel) {            //* for of - creamos una variable con funcion y un parametro marvel que contiene el array, y guarda toda la informacion en la variable que es word
+      if (word.length > longtWord.length){//* luego usamos una condicional que compara cual es el mas largo.
+          longtWord = word;               //* word sumara todos los elementos del array usando length cuenta todas las letras y el numero mas alto o palabra mas larga la guarda en longtword  
+      }                                   //* longtWord es igual a word asi contiene todo el array y como tiene una clave vacia lo llenamos. 
+  }                                       //* luego con el return le decimos que nos devuelva longtWord que contiene el elemento mas alto ya que la emos llenado antes.
+                                          
   return longtWord;
 }
 
