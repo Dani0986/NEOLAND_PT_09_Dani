@@ -117,30 +117,6 @@ function averageWord(numLetras) {
 let totalMix = averageWord(mixedElements);
 console.log(totalMix);
 
-//*--- version 2 -------
-
-const mix = [6, 1, 'Rayo', 1, 'vallecano', '10', 'upgrade', 8, 'hub'];
-function averageWord(numLetras) {  
-        let sumaNumeros = 0;
-        let contar = 0;
-      
-        numLetras.forEach(elemento => {
-          if (typeof elemento === "number") {
-            sumaNumeros += elemento;
-            contar++;
-          }
-        });
-      
-        if (contar === 0) {
-          return 0; 
-        }
-      
-        let tMix = sumaNumeros / contar;
-        return tMix;
-      }
-
-let tMix = averageWord(mix);
-console.log(tMix);
 
 //?--- Iteración #6: Valores únicos
 //!--- Crea una función que reciba por parámetro un array y compruebe si existen elementos duplicados, en caso que existan los elimina para retornar un array sin 
