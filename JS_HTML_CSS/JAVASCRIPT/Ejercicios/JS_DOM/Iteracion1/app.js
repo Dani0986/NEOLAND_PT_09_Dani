@@ -24,5 +24,12 @@ console.log("🚀 ~ file: app.js:22 ~ pokemon:", pokemon);
 //?- 1.5 Usa querySelector para mostrar por consola todos los elementos con el atributo 
 //?- data-function="testMe".
 
-const data = document.querySelectorAll("[data-function]");
+const data = document.querySelectorAll('[data-function="testMe"]');
 console.log("🚀 ~ file: app.js:28 ~ data:", data);
+
+//?- 1.6 Usa querySelector para mostrar por consola el 3 personaje con el atributo 
+//?- data-function="testMe".
+
+const data3 = document.querySelectorAll('[data-function="testMe"]');
+console.log(data3[2]);
+
