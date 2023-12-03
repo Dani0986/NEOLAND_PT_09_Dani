@@ -1,0 +1,17 @@
+article {
+    width: 140px;
+    height: 160px;
+    border: 1px solid rgba(0, 0, 0, 0.315);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  article p {
+    text-align: center;
+    height: 20px;
+  }
+  
