@@ -1,7 +1,7 @@
 //?- 1.1 Basandote en el array siguiente, crea una lista ul > li 
 //?- dinámicamente en el html que imprima cada uno de los paises.
 
-document.addEventListener('DOMContentLoaded', function () {  //* importante DOMcontentLoaded, sera lo primnero que carga en el html y asi puedes acceder a los elementos del dom.
+//* document.addEventListener('DOMContentLoaded', function () {  //* importante DOMcontentLoaded, sera lo primnero que carga en el html y asi puedes acceder a los elementos del dom.
     const countries = ['Japón', 'Nicaragua', 'Suiza', 'Australia', 'Venezuela'];
     const printElement = document.querySelector('[data-function="printHere"]');
     const ulElement = document.createElement('ul'); //* crear lista ul
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {  //* importante DOMc
     });
     
     printElement.appendChild(ulElement); //* agregamos la lista ul al html
-});
+
 
 
 
