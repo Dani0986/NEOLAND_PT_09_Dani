@@ -1,6 +1,6 @@
 import "./Footer.css";
 const template = `
-<footer></footer>
+<footer>Cartoon Network Studios</footer>
 `;
 
 export const PrintFooter = () =>

@@ -1,12 +1,14 @@
 header {
     width: 100vw;
     height: 20vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: left;
-    background-color: rgba(206, 241, 229, 0.976);
+    background-image: url(img/rick-2.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
     gap: 1rem;
-    position: fixed;
-  }
-  
+    position: fixed; 
+}
+

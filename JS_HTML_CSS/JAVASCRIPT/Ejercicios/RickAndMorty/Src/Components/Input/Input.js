@@ -2,7 +2,7 @@ import { filterData } from "../../utils/filterData";
 import { PrintArticle } from "../Article/Article";
 
 const template = `
-    <label>Introduzca un jugador a buscar: </label>
+    <label>Busca tu personaje: </label>
   <input type="text" id="inputBusqueda">
 
 `;
@@ -15,7 +15,7 @@ export const listenersInput = () => {
     const elementosFiltrados = filterData(e.target.value);
 
     elementosFiltrados.map((jugador) =>
-      PrintArticle(jugador.name, jugador.age, jugador.gameMorePlayed)
+      PrintArticle(jugador.name, jugador.species, jugador.gender)
     );
   });
 };

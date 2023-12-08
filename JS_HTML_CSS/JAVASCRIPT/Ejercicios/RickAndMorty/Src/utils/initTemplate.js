@@ -4,7 +4,7 @@ import { PrintMain } from "../Components/Estructura/Main/Main";
 import { Listener } from "../Components/Nav/Nav";
 
 export const initTemplate = () => {
-  PrintHeader("Proyecto Javascript&PokeApi");
+  PrintHeader("Rick&Morty");
   PrintMain();
   PrintFooter();
   Listener();

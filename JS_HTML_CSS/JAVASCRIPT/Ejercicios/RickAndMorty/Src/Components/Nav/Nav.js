@@ -4,9 +4,9 @@ import "./Nav.css";
 
 const template = () => `
 <nav>
-    <button id="navegateHome" class="btn-nav">RICK</button>
-    <button id="navegateBusqueta" class="btn-nav">BUSQUEDA</button>
-</nav>`;
+    <button id="navegateHome" class="btn-nav">Personajes</button>
+    <button id="navegateBusqueta" class="btn-nav">Buscador</button>
+    </nav>`;
 
 export const Listener = () => {
   const home = document.getElementById("navegateHome");
