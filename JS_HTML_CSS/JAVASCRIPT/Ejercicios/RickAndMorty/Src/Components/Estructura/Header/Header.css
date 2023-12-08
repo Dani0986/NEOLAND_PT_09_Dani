@@ -1,8 +1,8 @@
 header {
     width: 100vw;
     height: 20vh;
-    background-image: url(img/rick-2.jpg);
-    background-size: 100% 180%;
+    background-image: url(img/rick-2.bmp);
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex; 
