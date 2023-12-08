@@ -2,7 +2,8 @@ header {
     width: 100vw;
     height: 20vh;
     background-image: url(img/rick-2.jpg);
-    background-size: 100% 100%;
+    background-size: 100% 180%;
+    background-position: center;
     background-repeat: no-repeat;
     display: flex; 
     flex-direction: column; 
@@ -11,4 +12,5 @@ header {
     gap: 1rem;
     position: fixed; 
 }
+
 
