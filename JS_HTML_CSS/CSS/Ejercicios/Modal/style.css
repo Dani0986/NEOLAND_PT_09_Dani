@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+html, body {
+    height: 100%;
+  }
+  
+body {
+    font-family: Roboto, sans-serif;
+    margin: 0;
+    background: #aaa;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.modal {
+    background: white;
+    width: 480px;
+    border: 10px;
+    box-shadow: 2px 4px 16px rgba(0, 0, 0, .2);
+    padding: 20px 20px; /* Ajuste de padding en todo el modal */
+    display: flex;
+    flex-direction:column;
+    gap: 16px; /* Espaciado uniforme entre elementos */
+}
+
+.icon {
+    color: royalblue;
+    font-size: 26px;
+    font-weight: 700;
+    background: lavender;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+}
+
+
+.close-button {
+    background: #eee;
+    border-radius: 50%;
+    color: #888;
+    font-weight: 400;
+    font-size: 16px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* Alinear el botón de cierre a la derecha */
+}
+
+button {
+    padding: 8px 16px;
+    margin: 15px 1px;
+    border: 8px;
+    align-self: flex-start;
+    gap: 16px;
+}
+  
+button.continue {
+    background: royalblue;
+    border: 1px solid royalblue;
+    color: white;
+    align-self: flex-start;/* Alinear el botón de continuar a la izquierda */
+}
+  
+button.cancel {
+    background: white;
+    border: 1px solid #ddd;
+    color: royalblue;
+    align-self: flex-end;
+}
+
+.modal, .icon, .header, .close-button{
+    display:flex;
+    display: inline-block;
+} 
