@@ -1,0 +1,50 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+body {
+    background: #eee;
+    font-family: sans-serif;
+  } 
+  
+.card {
+    width: 400px;
+    background: white;
+    margin: 8px auto; /* Ajustar margen superior e inferior */
+    padding: 8px; /* Añadir padding alrededor de la carta */
+}
+  
+.title {
+    background: #a2daff;
+    font-size: 16px; /* Tamaño de fuente para el título */
+    padding: 8px; /* Añadir padding alrededor del título */
+    margin-bottom: 8px; /* Espacio entre el título y la sección de contenido */
+  }
+  
+.content {
+    background: #a2daff;
+    padding: 8px; /* Padding alrededor del contenedor de botones */
+    padding: 16px 8px; /* Espacio dentro de la sección de contenido */
+    margin-bottom: 8px;
+}
+
+
+.button-container {
+    background: #a2daff;
+    padding: 8px; /* Padding alrededor del contenedor de botones */
+    text-align: center; /* Centrar el contenido dentro del contenedor */
+}
+
+button {
+    background: white;
+    border: 1px solid #eee;
+    margin: 8px; /* Espacio alrededor del botón */
+    padding: 8px 24px; /* Espaciado interno del botón */
+}

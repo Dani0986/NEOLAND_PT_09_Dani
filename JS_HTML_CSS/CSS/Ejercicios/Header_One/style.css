@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+html {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.header  {
+    font-family: monospace;
+    background: #fa5252;
+    display: flex;
+    justify-content: space-between; /** ponemos los elementos en ambos lados **/
+    align-items: center; 
+    padding: 8px;
+     margin: 5px;
+    border: solid 2px black;
+}
+  
+.logo {
+    font-size: 20px;
+    font-weight: 900;   
+    color: black;
+    border: solid 2px black;
+    background: #82c91e;
+    padding: 8px 30px;
+    margin: 5px;
+  }
+  
+ul {
+    list-style-type: none;
+    display: flex; /* Mostrar los elementos de la lista en línea */
+
+  }
+  
+a {
+    font-size: 20px;
+
+
+    color: black;
+    background: rgb(111, 1, 255);
+    border: solid 2px black;
+    padding: 8px 30px;
+    text-decoration: none;
+    margin:  8px;
+}
