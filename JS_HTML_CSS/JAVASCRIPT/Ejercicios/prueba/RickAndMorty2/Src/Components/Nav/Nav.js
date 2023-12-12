@@ -9,6 +9,7 @@ const template = () => `
     </nav>`;
 
 
+
 export const Listener = () => {
   const home = document.getElementById("navegateHome");
   home.addEventListener("click", () => {

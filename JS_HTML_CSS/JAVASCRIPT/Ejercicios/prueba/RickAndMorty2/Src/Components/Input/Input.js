@@ -3,7 +3,8 @@ import { PrintArticle } from "../Article/Article";
 
 const template = `
     <label>Busca tu personaje: </label>
-  <input type="text" id="inputBusqueda">
+  <input type="text" v-model="inputValue" "id="inputBusqueda"/>
+
 `;
 
 

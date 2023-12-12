@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr; /* La segunda columna es 4 veces más grande que la primera */
+    grid-gap: 4px; /* Espacio de 4px entre elementos */
+    text-align: center;
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.container div {
+    padding: 15px;
+    font-size: 32px;
+    font-family: Helvetica;
+    font-weight: bold;
+    color: white;
+}
+
+.header {
+    background-color: #393f4d;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr auto; /* Dos columnas: la primera ocupa el espacio restante, la segunda se ajusta al contenido */
+    align-items: center; /* Centra verticalmente los elementos */
+    grid-column: span 2; /* Abarca ambas columnas */
+}
+
+.menu ul,
+.menu li {
+    font-size: 16px;
+    text-align: right;
+    display: inline-block;
+}
+
+.menu li{
+    margin: 1px 20px;
+}
+
+.menu ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en el menú */
+    gap: 8px; /* Espacio entre elementos del menú */
+    text-align: left;
+    display: inline-block;
+}
+
+.sidebar {
+    background-color: #FF7755;
+    grid-row: span 2; /* Abarca dos filas */
+    padding: 50px 0; /* Espacio de 50px en la barra lateral */
+    display: grid;
+    grid-template-rows: auto auto; /* Dos filas en la barra lateral */
+    gap: 8px; /* Espacio entre elementos en la barra lateral */
+    
+}
+
+.sidebar .photo {
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    font-weight: normal;
+    border-radius: 10px;
+}
+
+.sidebar .side-content {
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.nav {
+    background-color: #FF7755;
+}
+
+.nav ul li {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.nav ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas en la navegación */
+    gap: 8px; /* Espacio entre elementos de navegación */
+    text-align: left;
+}
+
+.article {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* Espacio de 15px */
+    background-color: #bccbde;
+}
+
+.article p {
+    font-size: 18px;
+    font-family: sans-serif;
+    color: white;
+    text-align: left;
+}
+
+.article .card {
+    background-color: #FFFFFF;
+    color: black;
+    text-align: center;
+    height: 200px; /* Altura de las tarjetas */
+}
+
+.card p {
+    color: black;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.card .title {
+    font-size: 18px;
+    text-align: center;
+}
+
+.footer {
+    background-color: #393f4d;
+    grid-column: span 2; /* Abarca ambas columnas */
+}
+
+.footer p {
+    font-size: 13px;
+    font-weight: normal;
+}
+

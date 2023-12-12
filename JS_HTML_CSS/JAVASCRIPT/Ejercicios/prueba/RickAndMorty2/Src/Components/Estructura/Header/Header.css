@@ -1,0 +1,19 @@
+header {
+    width: 100vw;
+    height: 20vh;
+    background-image: url(img/rk.bmp);
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 6rem;
+    position: fixed; 
+}
+
+
+h1 {
+    color: white;
+}
