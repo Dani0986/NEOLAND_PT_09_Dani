@@ -1,10 +1,15 @@
+import { PrintTemplateFooter, PrintTemplateHeader } from "../Components/Estructura/index"
 
 export const initTemplate = () => {
-    const app = document.getElementById("#app");
+  const app = document.getElementById("app");
 
-    const header = document.createElement("header");
-    const main = document.getElementById("main");
-    const footer = document.createElement("footer");
+  // creamos los elementos de la estructura
+  const footer = document.createElement("footer");
+  const header = document.createElement("header");
+  const main = document.createElement("main");
 
-    app.append(header, main, footer);
+  app.append(header, main, footer);
+
+  PrintTemplateHeader();
+  PrintTemplateFooter();
 };
