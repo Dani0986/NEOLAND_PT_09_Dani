@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    background-color: rgba(127, 255, 212, 0.582);
+    cursor: url('img/hammer3.png'), auto;
+   
+}
+header {
+      height: 20vh;
+      background-color:rgba(0, 128, 0, 0.24);
+    
+}
+
+
+.square {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+#punto {
+    color: black;
+}
+
+h2 {
+    color:red;
+}
+
+
+.grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 618px;
+    height: 618px;   
+    background-color: rgba(165, 42, 42, 0.445); 
+    border: 2px solid black
+    
+}
+
+.mole {
+    background-image: url("img/dig.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+footer {
+    background-color: rgba(0, 128, 0, 0.24);
+    height: 8.6vh;
+  
+}
