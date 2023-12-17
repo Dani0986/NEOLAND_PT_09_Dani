@@ -2,11 +2,8 @@ import { changeColorRGB } from "../../../utils";
 import "./Header.css";
 
 const template = () => `
-  <img
-    src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682679162/header_giqdug.jpg"
-    alt="title hub game website (app)"
-    class="logo"
-  />
+  <div id="imagenLogo">
+  </div>
   <nav>
     <img
       src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682684561/changeColor_tat29q.png"
@@ -40,3 +37,21 @@ export const PrintTemplateHeader = () => {
   document.querySelector("header").innerHTML = template();
   listeners();
 };
+
+//** estas son las otras dos formas */
+
+//** al ponerlo por css no me da error en las imagenes */
+/*
+<img
+src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682679162/header_giqdug.jpg"
+alt="title hub game website (app)"
+class="logo"
+/>*/
+
+
+/*
+<img
+src="img/pokemaniacs.png"
+alt="pokeapi"
+class="logo"
+/>*/

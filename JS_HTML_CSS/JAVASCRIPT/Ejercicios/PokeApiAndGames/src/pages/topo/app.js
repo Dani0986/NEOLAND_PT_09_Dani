@@ -1,9 +1,9 @@
 import "./style.css"
 
 const template = () =>  `
-    <main>
+    <section id="encuadrar">
     <div id="customCursor"></div>    
-    <h1>Dale al Topo</h1>
+    <h1 id="topo">Dale al Topo</h1>
     <h2 id="punto">puntuacion:</h2>
     <h2 id="puntuacion">0</h2>
     <div id="tiempo">tiempo restante:</div>
@@ -17,11 +17,10 @@ const template = () =>  `
         <div class="square" id="6"></div>
         <div class="square" id="7"></div>
         <div class="square" id="1"></div>
-        <div class="square" id="1"></div>
+        <div class="square" id="1"></div>        
     </div> 
-    </main>
+    </section>    
 `;
-
 
 
 const init = () => {
@@ -53,14 +52,6 @@ square.forEach(squareElement => {
             score.textContent = results;
         }
     });
-});
-document.addEventListener('mousemove', (e) => {
-    const cursor = document.querySelector('body');
-    const offsetX = 20; // Ajusta el desplazamiento en el eje X
-    const offsetY = 20; // Ajusta el desplazamiento en el eje Y
-
-    cursor.style.left = `${e.pageX - offsetX}px`;
-    cursor.style.top = `${e.pageY - offsetY}px`;
 });
 
 function moveMole() {
