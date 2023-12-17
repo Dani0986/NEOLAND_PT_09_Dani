@@ -1,6 +1,6 @@
 import { filterData } from "../../utils/filterData";
 import { PrintArticle } from "../Article/Article";
-
+/*
 const template = `
     <label>Busca tu personaje: </label>
   <input type="text" id="inputBusqueda">
@@ -23,3 +23,4 @@ export const listenersInput = () => {
 export const PrintInput = () => {
   document.querySelector("#busquedaPage").innerHTML += template;
 };
+*/

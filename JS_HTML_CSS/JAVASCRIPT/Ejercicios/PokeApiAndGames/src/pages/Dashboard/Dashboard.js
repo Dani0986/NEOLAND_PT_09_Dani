@@ -1,4 +1,6 @@
+import { initControler } from "../../utils/route";
 import "./Dashboard.css";
+
 
 const template = () => `
   <div id="containerDashboard">
@@ -14,9 +16,9 @@ const template = () => `
       </li>
       <li>
         <figure>
-          <img
+          <img  id="navigateTopo"
             src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761641/pngwing.com_1_iq8zfk.png"
-            alt=" go to wacka topo game"
+            alt=" go to wacka topo game"          
           />
           <h2>WACKA TOPO</h2>
         </figure>
@@ -34,9 +36,33 @@ const template = () => `
   </div>
 `;
 
-const listeners = () => {};
+const listeners = () => {
+  const navigateTopoElement = document.getElementById("navigateTopo");
+  if (navigateTopoElement) {
+    navigateTopoElement.addEventListener("click", handleTopoClick);
+}};
+
+/*function handleTopoClick() {
+  console.log("handleTopoClick called");
+  // Abre el juego al hacer clic en "navigateTopo"
+  PrintGame();
+} */ 
+
+/*function handleTopoClick() {
+  console.log("handleTopoClick called");
+  window.location.href = '';
+  document.querySelector("main").innerHTML = '';    
+  console.log("topo");
+};*/
+
+const handleTopoClick = () => {
+  console.log("topo")
+  initControler("Topo"); 
+}
 
 export const PrintDashboard = () => {
   document.querySelector("nav").style.display = "flex";
   document.querySelector("main").innerHTML = template();
+  listeners();
 };
+

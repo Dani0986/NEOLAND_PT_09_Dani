@@ -1,4 +1,5 @@
 import { PrintDashboard, PrintLogin } from "../pages";
+import { prinTopo } from "../pages/topo/app";
 
 export const initControler = (paginaQueVamosAPintar) => {
   switch (paginaQueVamosAPintar) {
@@ -14,7 +15,7 @@ export const initControler = (paginaQueVamosAPintar) => {
       break;
 
     case "Topo":
-      // la funcion qur pinta la pagina PrintPageTopo()
+      prinTopo();
       break;
     case "Memory":
       // la funcion qur pinta la pagina PrintPageMemoryGame()
