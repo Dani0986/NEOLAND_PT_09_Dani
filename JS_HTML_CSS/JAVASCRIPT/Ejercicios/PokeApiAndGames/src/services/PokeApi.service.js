@@ -1,17 +1,16 @@
-/*
-export const getAllPokemon = async () => {
-    const optionRequest = {
-        method: "GET",
-        url : "https://pokeapi.co/api/v2/pokemon/"
+import { axiosUtil } from "../utils/axios"
 
+export const getByIdPokemon = async (id) => {
+  const optionsRequest = {
+    method: "GET",
+    url: `https://pokeapi.co/api/v2/pokemon/${id}`,
+  };
 
-    };
-    return await axiosUtil(optionRequest);
+  return await axiosUtil(optionsRequest);
 };
 
-const urlPokemons = "https://pokeapi.co/api/v2/pokemon/";
-*/
 
+/*
 export const getAllPokemon = async () => {
     const baseUrl = "https://pokeapi.co/api/v2/pokemon/";
     const numberOfPokemon = 150;
@@ -26,9 +25,9 @@ export const getAllPokemon = async () => {
     return pokemonData;
   }
   
-  // Uso de la función
+
   getAllPokemon().then((data) => {
-    console.log(data); // Aquí tendrás la información sobre los primeros 150 Pokémon
-});
+    console.log(data); // información sobre los primeros 150 Pokémon
+});*/
 
 

@@ -5,7 +5,8 @@ header  {
   align-items: center;
   position: fixed;
   width: 100%;
-  background: #000000;
+  background-image: url("../../../../public/img/gaming-web.jpg");
+  background-repeat: no-repeat;
   -webkit-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
@@ -25,10 +26,11 @@ header  {
       transform: scale(1.2);
     }
   }
-  & .logo {
-    min-width: 15vw;
+  & #Logo { 
     height: 20vh;
-    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     @media (max-width: 600px) {
       width: 30vw;
       height: 10vh;
@@ -41,9 +43,9 @@ header  {
     align-items: center;
   }
 }
-
+/*
 #imagenLogo {
-  background-image: url("img/pokemon-logo1.png");
+  background-image: url("../../../../public/img/pokemon-logo1.png");
   background-size: contain;
   background-repeat: no-repeat;
   min-width: 25vw;
@@ -55,4 +57,4 @@ header  {
     width: 30vw;
     height: 10vh;
   }
-}
+}*/

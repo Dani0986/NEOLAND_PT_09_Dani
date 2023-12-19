@@ -1,10 +1,13 @@
 import { changeColorRGB } from "../../../utils";
 import "./Header.css";
 
-const template = () => `
-  <div id="imagenLogo">
-  </div>
-  <nav>
+const template = () => `  
+  <img
+    src="./img/pokemon-logo1.png"
+    alt="pokeapi"
+    id="Logo"
+    />
+  <nav>  
     <img
       src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682684561/changeColor_tat29q.png"
       alt=" change to style mode page"
@@ -15,7 +18,7 @@ const template = () => `
       alt=" navigate to home app"
       id="buttonDashboard"
     />
-    <img
+    <img      
       src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682679055/logout_arz0gw.png"
       alt="logout"
       id="buttonLogout"
@@ -31,6 +34,8 @@ const listeners = () => {
     document.body.style.background = colorRGB;
   });
 };
+
+
 
 
 export const PrintTemplateHeader = () => {
@@ -51,7 +56,7 @@ class="logo"
 
 /*
 <img
-src="img/pokemaniacs.png"
+src="./img/pokemon-logo1.png"
 alt="pokeapi"
 class="logo"
 />*/

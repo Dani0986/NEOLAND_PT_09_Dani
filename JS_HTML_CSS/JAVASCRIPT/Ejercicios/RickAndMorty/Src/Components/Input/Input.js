@@ -1,4 +1,4 @@
-import { filterData } from "../../utils/filterData";
+/*import { filterData } from "../../utils/filterData";*/
 import { PrintArticle } from "../Article/Article";
 
 const template = `

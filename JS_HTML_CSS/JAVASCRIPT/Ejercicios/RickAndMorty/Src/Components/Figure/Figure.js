@@ -10,5 +10,5 @@ const template = (imageFigure, nameFigure) => `
 export const PrintFigureRicky = (name, image) =>
   (document.getElementById("containerHomePage").innerHTML += template(
     image,
-    name
+    name,
   ));

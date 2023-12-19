@@ -21,7 +21,7 @@
     width: 165px;
     height: 165px;
     border: 1px solid black;
-    cursor: url('img/hammer.ico'), auto;
+    cursor: url('../../../public/img/pk1.png'), auto;
 }
 #topo {
     font-size: 2rem;
@@ -47,7 +47,7 @@ div.grid {
 }
 
 .mole {
-    background-image: url("img/dig.png");
+    background-image: url("../../../public/img/dig.png");
     background-size: cover;
     background-repeat: no-repeat;
 }

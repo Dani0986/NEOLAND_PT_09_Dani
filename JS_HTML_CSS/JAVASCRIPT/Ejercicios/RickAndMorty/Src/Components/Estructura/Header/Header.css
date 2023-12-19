@@ -1,8 +1,5 @@
 header {
-    width: 100vw;
-    height: 20vh;
-    background-image: url(img/rk.bmp);
-    background-size: 100% 100%;
+    background-color: rgb(255, 243, 226);
     background-position: center;
     background-repeat: no-repeat;
     display: flex; 
@@ -15,5 +12,5 @@ header {
 
 
 h1 {
-    color: white;
+    color: rgb(0, 0, 0);
 }

@@ -1,12 +1,7 @@
 footer {
-    height: 10vh;
+    background-color: rgb(252, 239, 222);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 219, 146, 0.719);
-    background-image: url(img/Cartoon_Network_extended_logo_2010.svg.png);
-    background-size: 800px 100px;   
-    background-repeat: no-repeat;
-    background-position: center;
   }
   

@@ -1,13 +1,13 @@
 import { PrintFigureRicky } from "../../Components/Figure/Figure";
-import { mapeoData } from "../../utils/mappeoDataRicky";
+import { getDataRickBucle } from "../../utils/mappeoDataRicky"
 import "./Home.css";
 const template = () => `<div id="containerHomePage">
 
 </div>`;
 
-const getData = async () => {
-  const data = await mapeoData();
-
+const getDataService = async () => {
+  const data = await getDataRickBucle();
+  console.log(data)
   printGallery(data);
 };
 
@@ -20,5 +20,5 @@ const printGallery = (data) => {
 
 export const PrintHomePage = () => {
   document.querySelector("main").innerHTML = template();
-  getData();
+  getDataService();
 };

@@ -9,3 +9,19 @@ html {
   width: 100vw;
   min-height: 100vh;
 }
+
+
+header {
+  height: 20vh;
+  width: 100vw;
+  position: fixed;
+}
+
+main {
+  min-height: 90vh;
+  padding-top: 10vh;
+}
+
+footer {
+  height: 10vh;  
+}
