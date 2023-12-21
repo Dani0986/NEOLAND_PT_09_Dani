@@ -1,10 +1,20 @@
 #containerHomePage {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-content: center;
-    justify-content: center;
-    padding: 2rem;
-    margin-top: 20vh;
+  display: flex;
+
+  padding: 2rem;
+  margin-top: 10vh;
+  flex-direction: column;
+  width: 100vw;
+
+  & input {
+    margin: 2rem;
   }
-  
+}
+
+#gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-content: center;
+  justify-content: center;
+}

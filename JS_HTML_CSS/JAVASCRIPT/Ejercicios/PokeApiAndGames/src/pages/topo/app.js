@@ -7,7 +7,7 @@ const template = () =>  `
     <h2 id="punto">puntuacion:</h2>
     <h2 id="puntuacion">0</h2>
     <div id="tiempo">tiempo restante:</div>
-    <h2 id="time-left">60</h2> 
+    <h2 id="time-left">5</h2> 
     <div class="grid">
         <div class="square" id="1"></div>
         <div class="square mole" id="2"></div>
@@ -25,7 +25,7 @@ const template = () =>  `
 
 const init = () => {
 const square = document.querySelectorAll('.square');
-const mole = document.querySelectorAll('.mole');
+/*const mole = document.querySelectorAll('.mole');*/
 const tiempo = document.querySelector('#mole');
 const score = document.querySelector('#puntuacion');
 
@@ -34,7 +34,8 @@ let results = 0;
 let currentTime = document.querySelector('#time-left').textContent;
 let hitPosicion = null;
 
-function randomSquare() {
+
+const randomSquare = () => {
     square.forEach((className, index) => {
         className.classList.remove('mole');
     });
@@ -61,19 +62,26 @@ function moveMole() {
 
 moveMole();
 
-function countdown() {
+const countdown = () => {
     currentTime--;
     document.querySelector('#time-left').textContent = currentTime;
     if(currentTime===0){
         clearInterval(timerId);
-        alert('Game Over! your score: '+ results);
-
+        alert('Game Over! Tu Puntuacion es de: '+ results + " puntos");
+        restartGame();
     }
 }
 
 let timerId = setInterval(countdown, 1000);
 
-
 };
+
+const restartGame = () => {
+    const restart = confirm('quieres volver a jugar?');
+    if (restart) {
+      document.querySelector('main').innerHTML = template();
+      init();
+    }
+  };
 
 export const prinTopo = () => { document.querySelector('main').innerHTML = template(); init()};

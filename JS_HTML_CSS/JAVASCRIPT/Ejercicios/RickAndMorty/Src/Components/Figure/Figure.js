@@ -7,8 +7,5 @@ const template = (imageFigure, nameFigure) => `
 </figure>
 `;
 
-export const PrintFigureRicky = (name, image) =>
-  (document.getElementById("containerHomePage").innerHTML += template(
-    image,
-    name,
-  ));
+export const PrintFigureRicky = (name, image) => 
+  (document.getElementById("gallery").innerHTML += template(image, name));

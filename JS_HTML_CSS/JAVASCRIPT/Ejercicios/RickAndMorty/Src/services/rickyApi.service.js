@@ -1,6 +1,6 @@
 import { axiosUtil } from "../utils/axios";
 
-export const getAllRick = async () => {
+export const getAll = async () => {
   const optionRequest = {
     method: "GET",
     url: "https://rickandmortyapi.com/api/character",

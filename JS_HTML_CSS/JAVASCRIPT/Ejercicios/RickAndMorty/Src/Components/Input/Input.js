@@ -2,10 +2,10 @@
 import { PrintArticle } from "../Article/Article";
 
 const template = `
-    <label>Busca tu personaje: </label>
+    <label>Introduzca un jugador a buscar: </label>
   <input type="text" id="inputBusqueda">
-`;
 
+`;
 
 export const listenersInput = () => {
   const inputElement = document.querySelector("#inputBusqueda");
@@ -13,9 +13,9 @@ export const listenersInput = () => {
   inputElement.addEventListener("input", (e) => {
     document.getElementById("containerGallery").innerHTML = "";
     const elementosFiltrados = filterData(e.target.value);
-    console.log(elementosFiltrados);
-    elementosFiltrados.map((item) =>
-      PrintArticle(item.name, item.species, item.gender)
+
+    elementosFiltrados.map((jugador) =>
+      PrintArticle(jugador.name, jugador.age, jugador.gameMorePlayed)
     );
   });
 };

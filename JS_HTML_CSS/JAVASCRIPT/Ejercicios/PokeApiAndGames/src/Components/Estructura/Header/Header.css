@@ -1,26 +1,61 @@
 header  {
-  height: 20vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  width: 100%;
   background-image: url("../../../../public/img/gaming-web.jpg");
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; 
   -webkit-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
   z-index: 100;
-  @media (max-width: 600px) {
-    flex-direction: column;
+  
+  @media (max-width: 300px) {
+    background-size: cover;
   }
+  @media (min-width: 301px) and (max-width: 600px) {
+    background-size: cover;
+  }
+  @media (min-width: 601px) and (max-width: 1023px) {
+    background-size: cover;
+  }
+  @media (min-width: 1024px) and (max-width: 1444px) {
+    background-size: cover;
+  }
+
+  
+}
  
   & nav img {
     width: 20%;
     margin: 1em;
     transition: ease-in-out 0.3s;
-    @media (max-width: 600px) {
-      width: 40%;
+    
+    @media (max-width: 300px) {
+      width: 13vw;
+      height: auto;
+    }
+
+    @media (min-width: 301px) and (max-width: 600px) {
+      width: 10vw;
+      height: auto;
+    }
+
+    @media (min-width: 601px) and (max-width: 1023px) {
+      width: 10vw;
+      height: auto;
+    }
+    @media (min-width: 1024px) and (max-width: 1027px) {
+      width: 5vw;
+      height: auto;
+    }
+    @media (min-width: 1028px) and (max-width: 1349px) {
+      width: 7vw;
+      height: auto;
+    }
+    @media (min-width: 1350px) and (max-width: 1444px) {
+      width: 7vw;
+      height: auto;
     }
     &:hover {
       transform: scale(1.2);
@@ -31,18 +66,55 @@ header  {
     display: flex;
     justify-content: center;
     align-items: center;
-    @media (max-width: 600px) {
-      width: 30vw;
-      height: 10vh;
+    @media (max-width: 300px) {
+      height: 12vh;
+    }
+    @media (min-width: 301px) and (max-width: 499px) {
+      height: 12vh;
+      margin: auto;
+    }
+    @media (min-width: 500px) and (max-width: 599px) {
+      height: 14vh;
+      margin: auto;
+    }
+    @media (min-width: 601px) and (max-width: 610px) {
+      width: 17vw;
+      height: auto;
+    }
+    @media (min-width: 611px) and (max-width: 1023px) {
+      width: 15vw;
+      height: auto;
+    }
+    @media (min-width: 1024px) and (max-width: 1039px) {
+      width: 15vw;
+      height: auto;
+    }
+    @media (min-width: 1040px) and (max-width: 1279px) {
+      width: 15vw;
+      height: auto;
+    }
+    @media (min-width: 1280px) and (max-width: 1444px) {
+      height: 18vh;
+      margin: auto;
     }
   }
+
+  
   & nav {
     width: 30vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 300px) {
+      width: 55vw;
+      height: auto;
+    }
+    @media (min-width: 301px) and (max-width: 600px) {
+    width: 56vw;
   }
-}
+  }
+
+
 /*
 #imagenLogo {
   background-image: url("../../../../public/img/pokemon-logo1.png");
