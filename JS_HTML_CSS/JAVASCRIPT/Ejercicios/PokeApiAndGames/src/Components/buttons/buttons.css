@@ -1,0 +1,76 @@
+button {
+    padding: 12px 20px;
+    margin: 8px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+#btn-grass {
+    background-color: green;
+}
+#btn-poison {
+    background-color: rgb(128, 0, 111);
+}
+#btn-fire {
+    background-color: rgb(250, 48, 48);
+}
+#btn-flying {
+    background-color: rgb(235, 255, 235);
+}
+#btn-water {
+    background-color: rgb(0, 156, 184);
+}
+#btn-bug {
+    background-color: rgb(1, 177, 1);
+}
+#btn-normal {
+    background-color: rgb(255, 255, 255);
+}
+#btn-electric {
+    background-color: rgb(251, 255, 0);
+}
+#btn-ground {
+    background-color: rgb(82, 79, 43);
+}
+#btn-fairy {
+    background-color: rgb(102, 0, 80);
+}
+#btn-fighting {
+    background-color: rgb(236, 138, 25);
+}
+#btn-psychic {
+    background-color: rgb(250, 106, 255);
+}
+#btn-rock {
+    background-color: rgba(88, 84, 40, 0.664);
+}
+#btn-steel {
+    background-color: rgb(131, 142, 150);
+}
+#btn-ice {
+    background-color: rgb(184, 244, 255);
+}
+#btn-ghost {
+    background-color: rgb(97, 97, 97);
+}
+#btn-dragon {
+    background-color: rgb(0, 60, 255);
+}
+#btn-All {
+    background-color: rgb(255, 255, 255);
+}
+
+  button:hover {
+    background-color: #e0e0e0;
+  }
+
+  button.active {
+    background-color: #a0a0a0;
+    color: #fff;
+  }
+
+
+
+

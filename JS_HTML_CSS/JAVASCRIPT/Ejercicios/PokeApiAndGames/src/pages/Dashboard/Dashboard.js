@@ -1,4 +1,4 @@
-import { initControler } from "../../utils/route";
+import { initControler } from "../../utils/index";
 import "./Dashboard.css";
 
 
@@ -37,40 +37,30 @@ const template = () => `
 `;
 
 const listeners = () => {
+  
   const navigateTopoElement = document.getElementById("navigateTopo");
-  const navigatePokemon = document.getElementById("navigatePokemon");
-
-  if (navigateTopoElement) {
-    navigateTopoElement.addEventListener("click", () => {
-      console.log("topo");
-      initControler("Topo");
-    });
-  }
-
-  if (navigatePokemon) {
-    navigatePokemon.addEventListener("click", () => {
-      initControler("Pokemon");
-    });
-  }
-};
-/*
-const handleTopoClick = () => {
-  console.log("topo")
-  initControler("Topo"); 
-};*/
-/*
-const listeners = () => {
+  navigateTopoElement.addEventListener("click", () => {
+    console.log("topo");
+    initControler("Topo");
+  });
+  
   const navigatePokemon = document.getElementById("navigatePokemon");
   navigatePokemon.addEventListener("click", () => {
     initControler("Pokemon");
   });
-};*/
+};
 
 export const PrintDashboard = () => {
   document.querySelector("nav").style.display = "flex";
   document.querySelector("main").innerHTML = template();
   listeners();
 };
+
+/*
+const handleTopoClick = () => {
+  console.log("topo")
+  initControler("Topo"); 
+};*/
 
 /*function handleTopoClick() {
   console.log("handleTopoClick called");

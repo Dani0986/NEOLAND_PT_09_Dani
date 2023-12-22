@@ -1,5 +1,5 @@
-import { printGallery } from "../../pages";
-import { filterDataPokemon, filterDataPokemonSelect } from "./../../utils";
+/*import { printGallery } from "../../pages";
+import { filterDataPokemonSelect } from "./../../utils";
 import "./Select.css";
 
 const listener = (allData) => {
@@ -17,7 +17,7 @@ export const PrintSelectTypePokemon = (type, allData) => {
     optionType.textContent = "All pokemon";
     selectType.appendChild(optionType);
   
-    types.map((type) => {
+    type.map((type) => {
       const optionType = document.createElement("option");
       optionType.textContent = type;
       selectType.appendChild(optionType);
@@ -26,6 +26,4 @@ export const PrintSelectTypePokemon = (type, allData) => {
     document.getElementById("filterButton").appendChild(selectType);
   
     listener(allData);
-  };
-  
-
+  };*/

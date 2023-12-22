@@ -1,5 +1,5 @@
 import {PrintFigurePokemon, 
-        PrintSelectTypePokemon,
+       PrintSelectTypePokemon,
         PrintSpinner,        
     } from "../../Components";
 import {
@@ -12,6 +12,7 @@ import "./pokemon.css";
 const template = () => `
     <div id="pokemon">
      <div id="containerFilter">
+     <div id="spinnerButtonFilter"></div>
      <div id="filterButton"></div>
      <input
         type="text"
@@ -31,29 +32,30 @@ const getDataService = async () => {
     const types = typePokemon(data);
     PrintSelectTypePokemon(types, data);
 
-    listener(data);
+    listeners(data);
     console.log(data);
     printGallery(data);
     document.getElementById("spinner").innerHTML = "";
 }
 
 export const printGallery = (dataprint) => {
-    document.getElementById("galleryPokemon").innerHtML = "";
+    document.getElementById("galleryPokemon").innerHTML = "";
     dataprint.map((pokemon) => 
      PrintFigurePokemon(pokemon.name, pokemon.id, pokemon.image, pokemon.type)
      ); 
 };
 
-const listener = (totalData) => {
-    const inputPokemon = document.getElementById("inputPokemon");
+const listeners = (totalData) => {
+    const inputPokemon = document.getElementById("inputpokemon");
 
     inputPokemon.addEventListener("input", (e) => {
         const filterPokemon = filterDataPokemon(totalData, e.target.value);
         printGallery(filterPokemon);
-    });
-};
+      });
+    };
+    
 
 export const PrintPokemonPage = () => {
     document.querySelector("main").innerHTML = template();
     getDataService();
-};
+}
