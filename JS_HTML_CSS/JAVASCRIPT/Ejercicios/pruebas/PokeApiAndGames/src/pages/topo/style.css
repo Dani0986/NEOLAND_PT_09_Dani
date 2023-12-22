@@ -1,0 +1,145 @@
+
+
+/*main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(0, 128, 0, 0.418);
+}
+*/
+#encuadrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0px;
+    height: 70vh;
+    background-color: rgba(0, 128, 0, 0.418);  
+   
+    @media (max-width: 500px) {
+        width: 100vw; 
+        height: 70vh;     
+    }
+    @media (max-width: 501px) and (max-width: 799px) {
+        width: 100vw; 
+        height: 70vh;     
+    }
+    @media (max-width: 800px) and (max-width: 1024px) {
+        width: 100vw; 
+        height: 70vh;     
+    }
+    @media (min-width: 1024px) and (max-width: 1026px) {
+        width: 100vw;
+        height: 70vh;
+      }
+    @media (max-width: 1025px) and (max-width: 1444px) {
+        width: 100vw;
+        height: 70vh;
+    }    
+}
+
+.square {
+    width: 165px;
+    height: 165px;
+    border: 1px solid black;
+    cursor: url('../../../public/img/pk1.png'), auto;
+
+    @media (max-width: 500px) { 
+        width: 32%;
+        height: 32%;
+        flex-wrap: wrap;
+    }
+    @media (min-width: 501px) and (max-width: 799px) {
+        width: 32%;
+        height: 32%;
+      }
+    @media (min-width: 800px) and (max-width: 1023px) {
+        width: 32%;
+        height: 32%;     
+    }
+    @media (min-width: 1024px) and (max-width: 1026px) {
+        width: 32%;
+        height: 32%;
+      }
+    @media (min-width: 1027px) and (max-width: 1444px) {
+        width: 32%;
+        height: 32%;
+    }       
+}
+#topo {
+    font-size: 2rem;
+}
+#punto {
+    color: black;
+}
+
+h2 {
+    color:red;
+}
+
+
+div.grid {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 520px;
+    height: 520px;     
+    background-color: rgba(165, 42, 42, 0.445); 
+    border: 2px solid black;        
+
+    @media (max-width: 500px) {
+        width: 90%;
+        height: 68%;
+           }
+    @media (min-width: 501px) and (max-width: 799px) {             
+            height: 74%;     
+               }       
+    @media (min-width: 800px) and (max-width: 1024px) {             
+        height: 74%;     
+           }
+    @media (min-width: 1024px) and (max-width: 1026px) {
+       
+        height: 65%;
+          }
+    @media (min-width: 1027px) and (max-width: 1444px) {
+             height: 74%;
+    }              
+}
+
+.mole {
+    background-image: url("../../../public/img/dig.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    @media (max-width: 500px) {
+        background-size: 90%;
+        background-position: center;
+    }
+    @media (max-width: 550px) {
+        background-size: 70%;
+        background-position: center;
+    }
+    @media (min-width: 551px) and (max-width: 799px) {
+        background-size: 80%;
+        background-position: center;
+    }
+    @media (min-width: 800px) and (max-width: 1023px) {
+        background-size: 80%;
+        background-position: center;
+    }
+    @media (min-width: 1024px) and (max-width: 1026px) {
+      background-size: 58%;
+      background-position: center;
+    }
+
+    @media (min-width: 1027px) and (max-width: 1444px) {
+        background-size: 85%;
+        background-position: center;
+      }
+
+
+    
+}
+

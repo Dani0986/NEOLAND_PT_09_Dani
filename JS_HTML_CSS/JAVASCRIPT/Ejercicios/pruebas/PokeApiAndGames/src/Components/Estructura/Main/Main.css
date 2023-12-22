@@ -1,0 +1,14 @@
+main {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(201, 253, 236, 0.651);
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+    }
+  }
+  

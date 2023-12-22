@@ -38,9 +38,39 @@ const template = () => `
 
 const listeners = () => {
   const navigateTopoElement = document.getElementById("navigateTopo");
+  const navigatePokemon = document.getElementById("navigatePokemon");
+
   if (navigateTopoElement) {
-    navigateTopoElement.addEventListener("click", handleTopoClick);
-}};
+    navigateTopoElement.addEventListener("click", () => {
+      console.log("topo");
+      initControler("Topo");
+    });
+  }
+
+  if (navigatePokemon) {
+    navigatePokemon.addEventListener("click", () => {
+      initControler("Pokemon");
+    });
+  }
+};
+/*
+const handleTopoClick = () => {
+  console.log("topo")
+  initControler("Topo"); 
+};*/
+/*
+const listeners = () => {
+  const navigatePokemon = document.getElementById("navigatePokemon");
+  navigatePokemon.addEventListener("click", () => {
+    initControler("Pokemon");
+  });
+};*/
+
+export const PrintDashboard = () => {
+  document.querySelector("nav").style.display = "flex";
+  document.querySelector("main").innerHTML = template();
+  listeners();
+};
 
 /*function handleTopoClick() {
   console.log("handleTopoClick called");
@@ -54,15 +84,3 @@ const listeners = () => {
   document.querySelector("main").innerHTML = '';    
   console.log("topo");
 };*/
-
-const handleTopoClick = () => {
-  console.log("topo")
-  initControler("Topo"); 
-}
-
-export const PrintDashboard = () => {
-  document.querySelector("nav").style.display = "flex";
-  document.querySelector("main").innerHTML = template();
-  listeners();
-};
-
