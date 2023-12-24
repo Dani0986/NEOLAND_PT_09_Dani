@@ -1,5 +1,6 @@
 import "./style.css"
 
+
 const template = () =>  `
     <section id="encuadrar">
     <div id="customCursor"></div>    
@@ -19,13 +20,20 @@ const template = () =>  `
         <div class="square" id="1"></div>
         <div class="square" id="1"></div>        
     </div> 
-    </section>    
+    </section>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p>Tu puntuación es: <span id="final-score"></span> puntos</p>
+            <p id="game-over-message">¡Bien hecho! ¿Quieres volver a jugar?</p>
+            <button id="restart-button">Volver a Jugar</button>
+        </div>
+    </div>
 `;
 
 
 const init = () => {
 const square = document.querySelectorAll('.square');
-/*const mole = document.querySelectorAll('.mole');*/
+const mole = document.querySelectorAll('.mole');
 const tiempo = document.querySelector('#mole');
 const score = document.querySelector('#puntuacion');
 
@@ -76,6 +84,7 @@ let timerId = setInterval(countdown, 1000);
 
 };
 
+
 const restartGame = () => {
     const restart = confirm('quieres volver a jugar?');
     if (restart) {
@@ -85,3 +94,5 @@ const restartGame = () => {
   };
 
 export const prinTopo = () => { document.querySelector('main').innerHTML = template(); init()};
+
+

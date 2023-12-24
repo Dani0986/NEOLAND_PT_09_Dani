@@ -1,0 +1,87 @@
+#hangmanDiv1{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#hangmanDiv2{
+    margin-top: 5rem;
+    min-width: 50vw;
+    min-height: 45vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 30px;
+}
+#hangmanImg{
+    width: 200px;
+    height: 200px;
+}
+#palabra{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#submit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tituloHangman{
+    margin: 0.5rem;
+}
+.hangmanP{
+    width: 20px;
+    border-bottom: solid 2px black;
+    margin-right: 20px;
+    padding-bottom: 25px;
+}
+.hangmanPacertado{
+    width: 20px;
+    border-bottom: solid 2px black;
+    margin-right: 20px;
+}
+#hangmanInput{
+    border: 2px solid black;
+    padding: 1rem;
+    margin: 0.5rem;
+    font-size: 17px;
+}
+
+#hangmanInput::placeholder{
+    color:black;
+    font-size: 17px;
+}
+#hangmanComprobar{
+    border: 2px solid black;
+    padding: 1rem;
+    margin: 0.5rem;
+    font-size: 17px;
+}
+#hangmanComprobar:hover{
+    background-color: black;
+    color: white;
+}
+.guiones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and ( max-width: 500px){
+    #palabra{
+        flex-direction: column;
+    }
+    #submit{
+        flex-direction: column;
+    }
+    #hangmanDiv2{
+        min-width: 80vw;
+    }
+}

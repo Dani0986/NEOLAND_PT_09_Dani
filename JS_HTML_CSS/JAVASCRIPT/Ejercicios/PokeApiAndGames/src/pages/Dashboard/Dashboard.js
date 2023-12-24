@@ -8,28 +8,37 @@ const template = () => `
       <li>
         <figure id="navigatePokemon">
           <img
-            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761508/pngwing.com_r0hr9b.png"
+            src="./img/pokeapi.png"
             alt="go to page pokemon"
           />
-          <h2>POKEMON</h2>
+          <h2>POKEDEX</h2>
         </figure>
       </li>
       <li>
         <figure>
           <img  id="navigateTopo"
-            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761641/pngwing.com_1_iq8zfk.png"
+            src="./public/img/dugtr.jpg"
             alt=" go to wacka topo game"          
           />
-          <h2>WACKA TOPO</h2>
+          <h2>WACKA DIGLETT</h2>
         </figure>
       </li>
       <li>
         <figure>
           <img
-            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761735/6168776_kfna36.png"
+            src="./public/img/nint2127.png"
             alt="go to memory game"
           />
           <h2>MEMORY GAME</h2>
+        </figure>
+      </li>
+      <li>
+        <figure id="navigateHangman">
+          <img
+            src="./public/img/hangm.png"
+            alt="go to hangman"
+          />
+          <h2>HANGMIME</h2>
         </figure>
       </li>
     </ul>
@@ -47,6 +56,10 @@ const listeners = () => {
   const navigatePokemon = document.getElementById("navigatePokemon");
   navigatePokemon.addEventListener("click", () => {
     initControler("Pokemon");
+  });
+  const navigateHangman = document.getElementById("navigateHangman");
+  navigateHangman.addEventListener("click", () => {
+    initControler("Hangman");
   });
 };
 
@@ -74,3 +87,18 @@ const handleTopoClick = () => {
   document.querySelector("main").innerHTML = '';    
   console.log("topo");
 };*/
+
+/*
+<img
+            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761508/pngwing.com_r0hr9b.png"
+            alt="go to page pokemon"
+          />
+          <h2></h2>
+          */
+/*
+          <img  id="navigateTopo"
+            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761641/pngwing.com_1_iq8zfk.png"
+            alt=" go to wacka topo game"*/
+/*
+            src="https://res.cloudinary.com/dq186ej4c/image/upload/v1689761735/6168776_kfna36.png"
+            alt="go to memory game"*/

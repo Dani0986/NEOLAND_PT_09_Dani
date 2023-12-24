@@ -1,4 +1,8 @@
-import { PrintDashboard, PrintLogin, PrintPokemonPage } from "../pages";
+import { 
+  PrintDashboard, 
+  PrintLogin, 
+  PrintPokemonPage,    } from "../pages";
+import { printTemplateHangman }  from "../pages/Hangman/Hangman"; 
 import { prinTopo } from "../pages/topo/app";
 
 export const initControler = (paginaQueVamosAPintar) => {
@@ -19,6 +23,10 @@ export const initControler = (paginaQueVamosAPintar) => {
       break;
     case "Memory":
       // la funcion qur pinta la pagina PrintPageMemoryGame()
+      break;
+      
+    case "Hangman":
+      printTemplateHangman();
       break;
 
     default:
