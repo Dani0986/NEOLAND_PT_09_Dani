@@ -4,11 +4,12 @@ import "./style.css"
 const template = () =>  `
     <section id="encuadrar">
         <div id="customCursor"></div>    
-        <h1 id="topo">Dale al Topo</h1>
-        <h2 id="punto">puntuacion:</h2>
+        <h1 id="topo">Atrapa al Diglett</h1>
+        <h2 id="punto">Puntuación:</h2>
         <h2 id="puntuacion">0</h2>
-        <div id="tiempo">tiempo restante:</div>
-        <h2 id="time-left">5</h2>
+        <div id="tiempo">Tiempo restante:</div>
+        <h2 id="time-left">10</h2>
+        <button id="iniciar">Iniciar Juego</button> 
         <div class="grid">
             <div class="square" id="1"></div>
             <div class="square mole" id="2"></div>
@@ -28,80 +29,81 @@ const template = () =>  `
     </section>
 `;
 
-let gameOver = false;
-let timerId = null;
+let gameOver = false; // esta variable indica que el juego termino
+let timerId = 0; // identifica el temporizador del juego
 
-const init = () => {
-    const square = document.querySelectorAll('.square');
+const init = () => { // funcion principal
+    const iniciarButton = document.querySelector('#iniciar'); //obetner boton inicial
+    iniciarButton.addEventListener('click', () => { // agregar el evento click
+    const square = document.querySelectorAll('.square'); //agregar las casillas del juego square y puntos
     const score = document.querySelector('#puntuacion');
-
-    let results = 0;
+ 
+    let results = 0;  // Inicializar variables del juego
     let currentTime = document.querySelector('#time-left').textContent;
 
-    const randomSquare = () => {
+    const randomSquare = () => { // Función que coloca el Diglett en una casilla aleatoria
         if (!gameOver) {
-            square.forEach((className) => {
+            square.forEach((className) => { // Ocultar Diglett en todas las casillas
                 className.classList.remove('mole');
             });
-            let randomPosition = square[Math.floor(Math.random() * 9)];
+            let randomPosition = square[Math.floor(Math.random() * 9)];  // Seleccionar una casilla aleatoria y mostrar Diglett
             randomPosition.classList.add('mole');
         }
     }
 
-    square.forEach(squareElement => {
-        squareElement.addEventListener('click', () => {
-            if (!gameOver && squareElement.classList.contains('mole')) {
+    square.forEach(squareElement => {   // Agregar eventos de clic a las casillas
+        squareElement.addEventListener('click', () => {  
+            if (!gameOver && squareElement.classList.contains('mole')) { // Si no ha terminado el juego y se hizo clic en Diglett, aumentar la puntuación
                 results = results + 1;
                 score.textContent = results;
             }
         });
     });
 
-    const moveMole = () => {
+    const moveMole = () => {  // Función que mueve al Diglett a una casilla aleatoria a intervalos regulares
         timerId = setInterval(() => {
             randomSquare();
-        }, 1000);
+        }, 700);
     }
 
-    moveMole();
+    moveMole(); // Iniciar movimiento del Diglett
 
-    const countdown = () => {
-        if (!gameOver) {
-            currentTime--;
-
-            if (currentTime <= 0) {
-                clearInterval(timerId);
+    const countdown = () => {      // Función que realiza la cuenta regresiva del tiempo
+        if (!gameOver) {  // si el juego a finalizado no hace mas opreciones de de cuenta hacia atras
+            currentTime --;   // Reducir el tiempo
+            const timeLeftElement = document.querySelector('#time-left'); // Obtener el elemento de tiempo restante y actualizar el contenido
+        /*    console.log(timeLeftElement); */
+            timeLeftElement.textContent = Math.max(currentTime, 0);
+            if (currentTime <= 0) {  // Si se agota el tiempo, finalizar el juego
                 gameOver = true;
-                endGame(results);
+                endGame(results); // muestra el endgame al finalizar
             }
-
-
-            document.querySelector('#time-left').textContent = Math.max(currentTime, 0);
         }
     };
 
-    timerId = setInterval(countdown, 1000);
-};
+    timerId = setInterval(countdown, 1000);  // Iniciar temporizador de la cuenta regresiva
+});
 
-const endGame = (results) => {
+const endGame = (results) => { // Función que se ejecuta al finalizar el juego
     // Ocultar el grid y otros elementos
     const grid = document.querySelector('.grid');
     grid.style.display = 'none'; // Ajusta según tu estructura HTML
 
-    const topoElement = document.querySelector('#topo');
+    const topoElement = document.querySelector('#topo');     // apunta a los elementos del juego
     const puntoElement = document.querySelector('#punto');
     const puntuacionElement = document.querySelector('#puntuacion');
     const tiempoElement = document.querySelector('#tiempo');
     const timeLeftElement = document.querySelector('#time-left');
+    const botonInicioElement = document.querySelector('#iniciar');
 
-    topoElement.style.display = 'none';
+    topoElement.style.display = 'none';     // Ocultar otros elementos del juego
     puntoElement.style.display = 'none';
     puntuacionElement.style.display = 'none';
     tiempoElement.style.display = 'none';
     timeLeftElement.style.display = 'none';
-    
-    // Mostrar el contenido de endGame
-    const messageContainer = document.querySelector('#message-container');
+    botonInicioElement.style.display = 'none';
+
+    const messageContainer = document.querySelector('#message-container');  // Mostrar el contenido del final del juego
     const restartButton = document.querySelector('#restart-button');
 
     const gameOverMessage = document.createElement('h2');
@@ -119,16 +121,17 @@ const endGame = (results) => {
 
     restartButton.style.display = 'block';
     restartButton.addEventListener('click', restartGame);
+    iniciarButton.disabled = false; // Habilitar el botón de iniciar después de finalizar el juego
 };
-
-const restartGame = () => {
-
-        document.querySelector('main').innerHTML = template();
-        gameOver = false; 
+};
+const restartGame = () => { // Función que reinicia el juego
+        document.querySelector('main').innerHTML = template(); // Restablecer el contenido principal con el template del juego
+        gameOver = false;  // Restablecer variables del juego
         clearInterval(timerId);
-        init();       
-    
+        init();     // Volver a iniciar el juego      
 };
 
-export const prinTopo = () => {
-    document.querySelector('main').innerHTML = template(); init();}
+export const prinTopo = () => { // Función que inicializa el juego al cargar la página
+    document.querySelector('main').innerHTML = template(); // Establecer el contenido principal con el template del jueg
+    init();  // Iniciar el juego
+};

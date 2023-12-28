@@ -1,25 +1,26 @@
 #galleryPokemon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0 0 20vh 0;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0 0 20vh 0;
+}
+
+#containerFilter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 0 1rem 0;
+}
   
-  #containerFilter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0 0 1rem 0;
-  }
-  
-  #inputPokemon {
+  #inputpokemon {
     width: 300px;
     height: 2rem;
     border-radius: 5px;
-    padding: 10px;
+    padding: 0 10px 0 0;
+    font-size: 20px;
   }
   
   #spinner {
@@ -28,16 +29,27 @@
     align-items: center;
   }
   
+
   #paginacion {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 0 3rem 0;
+    font-size: 20px;
     gap: 0.5rem;
-    & button {
-      width: 30px;
-      height: 30px;
-      border-radius: 5px;
-    }
+    margin: 0 0 15px 0;
   }
   
+  #paginacion a {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #cfcfcf;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #paginacion a:hover {
+    background-color: #837d7d;
+  }

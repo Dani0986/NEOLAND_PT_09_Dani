@@ -15,7 +15,7 @@
     justify-content: flex-start;
     margin-top: 0px;
     height: 70vh;
-    background-color: rgba(0, 128, 0, 0.418);  
+    background-color: rgba(158, 158, 158, 0.418);  
     
     @media (max-width: 500px) {
         width: 100vw; 

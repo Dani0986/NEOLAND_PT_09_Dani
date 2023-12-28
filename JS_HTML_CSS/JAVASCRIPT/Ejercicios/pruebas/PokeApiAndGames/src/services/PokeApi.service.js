@@ -10,24 +10,4 @@ export const getByIdPokemon = async (id) => {
 };
 
 
-/*
-export const getAllPokemon = async () => {
-    const baseUrl = "https://pokeapi.co/api/v2/pokemon/";
-    const numberOfPokemon = 150;
-    const pokemonData = [];
-  
-    for (let i = 1; i <= numberOfPokemon; i++) {
-      const response = await fetch(`${baseUrl}${i}`);
-      const data = await response.json();
-      pokemonData.push(data);
-    }
-  
-    return pokemonData;
-  }
-  
-
-  getAllPokemon().then((data) => {
-    console.log(data); // información sobre los primeros 150 Pokémon
-});*/
-
 

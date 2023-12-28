@@ -1,4 +1,4 @@
-import { changeColorRGB } from "../../../utils";
+import { changeColorRGB, initControler } from "../../../utils";
 import "./Header.css";
 
 const template = () => `  
@@ -33,9 +33,20 @@ const listeners = () => {
     const colorRGB = changeColorRGB();
     document.body.style.background = colorRGB;
   });
+
+  const buttonDashboard = document.getElementById("buttonDashboard");
+  buttonDashboard.addEventListener("click", () => {
+    console.log("pinto dashboard");
+    initControler("Dashboard");
+  });
+
+  const buttonLogout = document.getElementById("buttonLogout");
+
+  buttonLogout.addEventListener("click", () => {
+    localStorage.removeItem("user");
+    initControler();
+  });
 };
-
-
 
 
 export const PrintTemplateHeader = () => {

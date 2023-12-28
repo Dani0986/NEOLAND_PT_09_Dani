@@ -26,4 +26,3 @@ export const PrintNav = () => {
 };
 
 
-//***** este no se ***/
