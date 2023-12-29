@@ -15,6 +15,7 @@ const dataMap = (data) => {
     image: pokemon.sprites.other.dream_world.front_default,
     type: pokemon.types,
     id: pokemon.id,
+    hp: pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat,
     }));
 
     return filterData;

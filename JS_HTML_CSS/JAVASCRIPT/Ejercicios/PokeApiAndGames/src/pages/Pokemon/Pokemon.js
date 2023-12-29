@@ -31,6 +31,7 @@ const itemsPerPage = 14; // variables para la paginacion, numero de elementos po
 let currentPage = 1;  // pagina actual
 let globalData = []; // poner todos los datos globlaes
 
+
 const displayData = () => {  // muestra los pokenmons en la pagina
   const startIndex = (currentPage - 1) * itemsPerPage;  // esta es la pagina donde empezamos y los elementos por pagina
   const endIndex = startIndex + itemsPerPage; // el principio y el fin de pagina
@@ -77,10 +78,11 @@ const getDataService = async () => { //llamamos a l funcion async
   document.getElementById('spinner').innerHTML = ''; // esto es que salga un spinner mientras carga
 };
 
+
 export const printGallery = (dataprint) => { // eportamos los datos en la galleria 
   document.getElementById('galleryPokemon').innerHTML = ''; // lo inyectamos en html
   dataprint.forEach((pokemon) => { // iteramos el array con sus id
-    PrintFigurePokemon(pokemon.name, pokemon.id, pokemon.image, pokemon.type);
+    PrintFigurePokemon(pokemon.name, pokemon.id, pokemon.image, pokemon.type, pokemon.hp);
   });
 };
 

@@ -14,13 +14,17 @@ import "./buttons.css";
       });
     });
   };
+
+  const unmayus= (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
   
   export const PrintSelectTypePokemon = (types, allData) => {
     const filterButtonContainer = document.getElementById("filterButton");
   
     types.forEach((type) => {
       const button = document.createElement("button");
-      button.textContent = type;
+      button.textContent = unmayus(type);
       button.id = `btn-${type}`;
       filterButtonContainer.appendChild(button);
     });
