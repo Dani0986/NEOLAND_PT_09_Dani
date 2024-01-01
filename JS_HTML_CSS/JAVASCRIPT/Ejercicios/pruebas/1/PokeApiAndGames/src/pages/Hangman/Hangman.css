@@ -28,6 +28,7 @@
     align-items: center;
     text-align: center;
 }
+
 #submit{
     display: flex;
     justify-content: center;
@@ -35,7 +36,14 @@
 }
 .tituloHangman{
     margin: 0.5rem;
+
 }
+#titulo2 {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+}
+
+
 .hangmanP{
     width: 20px;
     border-bottom: solid 2px black;
@@ -63,6 +71,9 @@
     padding: 1rem;
     margin: 0.5rem;
     font-size: 17px;
+    width: 120px; /* Ajusta el ancho según tus necesidades */
+    height: 58px;
+
 }
 #hangmanComprobar:hover{
     background-color: black;
@@ -72,6 +83,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#hangmanReset {
+    width: 160px;
+    height: 60px;
 }
 
 @media screen and ( max-width: 500px){

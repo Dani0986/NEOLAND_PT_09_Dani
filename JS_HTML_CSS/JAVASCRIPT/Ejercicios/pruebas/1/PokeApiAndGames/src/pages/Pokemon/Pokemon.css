@@ -15,12 +15,20 @@
   margin: 0 0 1rem 0;
 }
   
-  #inputpokemon {
+  #inputpokemon  {
     width: 300px;
     height: 2rem;
     border-radius: 5px;
-    padding: 0 10px 0 0;
-    font-size: 20px;
+    padding: 0 10px 0 3px;
+    font-size: 19px;
+    margin: 0 0 10px 0;
+    display: inline-block;
+  }
+
+  #favorito {
+    display: inline-block;
+    margin-left: 5px; /* Puedes ajustar el margen según tus preferencias */
+    font-size: 20px; /* Puedes ajustar el tamaño de la fuente según tus preferencias */
   }
   
   #spinner {

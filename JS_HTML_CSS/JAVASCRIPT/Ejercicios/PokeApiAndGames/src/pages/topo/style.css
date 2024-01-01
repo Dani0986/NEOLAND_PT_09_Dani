@@ -1,13 +1,6 @@
 
 
-/*main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: rgba(0, 128, 0, 0.418);
-}
-*/
+
 #encuadrar {
     display: flex;
     flex-direction: column;
@@ -39,11 +32,27 @@
     }    
 }
 
+
+#puntuacion {
+    color: red;
+    text-align: center;
+}
+
+#tiempo {
+   
+    font-weight: bold;
+}
+
+#time-left {
+    color: red;
+}
+
 .square {
-    width: 165px;
-    height: 165px;
-    border: 1px solid black;
+    width: 8.6vw;
+    height: 16vh;
+    border: 2px solid black;
     cursor: url('../../../public/img/pk1.png'), auto;
+    margin: 2px;
 
     @media (max-width: 500px) { 
         width: 32%;
@@ -70,13 +79,6 @@
 #topo {
     font-size: 2rem;
 }
-#punto {
-    color: black;
-}
-
-h2 {
-    color:red;
-}
 
 
 div.grid {
@@ -84,10 +86,12 @@ div.grid {
     flex-flow: row wrap;
     justify-content: center;
     align-content: center;
-    width: 520px;
-    height: 520px;     
-    background-color: rgba(165, 42, 42, 0.445); 
-    border: 2px solid black;        
+    height: 50.6vh;
+    width: 27vw; 
+    background-color: rgba(165, 42, 42, 0.445);
+    background-image: url(../../../public/img/ground-texture.jpg); 
+    background-size: cover;
+    border: 3px solid black;        
 
     @media (max-width: 500px) {
         width: 90%;
@@ -147,8 +151,7 @@ div.grid {
     color: black;   
     justify-content: center;
     margin-top: 20vh;
-
-
+    text-align: center;
 }
 
 #score-message  {
@@ -156,4 +159,13 @@ div.grid {
     justify-content: center;
     height: 5vh;
 
+}
+
+#restart-button {
+    display: block;
+    margin: auto;
+    margin-top: 20px; /* Ajusta según sea necesario para el espaciado desde la parte superior */
+    width: 150px;
+    height: 50px;
+    background-color: var(--fondo);
 }

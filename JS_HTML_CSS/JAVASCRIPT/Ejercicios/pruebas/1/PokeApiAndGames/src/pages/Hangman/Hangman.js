@@ -6,7 +6,8 @@ import "./Hangman.css";
 const template = () => `
 <div id="hangmanDiv1">
 <div id="hangmanDiv2">
-<h1 class="tituloHangman">Hangman</h1>
+<h1 class="tituloHangman">Hangmime</h1>
+<p id="titulo2">Descubre la palabra correcta antes de que mr.mime se de a la fuga</p>
 <section id="palabra">
       <img id="hangmanImg" src="https://res.cloudinary.com/dtyjzv2xg/image/upload/v1683122726/hagmanMonigote0_xiqwwm.png"/>
       <div class="guiones"></div>

@@ -1,5 +1,5 @@
 import { initControler } from "../route";
-import { Foto } from "../../../public/Hangmime"
+import { Foto } from "../../data/Hangmime";
 
 // Contador de fallos
 let contador = 0;

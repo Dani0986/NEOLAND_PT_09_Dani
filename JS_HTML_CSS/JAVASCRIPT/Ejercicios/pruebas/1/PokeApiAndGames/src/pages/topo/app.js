@@ -5,8 +5,10 @@ const template = () =>  `
     <section id="encuadrar">
         <div id="customCursor"></div>    
         <h1 id="topo">Atrapa al Diglett</h1>
+        <div id="contenedorFlex">
         <h2 id="punto">Puntuación:</h2>
         <h2 id="puntuacion">0</h2>
+        </div>
         <div id="tiempo">Tiempo restante:</div>
         <h2 id="time-left">10</h2>
         <button id="iniciar">Iniciar Juego</button> 
@@ -112,8 +114,9 @@ const endGame = (results) => { // Función que se ejecuta al finalizar el juego
     gameOverMessage.id = 'game-over-message';
 
     const scoreMessage = document.createElement('h2');
-    scoreMessage.textContent = 'Tu Puntuacion es de: ' + results + ' puntos';
+    scoreMessage.textContent = 'Has capturado a: ' + results + ' Digletts';
     scoreMessage.id = 'score-message';
+    scoreMessage.style.color = 'red';
 
     messageContainer.innerHTML = '';
     messageContainer.appendChild(gameOverMessage);

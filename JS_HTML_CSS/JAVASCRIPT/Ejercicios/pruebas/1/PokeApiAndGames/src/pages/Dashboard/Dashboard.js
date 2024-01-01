@@ -2,6 +2,7 @@ import { initControler } from "../../utils/index";
 import "./Dashboard.css";
 
 
+
 const template = () => `
   <div id="containerDashboard">
     <ul>
@@ -11,7 +12,7 @@ const template = () => `
             src="./img/pokeapi.png"
             alt="go to page pokemon"
           />
-          <h2>POKEDEX</h2>
+          <h2 class="Pk">POKEDEX</h2>
         </figure>
       </li>
       <li>
@@ -20,16 +21,16 @@ const template = () => `
             src="./public/img/dugtr.jpg"
             alt=" go to wacka topo game"          
           />
-          <h2>WACKA DIGLETT</h2>
+          <h2 class="Wd">WACKA DIGLETT</h2>
         </figure>
       </li>
       <li>
-        <figure>
-          <img
-            src="./public/img/nint2127.png"
-            alt="go to memory game"
+        <figure id="navigatetresEnRaya">
+          <img 
+            src="./public/img/tres02.png"
+            alt="go to tresEnRaya"
           />
-          <h2>MEMORY GAME</h2>
+          <h2 class="Tr">TresEnRaya</h2>
         </figure>
       </li>
       <li>
@@ -38,7 +39,7 @@ const template = () => `
             src="./public/img/hangm.png"
             alt="go to hangman"
           />
-          <h2>HANGMIME</h2>
+          <h2 class="Hg">HANGMIME</h2>
         </figure>
       </li>
     </ul>
@@ -60,6 +61,12 @@ const listeners = () => {
   const navigateHangman = document.getElementById("navigateHangman");
   navigateHangman.addEventListener("click", () => {
     initControler("Hangman");
+  });
+  
+  const navigatetresEnRaya = document.getElementById("navigatetresEnRaya");
+  navigatetresEnRaya.addEventListener("click", () => {
+    console.log("Click en navigatetresEnRaya");
+    initControler("tresEnRaya");
   });
 };
 

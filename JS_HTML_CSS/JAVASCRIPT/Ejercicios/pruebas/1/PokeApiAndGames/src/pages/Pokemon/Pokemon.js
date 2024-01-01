@@ -14,13 +14,14 @@ const template = () => `
      <div id="containerFilter">
      <div id="spinnerButtonFilter"></div>
      <div id="filterButton"></div>
-     <div id="paginacion"></div>
+     <div id="container">
      <input
         type="text"
         id="inputpokemon"
-        placeholder="Busca a tu pokemon favorito"
-        /> 
+        placeholder="Busca a tu pokemon favorito" />
+     <div id="favorito">Haz click para seleccionar tus Pokemon favoritos ★</div>    
     </div>
+    <div id="paginacion"></div>
     <div id="spinner"></div>
     <div id="galleryPokemon"></div>
     </div>

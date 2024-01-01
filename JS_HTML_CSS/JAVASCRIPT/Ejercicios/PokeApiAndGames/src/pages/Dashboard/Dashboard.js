@@ -12,7 +12,7 @@ const template = () => `
             src="./img/pokeapi.png"
             alt="go to page pokemon"
           />
-          <h2>POKEDEX</h2>
+          <h2 class="Pk">POKEDEX</h2>
         </figure>
       </li>
       <li>
@@ -21,7 +21,7 @@ const template = () => `
             src="./public/img/dugtr.jpg"
             alt=" go to wacka topo game"          
           />
-          <h2>WACKA DIGLETT</h2>
+          <h2 class="Wd">WACKA DIGLETT</h2>
         </figure>
       </li>
       <li>
@@ -30,7 +30,7 @@ const template = () => `
             src="./public/img/tres02.png"
             alt="go to tresEnRaya"
           />
-          <h2>TresEnRaya</h2>
+          <h2 class="Tr">TICTACTOE VS POKEMON</h2>
         </figure>
       </li>
       <li>
@@ -39,7 +39,7 @@ const template = () => `
             src="./public/img/hangm.png"
             alt="go to hangman"
           />
-          <h2>HANGMIME</h2>
+          <h2 class="Hg">HANGMIME</h2>
         </figure>
       </li>
     </ul>
