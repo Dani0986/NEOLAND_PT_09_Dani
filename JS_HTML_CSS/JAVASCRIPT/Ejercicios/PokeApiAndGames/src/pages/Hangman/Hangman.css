@@ -17,6 +17,9 @@
     text-align: center;
     flex-direction: column;
     border-radius: 30px;
+    background-image: url(../../../public/img/teatro1.JPG);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #hangmanImg{
     width: 200px;
