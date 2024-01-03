@@ -33,7 +33,7 @@ header  {
     
     @media (max-width: 300px) {
       width: auto;
-      height: 6vh;      
+      height: 35px;      
     }
     @media (min-width: 301px) and (max-width: 370px) {
       width: auto;
@@ -41,7 +41,7 @@ header  {
     }
     @media (min-width: 371px) and (max-width: 400px) {
       width: auto;
-      height: 6vh;
+      height: 45px;
     }
     @media (min-width: 401px) and (max-width: 499px) {
       width: auto;
@@ -82,10 +82,10 @@ header  {
     align-items: center;
     @media (max-width: 300px) {
       width: auto;
-      height: 13vh;
+      height: 80px;
     }
     @media (min-width: 301px) and (max-width: 499px) {
-      height: 13vh;
+      height: 100px;
       width: auto;
     }
     @media (min-width: 500px) and (max-width: 599px) {

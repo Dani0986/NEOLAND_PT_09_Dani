@@ -11,7 +11,9 @@ footer {
     bottom: 0;
     width: 100%;
     z-index: 100;
-    color: #0def03;
+    opacity: 0; 
+    transition: opacity 0.5s ease;
+    color: var(--h1footer);
     & span {
       color: white;
       @media (max-width: 300px) {
@@ -47,9 +49,9 @@ footer {
       }
     }
   }
+ 
   #neoFooter {
     font-size: 3rem;
-
     @media (max-width: 300px) {
       font-size: 2rem;
     }
@@ -84,3 +86,6 @@ footer {
     }
   }
 
+  footer:hover {
+    opacity: 1;
+  }

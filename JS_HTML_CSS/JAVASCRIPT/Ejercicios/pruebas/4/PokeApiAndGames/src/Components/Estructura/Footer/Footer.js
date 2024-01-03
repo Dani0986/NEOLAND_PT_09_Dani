@@ -1,8 +1,11 @@
 import "./Footer.css";
 
 const template = () => `
-<h3 id="neoFooter"><span>Project for</span> Neoland</h3>
+<footer id="neoFooter">
+  <h3><span>Proyecto para</span> Neoland</h3>
+</footer>
 `;
+
 
 export const PrintTemplateFooter = () => {
   document.querySelector("footer").innerHTML = template();

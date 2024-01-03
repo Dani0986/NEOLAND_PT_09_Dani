@@ -21,7 +21,7 @@
       height: 350px;
       border-radius: 10%;
       background-color: black;
-      color: white;
+      color: var(--DahsColor);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -45,3 +45,8 @@
     }
   }
 }
+
+.Wd, .Pk, .Tr, .Hg  {
+  color: var(--h2);
+}  
+

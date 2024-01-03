@@ -10,13 +10,15 @@
     margin-top: 5rem;
     min-width: 50vw;
     min-height: 45vh;
-    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     flex-direction: column;
     border-radius: 30px;
+    background-image: url(../../../public/img/prado.JPG);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #hangmanImg{
     width: 200px;
@@ -40,7 +42,7 @@
 }
 #titulo2 {
     font-size: 18px;
-    color: rgb(0, 0, 0);
+    color: var(--secondColor)
 }
 
 
@@ -63,7 +65,7 @@
 }
 
 #hangmanInput::placeholder{
-    color:black;
+    color: var(--secondColor);
     font-size: 17px;
 }
 #hangmanComprobar{
@@ -71,15 +73,23 @@
     padding: 1rem;
     margin: 0.5rem;
     font-size: 17px;
+    width: 120px; /* Ajusta el ancho según tus necesidades */
+    height: 58px;
+
 }
 #hangmanComprobar:hover{
-    background-color: black;
+    background-color: var(--black);
     color: white;
 }
 .guiones{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#hangmanReset {
+    width: 160px;
+    height: 60px;
 }
 
 @media screen and ( max-width: 500px){

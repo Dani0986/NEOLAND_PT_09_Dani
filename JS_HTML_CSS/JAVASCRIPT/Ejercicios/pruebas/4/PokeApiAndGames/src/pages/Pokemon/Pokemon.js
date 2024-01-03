@@ -83,7 +83,7 @@ const getDataService = async () => { //llamamos a l funcion async
 export const printGallery = (dataprint) => { // eportamos los datos en la galleria 
   document.getElementById('galleryPokemon').innerHTML = ''; // lo inyectamos en html
   dataprint.forEach((pokemon) => { // iteramos el array con sus id
-    PrintFigurePokemon(pokemon.name, pokemon.id, pokemon.image, pokemon.type, pokemon.hp);
+    PrintFigurePokemon(pokemon.name, pokemon.id, pokemon.image, pokemon.type, pokemon.hp, pokemon.weight,);
   });
 };
 

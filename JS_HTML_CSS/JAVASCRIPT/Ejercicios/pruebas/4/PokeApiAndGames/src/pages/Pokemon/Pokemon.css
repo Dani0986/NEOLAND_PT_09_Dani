@@ -4,7 +4,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  padding: 0 0 20vh 0;
+  padding: 0 0 10vh 0;
 }
 
 #containerFilter {
@@ -51,9 +51,9 @@
     display: inline-block;
     padding: 5px 10px;
     margin-right: 5px;
-    background-color: #cfcfcf;
+    background-color: var(--bgPokemon);
     text-decoration: none;
-    color: #333;
+    color: var(--bgPokemon2);
     border-radius: 5px;
     cursor: pointer;
   }

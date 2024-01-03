@@ -6,15 +6,16 @@ const primeraletra = (string) => { //creo una funcion que usa chartAt para poner
 }
 
 
-const template = (name, id, image, type, hp) => `
+const template = (name, id, image, type, hp, weight) => `
 <figure class="${type[0].type.name} figurePokemon" onclick="handleFavoriteClick('${id}★')">
     <img src=${image} alt=${name}/>
     <h3>${primeraletra(name)}</h3>
     <p>ID: ${id}</p>
-    <p>Base Stats: ${hp}</p>
+    <p>Health: ${hp}</p>
+    <p>Weight: ${weight}</p>
 </figure>
 `;
-export const PrintFigurePokemon = (name, id, image, type, hp) => {
+export const PrintFigurePokemon = (name, id, image, type, hp, weight) => {
     const pokemonContainer = document.getElementById("galleryPokemon");
 
     const figureElement = document.createElement("figure");
@@ -29,7 +30,8 @@ export const PrintFigurePokemon = (name, id, image, type, hp) => {
         <img src=${image} alt=${name}/>
         <h3>${primeraletra(name)}</h3>
         <p>ID: ${id}</p>
-        <p>Base Stats: ${hp}</p>
+        <p>Health: ${hp}</p>
+        <p>Weight: ${weight}</p>
         <div class="favorite-icon hidden">&#9733;</div>
     `;
 

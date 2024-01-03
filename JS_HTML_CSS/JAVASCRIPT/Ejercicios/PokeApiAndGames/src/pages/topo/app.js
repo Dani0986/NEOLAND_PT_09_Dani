@@ -5,7 +5,7 @@ const template = () =>  `
     <section id="encuadrar">
         <div id="customCursor"></div>    
         <h1 id="topo">Atrapa al Diglett</h1>
-        <p id="descripcion">Captura a tantos Digletts como puedas antes de que se acabe</p>
+        <p id="descripcion">Captura a todos los Digletts antes de que se agote el tiempo</p>
         <div id="contenedorFlex">
         <h2 id="punto">Puntuación:</h2>
         <h2 id="puntuacion">0</h2>

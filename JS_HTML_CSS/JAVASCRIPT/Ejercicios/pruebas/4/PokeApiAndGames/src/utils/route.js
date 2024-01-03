@@ -4,6 +4,7 @@ import {
   PrintPokemonPage,    } from "../pages";
 import { printTemplateHangman }  from "../pages/Hangman/Hangman"; 
 import { prinTopo } from "../pages/topo/app";
+import { printTresEnRaya } from "../pages/tresRaya/tresEnRaya";
 
 export const initControler = (paginaQueVamosAPintar) => {
   switch (paginaQueVamosAPintar) {
@@ -21,8 +22,9 @@ export const initControler = (paginaQueVamosAPintar) => {
     case "Topo":
       prinTopo();
       break;
-    case "Memory":
-      // la funcion qur pinta la pagina PrintPageMemoryGame()
+
+    case "tresEnRaya":
+      printTresEnRaya();
       break;
       
     case "Hangman":

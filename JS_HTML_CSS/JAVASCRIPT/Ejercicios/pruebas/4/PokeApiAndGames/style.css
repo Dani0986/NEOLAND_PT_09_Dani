@@ -9,7 +9,37 @@
   min-height: 100vh;
 }
 
-
+:root {
+  --fondo: #89b1d8;
+  --colorPrimary: #cf0000;
+  --colorSecundary: #e5ae68;
+  --backgroundSecundary: #02020357;
+  --h1: rgb(255, 217, 2);
+  --h2: rgb(185, 0, 0);
+  --h3: rgb(0, 90, 173);
+  --p: rgb(14, 13, 13);
+  --firstColor: black;
+  --secondColor: rgb(78, 78, 78);
+  --thirdColor: black;
+  --darkColor: rgb(51, 48, 48);
+  --lightColor: rgba(206, 206, 206, 0.897);
+  --borderColor: rgb(103, 104, 63); 
+  --newtextColor: rgb(209, 214, 167);
+  --cardColor: rgb(51, 75, 119);
+  --newFontSize: 2rem;
+  --tic-tac: rgb(0, 183, 255);
+  --scores: red;
+  --message: black;
+  --H1diglett: rgba(165, 42, 42, 0.897);
+  --squares: rgba(128, 128, 128, 0.623);
+  --bgPokemon: #cfcfcf;
+  --bgPokemon2: #333;
+  --login: #0def03;
+  --DahsColor: white;
+  --h1footer: #0def03;
+  --white: white;
+  --black: black;
+}
 
 header {
   height: 20vh;

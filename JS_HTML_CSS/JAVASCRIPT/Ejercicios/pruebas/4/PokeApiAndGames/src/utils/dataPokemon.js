@@ -16,6 +16,7 @@ const dataMap = (data) => {
     type: pokemon.types,
     id: pokemon.id,
     hp: pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat,
+    weight: pokemon.weight,
     }));
 
     return filterData;
