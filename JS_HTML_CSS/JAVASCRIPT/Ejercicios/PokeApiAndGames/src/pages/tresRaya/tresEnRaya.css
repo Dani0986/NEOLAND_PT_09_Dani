@@ -16,21 +16,119 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* 100% del alto de la ventana */
+    height: 100vh; 
 }
 
 .buttonsSquare  {
-    height: 22vh; /* Ajusta la altura según tus necesidades */ 
-    width: 20vw;
+    height: 192px; 
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: solid black 2px;
     margin: 2px;
-    background-size: cover;  /* Ajusta el tamaño de la imagen para cubrir completamente el fondo */
-    background-position: center;  /* Centra la imagen en el fondo */
+    background-size: cover;  
+    background-position: center;  
     background-repeat: no-repeat;
     background-color: var(--squares);
+    @media (max-width: 300px) {
+        width: 220px;
+        height: 170px;      
+      }
+      @media (min-width: 301px) and (max-width: 358px) {
+        width: 90px;
+        height: 120px;
+      }
+      @media (min-width: 359px) and (max-width: 370px) {
+        width: 90px;
+        height: 120px;
+      }
+      @media (min-width: 371px) and (max-width: 388px) {
+        width: 90px;
+        height: 120px;
+      }
+      @media (min-width: 389px) and (max-width: 400px) {
+        width: 90px;
+        height: 120px;
+      }
+      @media (min-width: 401px) and (max-width: 478px) {
+        width: 90px;
+        height: 150px;
+      }
+      @media (min-width: 474px) and (max-width: 499px) {
+        width: 120px;
+        height: 170px;
+      }
+      
+      @media (min-width: 500px) and (max-width: 600px) {
+        width: 140px;
+        height: 155px;
+      }@media (min-width: 500px) and (max-width: 600px) {
+        width: 140px;
+        height: 155px;
+      }
+      @media (min-width: 601px) and (max-width: 750px) {
+        width: 220px;
+        height: 170px;
+      }
+      @media (min-width: 751px) and (max-width: 819px) {
+        width: 200px;
+        height: 170px;
+      }
+      @media (min-width: 821px) and (max-width: 1023px) {
+        width: 200px;
+        height: 170px;
+      }
+      @media (min-width: 1024px) and (max-width: 1027px) {
+        width: 210px;
+        height: 170px;
+      }
+      @media (min-width: 1028px) and (max-width: 1169px) {
+        width: 250px;
+        height: 170px;
+      }
+      @media (min-width: 1170px) and (max-width: 1180px) {
+        width: 270px;
+        height: 170px;
+
+      }@media (min-width: 1181px) and (max-width: 1183px) {
+        width: 270px;
+        height: 170px;
+      }
+      @media (min-width: 1184px) and (max-width: 1280px) {
+        width: 300px;
+        height: 170px;
+      }
+      @media (min-width: 1281px) and (max-width: 1304px) {
+        width: 300px;
+        height: 170px;
+      }
+      @media (min-width: 1305px) and (max-width: 1335px) {
+        width: 310px;
+        height: 170px;
+      }
+      @media (min-width: 1336px) and (max-width: 1445px) {
+        width: 350px;
+        height: 172px;
+      }
+      @media (min-width: 1445px) and (max-width: 1629px) {
+        width: 360px;
+        height: 172px;
+    }
+
+    @media (width: 820px) and (height: 1180px) {
+        width: 210px;
+        height: 220px;
+      }
+      @media (width: 1024px) and (height: 1366px) {
+        width: 260px;
+        height: 230px;
+      }
+      @media (width: 912px) and (height: 1368px) {
+        width: 230px;
+        height: 250px;
+      }
+
 }
 
 .containerButton {
@@ -38,15 +136,73 @@
     flex-wrap: wrap;
     gap: 1px;
     max-width: 80vw;
-    margin: 0 0 0 19vw;
+    margin: 0 0 0 325px;
     padding-top: 1vh;
-}
+    @media (max-width: 300px) {
+        margin: 0 0 0 270px;;      
+      }
+      @media (min-width: 301px) and (max-width: 370px) {
+        margin: 0 0 0 35px;
+      }
+      @media (min-width: 371px) and (max-width: 388px) {
+        margin: 0 0 0 40px;
+      }
+      @media (min-width: 389px) and (max-width: 400px) {
+        margin: 0 0 0 50px;
+      }
+      @media (min-width: 401px) and (max-width: 410px) {
+        margin: 0 0 0 55px;
+      }
+      @media (min-width: 411px) and (max-width: 429px) {
+        margin: 0 0 0 65px;
+      }
+      @media (min-width: 430px) and (max-width: 499px) {
+        margin: 0 0 0 70px;
+      }
+      
+      @media (min-width: 500px) and (max-width: 600px) {
+        margin: 0 0 0 50px;
+      }
+      @media (min-width: 601px) and (max-width: 750px) {
+        margin: 0 0 0 50px;
+      }
+      @media (min-width: 751px) and (max-width: 1023px) {
+        margin: 0 0 0 70px;
+      }
+      @media (min-width: 1024px) and (max-width: 1027px) {
+        margin: 0 0 0 50px;
+      }
+
+      @media (min-width: 1028px) and (max-width: 1349px) {
+        margin: 0 0 0 270px;
+      }
+      @media (min-width: 1350px) and (max-width: 1304px) {
+        margin: 0 0 0 270px;
+      }
+      @media (min-width: 1305px) and (max-width: 1444px) {
+        margin: 0 0 0 270px;
+      }
+      @media (min-width: 1445px) and (max-width: 1629px) {
+        margin: 0 0 0 270px;
+      }
+        @media (width: 820px) and (height: 1180px) {
+            margin: 0 0 0 80px;
+          }
+          @media (width: 1024px) and (height: 1366px) {
+            margin: 0 0 0 100px;
+          }
+          @media (width: 912px) and (height: 1368px) {
+            margin: 0 0 0 100px;
+          }
+    }
+
+
 
 
 #button-restart {
     display: block;
     margin: auto;
-    margin-top: 20px; /* Ajusta según sea necesario para el espaciado desde la parte superior */
+    margin-top: 20px; /* Ajustar espaciado desde la parte superior */
     width: 180px;
     height: 80px;
     background-color: var(--fondo);

@@ -117,7 +117,7 @@ const endGame = (results) => { // Función que se ejecuta al finalizar el juego
     gameOverMessage.id = 'game-over-message';
 
     const scoreMessage = document.createElement('h2');
-    scoreMessage.textContent = 'Has capturado a: ' + results + ' Digletts';
+    scoreMessage.textContent = 'Has capturado: ' + results + ' Digletts';
     scoreMessage.id = 'score-message';
     scoreMessage.style.color = 'red';
 
