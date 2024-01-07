@@ -54,3 +54,20 @@ export const PrintTemplateHeader = () => {
   listeners();
 };
 
+//** estas son las otras dos formas */
+
+//** al ponerlo por css no me da error en las imagenes */
+/*
+<img
+src="https://res.cloudinary.com/dq186ej4c/image/upload/v1682679162/header_giqdug.jpg"
+alt="title hub game website (app)"
+class="logo"
+/>*/
+
+
+/*
+<img
+src="./img/pokemon-logo1.png"
+alt="pokeapi"
+class="logo"
+/>*/
