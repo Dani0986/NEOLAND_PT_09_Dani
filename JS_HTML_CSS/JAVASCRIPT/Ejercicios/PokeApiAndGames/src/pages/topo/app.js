@@ -32,7 +32,7 @@ const template = () =>  `
     </section>
 `;
 
-let gameOver = false; // esta variable indica que el juego termino
+let gameOver = false; //  variable para indicar que el juego termino
 let timerId = 0; // identifica el temporizador del juego
 
 const init = () => { // funcion principal
@@ -45,7 +45,7 @@ const init = () => { // funcion principal
     let currentTime = document.querySelector('#time-left').textContent;
 
     const randomSquare = () => { // Función que coloca el Diglett en una casilla aleatoria
-        if (!gameOver) {
+        if (!gameOver) { // aqui negamos el valor, asi que solo se ejecuta si el juego no a terminado
             square.forEach((className) => { // Ocultar Diglett en todas las casillas
                 className.classList.remove('mole');
             });

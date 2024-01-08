@@ -52,6 +52,16 @@
 #descripcion {
     font-size: 19px;
     font-weight: bold;
+    @media (max-width: 375px) {
+      font-size: 14px;     
+    }
+    @media (width: 540px) and (height: 720px) {
+      font-size: 15px
+    }
+    @media (width: 1024px) and (height: 600px) {
+      font-size: 15px
+    }
+
 }
 
 .square {
@@ -358,3 +368,24 @@ div.grid {
     height: 50px;
     background-color: var(--fondo);
 }
+
+/*
+@media (max-width: 300px) {
+  #encuadrar { 
+    width: 100vw; 
+    height: 70vh;   
+  }
+  .square { 
+    width: 66px;
+    height: 66px;
+  }
+  div.grid {
+    width: 220px;
+    height: 220px;
+  }
+  .mole {
+    background-size: 62px;
+    background-position: center; 
+  }
+  
+*/
