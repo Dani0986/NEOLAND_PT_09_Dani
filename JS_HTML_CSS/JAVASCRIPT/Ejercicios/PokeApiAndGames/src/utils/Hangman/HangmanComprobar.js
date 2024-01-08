@@ -72,7 +72,7 @@ export const hangmanComprobar = (inputValue, palabra) => {
         const div = document.querySelector("#hangmanDiv2");
         div.innerHTML = "";
         const h1 = document.createElement("h1");
-        h1.innerHTML = "MR.Mime te ha engañado y se ha ido corriendo";
+        h1.innerHTML = "MR.MIME te ha engañado y se ha ido corriendo";
         const button = document.createElement("button");
         button.innerHTML = "Volver a jugar";
         button.setAttribute("id", "hangmanReset");
