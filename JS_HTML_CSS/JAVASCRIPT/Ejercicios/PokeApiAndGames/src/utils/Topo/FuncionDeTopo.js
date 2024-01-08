@@ -1,46 +1,15 @@
-import "./style.css"
-import { init } from "../../utils/Topo/FuncionDeTopo";
+import { template } from "../../pages/topo/app";
 
-export const template = () =>  `
-    <section id="encuadrar">
-        <div id="customCursor"></div>    
-        <h1 id="topo">WACKA-DIGLETT</h1>
-        <p id="descripcion">Captura a muchos Digletts antes de que se agote el tiempo</p>
-        <div id="contenedorFlex">
-        <h2 id="punto">Puntuación:</h2>
-        <h2 id="puntuacion">0</h2>
-        </div>
-        <div id="tiempo">Tiempo restante:</div>
-        <h2 id="time-left">10</h2>
-        <button id="iniciar">Iniciar Juego</button> 
-        <div class="grid">
-            <div class="square" id="1"></div>
-            <div class="square mole" id="2"></div>
-            <div class="square" id="3"></div>
-            <div class="square" id="4"></div>
-            <div class="square" id="5"></div>
-            <div class="square" id="6"></div>
-            <div class="square" id="7"></div>
-            <div class="square" id="8"></div>
-            <div class="square" id="9"></div>        
-        </div>  
-        <div>
-            <div id="message-container"></div>
-            <p id="final-score-container"></p>
-            <button id="restart-button" style="display: none;">Volver a Jugar</button>
-        </div>    
-    </section>
-`;
-/*
+
 let gameOver = false; //  variable para indicar que el juego termino
 let timerId = 0; // identifica el temporizador del juego
 
-const init = () => { // funcion principal
+export const init = () => { // funcion principal
     const iniciarButton = document.querySelector('#iniciar'); //obetner boton inicial
     iniciarButton.addEventListener('click', () => { // agregar el evento click
     const square = document.querySelectorAll('.square'); //agregar las casillas del juego square y puntos
     const score = document.querySelector('#puntuacion');
- 
+    
     let results = 0;  // Inicializar variables del juego
     let currentTime = document.querySelector('#time-left').textContent;
 
@@ -129,15 +98,10 @@ const endGame = (results) => { // Función que se ejecuta al finalizar el juego
     restartButton.addEventListener('click', restartGame);
     iniciarButton.disabled = false; // Habilitar el botón de iniciar después de finalizar el juego
 };
-};
+
 const restartGame = () => { // Función que reinicia el juego
         document.querySelector('main').innerHTML = template(); // Restablecer el contenido principal con el template del juego
         gameOver = false;  // Restablecer variables del juego
         clearInterval(timerId);
         init();     // Volver a iniciar el juego      
-};
-*/
-export const prinTopo = () => { // Función que inicializa el juego al cargar la página
-    document.querySelector('main').innerHTML = template(); // Establecer el contenido principal con el template del jueg
-    init();  // Iniciar el juego
-};
+}};
