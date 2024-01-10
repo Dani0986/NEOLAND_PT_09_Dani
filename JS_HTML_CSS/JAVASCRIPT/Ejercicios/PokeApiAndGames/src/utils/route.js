@@ -12,22 +12,27 @@ export const initControler = (paginaQueVamosAPintar) => {
       localStorage.getItem("user") ? PrintDashboard() : PrintLogin();
       break;
     case "Pokemon":
+      buttonDashboard.style.display = "block";
       PrintPokemonPage();
       break;
 
     case "Dashboard":
-      PrintDashboard();
+      buttonDashboard.style.display = "none";
+      PrintDashboard();     
       break;
 
     case "Topo":
+      buttonDashboard.style.display = "block";
       prinTopo();
       break;
 
     case "tresEnRaya":
+      buttonDashboard.style.display = "block";  
       printTresEnRaya();
       break;
       
     case "Hangman":
+      buttonDashboard.style.display = "block";  
       printTemplateHangman();
       break;
 
