@@ -10,15 +10,17 @@ export const initControler = (paginaQueVamosAPintar) => {
   switch (paginaQueVamosAPintar) {
     case undefined:
       localStorage.getItem("user") ? PrintDashboard() : PrintLogin();
+      buttonDashboard.style.display = "none";
       break;
-    case "Pokemon":
-      buttonDashboard.style.display = "block";
-      PrintPokemonPage();
-      break;
-
+      
     case "Dashboard":
       buttonDashboard.style.display = "none";
       PrintDashboard();     
+      break;
+  
+      case "Pokemon":
+      buttonDashboard.style.display = "block";
+      PrintPokemonPage();
       break;
 
     case "Topo":

@@ -17,6 +17,7 @@ const template = () => `
       src="./public/img/gba2.png"
       alt=" navigate to home app"
       id="buttonDashboard"
+      buttonDashboard.style.display = "none";
     />
     <img      
       src="./public/img/login.png"
@@ -36,7 +37,7 @@ const listeners = () => {
 
   const buttonDashboard = document.getElementById("buttonDashboard");
   buttonDashboard.addEventListener("click", () => {
-    console.log("pinto dashboard");
+    console.log("pinto dashboard");   
     initControler("Dashboard");
   });
 

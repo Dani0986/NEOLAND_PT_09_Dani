@@ -7,9 +7,11 @@ import {
         getDataPokemonBucle,
         typePokemon,
 } from "../../utils/Pokemon";
+
+ 
 import "./pokemon.css";
 
-const template = () => `
+export const template = () => `
     <div id="pokemon">
      <div id="containerFilter">
      <div id="spinnerButtonFilter"></div>
