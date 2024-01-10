@@ -96,3 +96,8 @@ footer {
   footer:hover {
     opacity: 1;
   }
+
+#logoNeo {
+  width: 40px; 
+
+}
