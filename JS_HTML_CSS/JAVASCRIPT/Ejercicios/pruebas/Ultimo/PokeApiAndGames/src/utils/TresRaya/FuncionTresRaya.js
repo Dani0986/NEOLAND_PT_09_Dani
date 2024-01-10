@@ -1,28 +1,6 @@
-import "./tresEnRaya.css";
-import { init } from "../../utils/TresRaya/FuncionTresRaya";
+export { template } from "../../pages/tresRaya/tresEnRaya";
 
-export const template = () => `
-<h1 id="ticTac">POKE - TIC TAC TOE</1>
-<h2 id="descripcion">Consigue ser el primero en colocar tres imágenes en línea</h2>
-<div class="containerButton">
-    <div class="buttonsSquare" id="1"></div>
-    <div class="buttonsSquare" id="2"></div>
-    <div class="buttonsSquare" id="3"></div>
-    <div class="buttonsSquare" id="4"></div>
-    <div class="buttonsSquare" id="5"></div>
-    <div class="buttonsSquare" id="6"></div>
-    <div class="buttonsSquare" id="7"></div>
-    <div class="buttonsSquare" id="8"></div>
-    <div class="buttonsSquare" id="9"></div>
-</div>
-    <div>
-        <div id="message-container"></div>
-        <p id="winner-container"></p>
-        <button id="button-restart" style="display: none;">Volver a Jugar</button>
-        </div>    
-    `;
-/*
-const init = () => {
+export const init = () => {
     
     let turno = 0;
     const tablero = [];
@@ -31,7 +9,7 @@ const btnPulsado = (e, pos) => {
     turno ++;
     const div = e.target;
     const characters = turno % 2 ? 'Charizard' : 'Blastoise'; 
-    const imagen = `public/img/${characters}.JPG`; 
+    const imagen = `../../../public/img/${characters}.JPG`; 
     div.style.backgroundImage = `url(${imagen})`;
     tablero[pos] = characters;
     if (haGanado()) {
@@ -123,10 +101,4 @@ const restart = () => {
     document.querySelector('main').innerHTML = template();
     init();
 
-};*/
-export const printTresEnRaya = () => { // Función que inicializa el juego al cargar la página
-    console.log("Iniciando juego Tres en Raya");
-    document.querySelector('main').innerHTML = template(); // Establecer el contenido principal con el template del jueg
-    init();  // Iniciar el juego
-    console.log(document.querySelector('main').innerHTML);
 };

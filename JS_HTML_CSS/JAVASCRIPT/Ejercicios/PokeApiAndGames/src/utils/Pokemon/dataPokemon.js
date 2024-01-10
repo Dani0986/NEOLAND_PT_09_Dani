@@ -1,4 +1,6 @@
-import { getByIdPokemon } from "../services/PokeApi.service";
+import { getByIdPokemon } from "../../services/PokeApi.service";
+
+
 
 export const getDataPokemonBucle = async () => {
     const rawData = [];
