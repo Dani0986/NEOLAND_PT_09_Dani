@@ -1,14 +1,10 @@
 #containerHomePage {
   display: flex;
-
   padding: 2rem;
   margin-top: 10vh;
   flex-direction: column;
   width: 100vw;
-
-  & input {
-    margin: 2rem;
-  }
+  
 }
 
 #gallery {
@@ -17,4 +13,19 @@
   gap: 1rem;
   align-content: center;
   justify-content: center;
+}
+
+
+#inputRick {
+   width: 35%;
+   height: 40PX;
+   margin: 5PX 0PX 10PX 32%;
+
+  }
+
+#btnBuscar {
+  width: 35%;
+  height: 40px;
+  margin: 0px 0px 15px 32%;
+
 }

@@ -1,8 +1,9 @@
 footer {
-    background-color: rgb(252, 239, 222);
+    background-color:#A9D3E9;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative; 
+    font-size: 2rem;
   }
   

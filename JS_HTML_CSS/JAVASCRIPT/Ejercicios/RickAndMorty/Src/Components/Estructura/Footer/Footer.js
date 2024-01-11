@@ -1,6 +1,6 @@
 import "./Footer.css";
 const template = `
-<footer></footer>
+<footer>Primer proyecto de crear una api con vite</footer>
 `;
 
 export const PrintFooter = () =>

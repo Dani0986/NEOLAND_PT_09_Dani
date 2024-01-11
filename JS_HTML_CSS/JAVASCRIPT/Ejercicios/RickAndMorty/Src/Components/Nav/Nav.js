@@ -1,24 +1,25 @@
+
 import { PrintBusquedaPage } from "../../pages/Busqueda/Busqueda";
 import { PrintHomePage } from "../../pages/Home/Home";
 import "./Nav.css";
 
 const template = () => `
 <nav>
-    <button id="navegateHome" class="btn-nav">Personajes</button>
-    <button id="navegateBusqueta" class="btn-nav">Buscador</button>
+    <button id="navegateHome" class="btn-nav" >Personajes</button>
     </nav>`;
 
 
 export const Listener = () => {
   const home = document.getElementById("navegateHome");
+  navegateHome.style.display = "none";
   home.addEventListener("click", () => {
     PrintHomePage();
   });
-
+/*
   const busqueda = document.getElementById("navegateBusqueta");
   busqueda.addEventListener("click", () => {
     PrintBusquedaPage();
-  });
+  });*/
 };
 
 export const PrintNav = () => {

@@ -3,7 +3,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../../../public/img/gaming-web-footer.jpg");
+    background-color: antiquewhite;
     -webkit-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
     -moz-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
     box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
@@ -56,7 +56,6 @@ footer {
  
   #neoFooter {
     font-size: 3rem;
-    margin: 0;
     @media (max-width: 300px) {
       font-size: 23px;
     }
@@ -99,7 +98,6 @@ footer {
   }
 
 #logoNeo {
-  width: 35px; 
-  float: right;
-}
+  width: 30px; 
 
+}
