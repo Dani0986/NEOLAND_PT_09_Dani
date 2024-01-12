@@ -24,7 +24,7 @@ export const initControler = (paginaQueVamosAPintar) => {
       prinTopo();
       break;
 
-    case "tresEnRaya":
+    case "tresEnRaya": 
       printTresEnRaya();
       break;
       

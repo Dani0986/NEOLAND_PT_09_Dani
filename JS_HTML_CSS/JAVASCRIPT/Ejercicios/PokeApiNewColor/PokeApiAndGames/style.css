@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app, html {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+:root {
+  --fondo: #89b1d8;
+  --colorPrimary: #cf0000;
+  --colorSecundary: #e5ae68;
+  --backgroundSecundary: #02020357;
+  --h1: rgb(255, 217, 2);
+  --h2: rgb(255, 255, 255);
+  --h3: rgb(0, 90, 173);
+  --p: rgb(14, 13, 13);
+  --firstColor: black;
+  --secondColor: rgb(255, 255, 255);
+  --thirdColor: black;
+  --darkColor: rgb(51, 48, 48);
+  --lightColor: rgba(206, 206, 206, 0.897);
+  --borderColor: rgb(103, 104, 63); 
+  --newtextColor: rgb(209, 214, 167);
+  --cardColor: rgb(51, 75, 119);
+  --newFontSize: 2rem;
+  --tic-tac: #FE6B45;
+  --scores: red;
+  --message: black;
+  --H1diglett: rgba(165, 42, 42, 0.897);
+  --squares: rgba(128, 128, 128, 0.623);
+  --bgPokemon: #cfcfcf;
+  --bgPokemon2: #333;
+  --login: #0def03;
+  --DahsColor: rgb(255, 255, 255);
+  --h1footer:#EF8200;
+  --white: white;
+  --black: rgb(0, 0, 0);
+  --tituloHangman: #DB7E92;
+  --header: antiquewhite;
+  --footer: antiquewhite;
+  --figuresMain: antiquewhite;
+  --tpobackground: rgb(206, 206, 206);
+}
+
+header {
+  height: 20vh;
+  width: 100%;
+  position: fixed;
+}
+
+main {
+  min-height: 90vh;
+  padding-top: 20vh;
+ 
+}
+
+footer {
+  height: 10vh;  
+}

@@ -1,0 +1,152 @@
+footer {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:var(--footer);
+    -webkit-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
+    -moz-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
+    box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+    opacity: 1; 
+    transition: opacity 0.5s ease;
+    color: var(--h1footer);
+    & span {
+      color: rgb(0, 0, 0);
+      @media (max-width: 300px) {
+        background-size: cover;    
+      }
+      @media (min-width: 301px) and (max-width: 370px) {
+        background-size: cover;
+      
+      }
+      @media (min-width: 371px) and (max-width: 400px) {
+        background-size: cover;
+      }
+      @media (min-width: 401px) and (max-width: 499px) {
+        background-size: cover;
+      }
+      @media (min-width: 500px) and (max-width: 600px) {
+        background-size: cover;
+      }
+      @media (min-width: 601px) and (max-width: 1020px) {
+        
+        background-size: cover;
+      }
+      @media (min-width: 1021px) and (max-width: 1023px) {
+        background-size: cover;
+      }
+      @media (min-width: 1024px) and (max-width: 1027px) {
+        background-size: cover;
+      }
+      @media (min-width: 1028px) and (max-width: 1349px) {
+        background-size: cover;
+      }
+      @media (min-width: 1350px) and (max-width: 1304px) {
+        background-size: cover;
+      }
+      @media (min-width: 1305px) and (max-width: 1444px) {
+        background-size: cover;
+      }
+    }
+  }
+  /*
+  #neoFooter {
+    font-size: 3rem;
+    @media (max-width: 300px) {
+      font-size: 23px;
+    }
+
+    @media (min-width: 301px) and (max-width: 370px) {
+      font-size: 25px;
+    
+    }
+    @media (min-width: 371px) and (max-width: 400px) {
+      font-size: 25px;
+    }
+    @media (min-width: 401px) and (max-width: 499px) {
+      font-size: 35px;
+    }
+    @media (min-width: 500px) and (max-width: 600px) {
+      font-size: 40px;
+    }
+    @media (min-width: 601px) and (max-width: 1020px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1021px) and (max-width: 1023px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1024px) and (max-width: 1027px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1028px) and (max-width: 1349px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1350px) and (max-width: 1304px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1305px) and (max-width: 1444px) {
+      font-size: 3rem;
+    }
+  }*/
+
+
+  footer:hover {
+    opacity: 1;
+  }
+
+
+.textFooter {
+  font-size: 3rem;  
+  text-align: center;
+    color: rgb(0, 0, 0);
+    flex: 1; 
+    @media (max-width: 300px) {
+      font-size: 23px;
+    }
+
+    @media (min-width: 301px) and (max-width: 370px) {
+      font-size: 25px;
+    
+    }
+    @media (min-width: 371px) and (max-width: 400px) {
+      font-size: 25px;
+    }
+    @media (min-width: 401px) and (max-width: 499px) {
+      font-size: 1.8rem;
+    }
+    @media (min-width: 500px) and (max-width: 600px) {
+      font-size: 2rem;
+    }
+    @media (min-width: 601px) and (max-width: 1020px) {
+      font-size: 2.5rem;
+    }
+    @media (min-width: 1021px) and (max-width: 1023px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1024px) and (max-width: 1027px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1028px) and (max-width: 1349px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1350px) and (max-width: 1304px) {
+      font-size: 3rem;
+    }
+    @media (min-width: 1305px) and (max-width: 1444px) {
+      font-size: 3rem;
+    }
+  }
+
+.icons { 
+  display: flex;
+  justify-content: flex-end; 
+  margin-right: 50px; 
+}
+
+#logoNeo {
+  width: 25px;
+}

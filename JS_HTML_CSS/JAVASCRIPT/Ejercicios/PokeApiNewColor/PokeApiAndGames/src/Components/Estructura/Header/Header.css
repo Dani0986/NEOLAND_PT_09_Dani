@@ -1,0 +1,265 @@
+header  {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  background-color: var(--header); 
+  -webkit-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
+  -moz-box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
+  box-shadow: 0px 8px 30px -3px rgba(0, 0, 0, 0.61);
+  z-index: 100;
+ /* @media (max-width: 600px) {
+    flex-direction: column;
+  }*/
+
+  @media (max-width: 300px) {
+    background-size: cover;    
+  }
+  @media (min-width: 301px) and (max-width: 600px) {
+    background-size: cover;    
+  }
+  @media (min-width: 601px) and (max-width: 1023px) {
+    background-size: cover;
+  }
+  @media (min-width: 1024px) and (max-width: 1444px) {
+    background-size: cover;
+  }
+
+  
+}
+ 
+  & nav img {
+    width: 20%;
+    margin: 1em;
+    transition: ease-in-out 0.3s;
+    
+    @media (max-width: 300px) {
+      width: auto;
+      height: 40px;   
+      margin: 8px;   
+    }
+    @media (min-width: 301px) and (max-width: 310px) {
+      width: auto;
+      height: 40px;
+      margin: 11px;
+    }
+    @media (min-width: 311px) and (max-width: 330px) {
+      width: auto;
+      height: 45px;
+      margin: 10px;
+    }
+    @media (min-width: 331px) and (max-width: 350px) {
+      width: auto;
+      height: 45px;
+      margin: 11px;
+    }
+
+    @media (min-width: 351px) and (max-width: 400px) {
+      width: auto;
+      height: 50px;
+      margin: 10px;
+    }
+    @media (min-width: 401px) and (max-width: 409px) {
+      width: auto;
+      height: 54px;
+      margin: 9px;
+    } 
+    @media (min-width: 410px) and (max-width: 429px) {
+      width: auto;
+      height: 55px;
+      margin: 10px;
+    }
+    @media (min-width: 430px) and (max-width: 499px) {
+      width: auto;
+      height: 60px;
+      margin: 10px
+    }
+    @media (min-width: 500px) and (max-width: 600px) {
+      width: auto;
+      height: 70px;
+    }
+    @media (min-width: 601px) and (max-width: 800px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 801px) and (max-width: 899px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 901px) and (max-width: 910px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 911px) and (max-width: 919px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 920px) and (max-width: 1023px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 1024px) and (max-width: 1027px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 1028px) and (max-width: 1349px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (min-width: 1350px) and (max-width: 1304px) {
+      width: auto;
+      height: 80px;
+    }    
+    @media (min-width: 1305px) and (max-width: 1444px) {
+      width: auto;
+      height: 80px;
+    }
+    @media (width: 912px) and (height: 1368px) {
+      width: auto;
+      height: 100px;
+    }
+    @media (width: 1024px) and (height: 1366px) {
+      width: auto;
+      height: 110px;
+    }
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  & #Logo { 
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 300px) {
+      width: auto;
+      height: 72px;
+    }
+    @media (min-width: 301px) and (max-width: 310px) {
+      height: 80px;
+      width: auto;
+    }
+    @media (min-width: 311px) and (max-width: 330px) {
+      height: 90px;
+      width: auto;
+    }
+    @media (min-width: 331px) and (max-width: 400px) {
+      height: 90px;
+      width: auto;
+    }
+    @media (min-width: 401px) and (max-width: 499px) {
+      height: 120px;
+      width: auto;
+    }
+
+    @media (min-width: 500px) and (max-width: 600px) {
+      height: 120px;
+      width: auto;
+    }
+    @media (min-width: 601px) and (max-width: 610px) {
+      width: auto;
+      height: 140px;
+    }
+    @media (min-width: 611px) and (max-width: 699px) {
+      width: auto;
+      height: 145px;
+    }
+    @media (min-width: 700px) and (max-width: 766px) {
+      width: auto;
+      height: 140px;
+    }
+    @media (min-width: 767px) and (max-width: 798px) {
+      width: auto;
+      height: 150px;
+    }
+    @media (min-width: 799px) and (max-width: 900px) {
+      width: auto;
+      height: 150px;
+    }
+    @media (min-width: 901px) and (max-width: 910px) {
+      width: auto;
+      height: 150px;
+    }
+    @media (min-width: 911px) and (max-width: 919px) {
+      width: auto;
+      height: 150px;
+    }
+    @media (min-width: 920px) and (max-width: 1023px) {
+      width: auto;
+      height: 150px;
+    }
+    @media (min-width: 1024px) and (max-width: 1039px) {
+      width: auto;
+      height: 150px;
+      
+    }
+    @media (min-width: 1040px) and (max-width: 1279px) {
+      width: auto;
+      height: 150px;
+    }
+    @media (min-width: 1280px) and (max-width: 1444px) {
+      height: 145px;
+      width: auto;
+    }
+    @media (width: 912px) and (height: 1368px) {
+      width: auto;
+      height: 170px;
+    }
+    @media (width: 1024px) and (height: 600px) {
+      width: auto;
+      height: 120px;
+    }
+    @media (width: 1024px) and (height: 1366px) {
+      width: auto;
+      height: 190px;
+    }
+  }
+
+  
+  & nav {
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 300px) {
+      width: 55vw;
+      height: auto;
+    }
+    @media (min-width: 301px) and (max-width: 321px) {
+    width: 58vw;
+  }
+  @media (min-width: 323px) and (max-width: 600px) {
+    width: 55vw;
+  }
+
+  @media (min-width: 601px) and (max-width: 1022px) {
+    width: 56vw;
+  }
+
+  @media (min-width: 1023px) and (max-width: 1027px) {
+    width: 40vw;
+  }
+  @media (min-width: 1028px) and (max-width: 1280px) {
+    width: 40vw;
+  }
+  @media (min-width: 1281px) and (max-width: 1444px) {
+    width: 40vw;
+  }
+  }
+
+
+/*
+#imagenLogo {
+  background-image: url("../../../../public/img/pokemon-logo1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-width: 25vw;
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    @media (max-width: 600px) {
+    width: 30vw;
+    height: 10vh;
+  }
+}*/
