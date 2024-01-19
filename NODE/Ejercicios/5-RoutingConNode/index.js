@@ -22,7 +22,7 @@ const app = http.createServer((req, res) => {
 
     }
 
-    if (method === "GET" && url === "/alumons") getAlumns(res)
+    if (method === "GET" && url === "/alumnos") getAlumns(res)
 });
 
 const getAlumns = (res) => {
@@ -47,5 +47,5 @@ const getAlumns = (res) => {
 };
 
 app.listen(8080, () => {
-    console.log("concetado al puerto 8080 localhost:8080");
+    console.log("concetado al puerto 8080 http://localhost:8080");
 });
