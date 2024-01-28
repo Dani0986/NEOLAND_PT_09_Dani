@@ -71,21 +71,65 @@ const toggleCharacter = async (req, res, next) => {
                                 $pull: { characters: character },
                             });
 
-                        
+                        try {  // Buscamos el character y le quitasmos la pelicula
+                            await Character.findByIdAndUpdate(character, {
+                                $pull: { movies: id},
+                            });
                         } catch (error) {
-                            
+                            return res.status(409).json({
+                               error: "Error al actualizar la movie, quitarle el character",
+                               message: error.message, 
+                            });
+                        }                         
+                        } catch (error) { 
+                            return res.status(409).json({
+                                error: "Error al actualizar la movie, quitarle el character",
+                                message: error.message,
+                              });                            
+                        } 
+                        } else {
+                            // si no lo incluye lo añadimos ( character al array de character de movie)
+                            try { 
+                                await Movie.findByIdAndUpdate(id, {
+                                    $push: {character: character },
+                                });
+                            // actualizamos nuesto character metiendo en el campo de movies a la movie
+                            try {
+                                await Character.findByIdAndUpdate(character, {
+                                    $push: { movies: id},
+                                });
+
+                            } catch (error) {
+                                return res.status(409).json({
+                                    error: "Error al actualizar el character, añadirle la movie",
+                                    message: error.message,
+                                  });
+                            }
+
+                            } catch (error) {
+                                return res.status(409).json({
+                                    error: "Error al actualizar la movie, al añadirle el character",
+                                    message: error.message,
+                                  });
+                            }
                         }
 
-                    }
-
                 })
-            )
-
+                // .then retorna una promesa que permoite encadenar metodos
+            ).then(async () => {
+                return res
+                .status(200)
+                .json(await Movie.findById(id).populate("characters"));
+            });
+        } else {
+            // Lanzamos un 404 porque no existe la pelicula a actualizar
+            return res.status(404).json("Movie no encontrada, prueba con otro id")
         }
-
-
-    } catch (error) {
-
+    } catch (error) { 
+        return res
+        .status(409)
+        .json({ error: "Error al actualizar la movie", message: error.mesage});
     }
-    
-}
+};
+
+module.exports = { createMovie, toggleCharacter };

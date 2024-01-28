@@ -1,7 +1,7 @@
 
 // traemos la funcion de borrar imagenes por si el usuario al subir un nuevo character tienee un error, que esa imagen se borre
 const { deleteImgCloudinary } = require("../../middleware/file.middleware");
-const enumok = require("../../utils/enumOk");
+const enumOk = require("../../utils/enumOk");
 
 // nos traemos el modelo
 
@@ -134,3 +134,117 @@ const getByName = async (req, res, next) => {
         .json({ error: "error durante la búsqueda", message: error.message });
     }
   };
+
+  // patch y update (parches y actualizciones)
+
+  const update = async (req, res, next) => {
+    try {
+      // comprobasr si en la solicitud hay una imagen
+      let catchImage = req.file?.path // path es una ruta que podemos manejar
+      await Character.syncIndexes()
+
+      // Trameos el  ID de los params de este character a actualizar
+      const { id } = req.params;
+
+      //buscamos el character
+      const characterById = await Character.findById(id);
+
+      if (characterById) {
+        // guardamos la imagen que tiene el character en la base de dfatos
+        const oldImage = characterById.image;
+
+        //creamos un body custom con los datos, si los hay, del body
+        const bodyCustom = {
+          _id: characterById._id,
+          image: req.file?.path ? catchImage : oldImage,
+          name: req.body?. name ? req.body?.name : characterById.name,
+        };
+
+        // comprobamos si recibimospor el body el genero
+      if (req.body?.gender) {
+        // comprobamos si recibimos por el body el genero
+        const resultEnumOk = enumOk(req.body?.gender);
+        bodyCustom.gender = resultEnumOk.check
+          ? req.body?.gender
+          : characterById.gender;
+      }
+      // buscar por id el character y actualizar con el custombody
+    try {
+      await Character.findByIdAndUpdate(id, bodyCustom);
+
+      //miramos si se a actulizado la imagen, si esto es asi - borrar la antigua
+
+      if (req.file?.path) {
+        // si la inmagen atigua es diferete a la que ponemos por defecto la borramos
+        oldImage !== 
+        "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png" &&
+        deleteImgCloudinary(oldImage);
+      }
+
+      // testear en teimpo real qie todo se hay realizado correctamente
+      
+      // buscar el elemento character ya actualizado mediante el id
+      const characterByIdUpdate = await Character.findById(id); 
+      
+      // cogemos el req.body y le sacamos las CLAVES para saber que elementos se han actualizado
+      const elementUpdate = object.keys(req.body);
+
+      // creamos un objeto vacio donde vamos a meter el test
+      let test = {};
+
+      // recorremos las claves del body y rellenamos el objeto test
+
+      elementUpdate.forEach((item) => {
+        // comprobar el valor de las claves del body con los valores del character actualizad
+        if (req.body[item] === characterByIdUpdate[item]) {
+          test[item] = true;
+        } else {
+          test[item] = false;
+        }
+      });
+
+      // comprobar que la imagen del character actualizado coincide con la imagen nueva que hay
+      // si coinciden creamos una copia de tes con una nueva clave que sera file en true y si jno estara en false
+      // usamos el spread oprator para hacer la copia
+      if (catchImage) {
+        characterByIdUpdate.image === catchImage
+        ? (test = { ...test, file: true})
+        : (test = { ...test, file: false})
+
+      }
+
+      //comprobar que ninguna clave es false, si hayu alguna lanzamos 409 
+      // clave no actulizada correctamente, so estan bien lanzamos 200
+
+      // creamos contador
+      let acc = 0
+
+      for (const key in test) {
+        // si esto es false añadimos al contador
+        test[key] === fasle && acc++;
+      }
+
+      // si acc es mayor a 0 lanzamos el error porque hay alguna clave en false y eso es por que no se a atualizado
+      if (acc > 0) {
+        return res.status(409).json({ dataTest: test, update: false});
+      } else {
+        return res
+        .status(200)
+        .json({ dataTest: test, update: characterByIdUpdate});
+      }
+    } catch (error) {
+      return res.status(409).json({
+        error: "No se ha podidio actualizar",
+        message: error.message,
+      });
+    }
+      } else {
+        // si el chacarter con es id no existe
+        return res.status(404).json("El character no ha sido encontrado");
+      }
+    } catch (error) {
+      return res
+      .status(409)
+      .json({ error: "No se ha podidio actualizar", message: error.message });
+    }
+  }
