@@ -1,5 +1,4 @@
-
-// crear importaciones
+//! ----------- IMPORTACIONES
 
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
@@ -7,41 +6,41 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const dotenv = require("dotenv");
 dotenv.config();
 
-// creamos el almacen
+//!------------- CREAMOS EL ALMACEN
 
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-        folder: "Primer_Ejercicio",
-        allowedFormats: ["jpg", "png", "jpeg", "gif", "svg", "webp"],
-    },
+  cloudinary: cloudinary,
+  params: {
+    folder: "Primer Ejercicio",
+    allowedFormats: ["jpg", "png", "jpeg", "gif", "svg", "webp"],
+  },
 });
 
-// funcion que sube imagenes
+//!------------ FUNCION QUE SUBE LAS IMAGENES
 
 const upload = multer({ storage });
 
-// funcion de borrado de imagenes en cloudinary
+//!------------ FUNCIÓN DE BORRADO DE IMAGENES EN CLOUDINARY
 
 const deleteImgCloudinary = (imgUrl) => {
-    const imgSplited = imgUrl.split("/");
-    const nameSplited = imgSplited[imgSplited.length - 1].split(",");
-    const folderSplited = imgSplited[imgSplited.length - 2];
-    const public_id = `${folderSplited}/${nameSplited[0]}`;
+  const imgSplited = imgUrl.split("/");
+  const nameSplited = imgSplited[imgSplited.length - 1].split(".");
+  const folderSplited = imgSplited[imgSplited.length - 2];
+  const public_id = `${folderSplited}/${nameSplited[0]}`;
 
-    cloudinary.uploader.destroy(public_id, () => {
-        console.log("Image delete in cloudinary");
-    });
+  cloudinary.uploader.destroy(public_id, () => {
+    console.log("Image delete in cloudinary");
+  });
 };
 
-// funcion de configuracion de cloudinary con variables de entorno
+//!--------- FUNCIÓN DE CONFIGURACIÓN DE CLOUDINARY CON VARIABLES DE ENTORNO
 
 const configCloudinary = () => {
-    cloudinary.config({
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_secret: process.env.CLOUDINARY_API_SECRET,
-        api_key: process.env.CLOUDINARY_API_KEY,
-    });
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    api_key: process.env.CLOUDINARY_API_KEY,
+  });
 };
 
 module.exports = { upload, deleteImgCloudinary, configCloudinary };
