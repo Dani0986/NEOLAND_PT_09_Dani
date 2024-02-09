@@ -10,7 +10,7 @@ const { deleteImgCloudinary } = require("../../middleware/file.middleware");
 const { generateToken } = require("../../utils/token");
 
 
-//! register larcgo con enviode codigo al email
+//! register largo con envio de codigo al email
 
 const registerLargo = async (req, res, next) => {
 //vemos si hay imagen en la solicitud
@@ -201,15 +201,50 @@ const sendCode = async (req, res, next) => {
         const userDB = await User.findById(id);
 
         //llamamos a las vasriables de entorno
-        const emailEnv = process.env.EMAIL;
+        const emailENV = process.env.EMAIL;
         const passwordENV = process.env.PASSWORD;
 
         //creamos el trasnport
 
         const transporter = nodemailer.createTransport({
-            
-        })
-    } catch {}
+            service: "gmail",
+            auth: {
+                user: emailENV,
+                pass: passwordENV,
+            }
+        }); 
 
+        //creamos las opciones del mensaje
+        const mailOptions = {
+            from: emailENV,
+            to: userDB.email, // se lo enviamos al registrado
+            subject: "Confirmation Code",
+            text: `Su código de confirmación es ${userDB.confirmationCode}, gracias por confiar en nosotros`,
+        };
+
+        //enviamos el email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return res
+                .status(409)
+                .json({error: "correo no enviado", message: error});
+            } else {
+                return res
+                .status(409)
+                .json({ user: userDB, confirmationCode: userDB.confirmationCode})
+            }
+        });
+    } catch (error) {
+        return res
+        .status(409)
+        .json({ error: "Error al enviar el email", message: error.message});
+    }
+};
+
+//! Resend Code
+
+const resendCode = async (req, res, next) => {
+    // llamamos a las variables de entorno
+   
 }
 
