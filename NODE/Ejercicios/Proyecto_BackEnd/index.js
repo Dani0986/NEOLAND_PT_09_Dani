@@ -48,7 +48,7 @@ app.disable("x-powered-by");
 
 //! traemos variable de entorno
 
-const PORT = preocess.env.PORT;
+const PORT = process.env.PORT;
 
 //! escuchamos en el puerto el servidor web
 

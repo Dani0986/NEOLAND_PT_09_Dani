@@ -7,7 +7,7 @@
 
 // nos traemos el model de user para buscar al usuario que hace la solicitud mediante el id que trae el token -> decodificacion
 
-const user = require("../api/models/User.model");
+const User = require("../api/models/User.model");
 const { verifyToken } = require("../utils/token");
 
 const dotenv = require("dotenv");

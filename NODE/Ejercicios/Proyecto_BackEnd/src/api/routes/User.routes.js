@@ -18,18 +18,18 @@ const UserRoutes = require("express").Router();
 
 UserRoutes.post("/registerLargo", upload.single("image"), registerLargo);
 UserRoutes.post(
-    "/registerRedirect",
+    "/direccionRegistro",
     upload.single("image"),
     registerWithRedirect
 ); // redirect con sendcode
 
-UserRoutes.post("/resend", resendCode);
-UserRoutes.post("/check", checkNewUser);
+//UserRoutes.post("/resend", resendCode);
+//UserRoutes.post("/check", checkNewUser);
 
-UserRoutes.post("/login", login);
-UserRoutes.post("/autologin", autologin);
+//UserRoutes.post("/login", login);
+//UserRoutes.post("/autologin", autologin);
 
-UserRoutes.patch("/forgotPassword", forgotPassword); // Redirect sendPassword
+//UserRoutes.patch("/forgotPassword", forgotPassword); // Redirect sendPassword
 
 
 //! Rutas Autenticadas
@@ -37,13 +37,13 @@ UserRoutes.patch("/forgotPassword", forgotPassword); // Redirect sendPassword
 // middleware isAuth -> verifica el token
 // isAuthAdmin -> verifica que tenemos token y somos rol = admin
 
-UserRoutes.get("/pruebas", [isAuthAdmin], exampleAuth);
+//UserRoutes.get("/pruebas", [isAuthAdmin], exampleAuth);
 
-UserRoutes.patch("/changePassword", [isAuth], changePassword);
+//UserRoutes.patch("/changePassword", [isAuth], changePassword);
 
 // -- controladores usados por redirect
 
-UserRoutes.post("/register/senMAil/:id", sendCode);
-UserRoutes.patch("/forgot/sendPassword/:id", sendPassword);
+UserRoutes.post("/register/sendMail/:id", sendCode);
+//UserRoutes.patch("/forgot/sendPassword/:id", sendPassword);
 
 module.exports = UserRoutes;

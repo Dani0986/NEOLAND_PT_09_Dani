@@ -1,14 +1,17 @@
 
-
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
+
 const nodemailer = require("nodemailer");
-const randomcode = require("../../utils/randomCode");
+const randomCode = require("../../utils/randomCode");
+
 const User = require("../models/User.model");
+
 const { deleteImgCloudinary } = require("../../middleware/file.middleware");
 const { generateToken } = require("../../utils/token");
-
+const randomPassword = require("../../utils/randomCode");
+const enumOK = require("../../utils/enumOk");
 
 //! register largo con envio de codigo al email
 
@@ -62,7 +65,7 @@ const registerLargo = async (req, res, next) => {
                 // Todo - ENVIAMOS EL CODIGO
                 // llamamos a las variables de entorno
                 const emailENV = process.env.EMAIL;
-                const passwordENV = process.eventNames.PASSWORD;
+                const passwordENV = process.env.PASSWORD;
 
                 // creamos el transport
                 const trasnporter = nodemailer.createTransport({
@@ -71,16 +74,20 @@ const registerLargo = async (req, res, next) => {
                         user: emailENV,
                         pass: passwordENV,
                     },
+                    tls: {
+                        // AÑADIR ESTA PARTE PARA QUE FUCNCIONES
+                        rejectUnauthorized: false
+                    }
                 });
                 //creamos las opciones del mensaje
                 const mailOption = {
                     from: emailENV,
-                    to: email, // se lo enviamos a un registrado
+                    to: req.body.email, // se lo enviamos a un registrado
                     subject: "Confirmation code",
                     text: `Su codigo de confitmacion es ${confirmationCode}, gracias por confiar en nosotros`,                  
                 };
 
-            trasnporter.sendMail(mailOptions, (error, info) => {
+            trasnporter.sendMail(mailOption, (error, info) => {
                 if (error) {
                     return res
                     .status(409)
@@ -119,7 +126,7 @@ const registerLargo = async (req, res, next) => {
 
 const registerWithRedirect = async (req, res, next) => {
     let catchImg = req.file?.path;
-
+    console.log("registro")
     try {
         //indexes
     await User.syncIndexes();
@@ -128,7 +135,7 @@ const registerWithRedirect = async (req, res, next) => {
     let confirmationCode = randomCode();
 
     // buscamos si hay algun user con email o el name
-    const userExist = await User.finOne(
+    const userExist = await User.findOne(
         { email: req.body.email },
         { name: req.body.name }
     );
@@ -175,7 +182,7 @@ const registerWithRedirect = async (req, res, next) => {
     } else {
         // Error porque ya existe este usuario
         req.file && deleteImgCloudinary(catchImg);
-        return res.statuis(409).json({
+        return res.status(409).json({
             error: "El usuario ya existe",
             message: "El usuario no se ha guardado",
         });
@@ -192,6 +199,7 @@ const registerWithRedirect = async (req, res, next) => {
 //! send code Confirmation
 
 const sendCode = async (req, res, next) => {
+    console.log("dentro");
     try {
         //buscamos al user por su id de los params
         // para buscar el email y el codigo de confirmation
@@ -244,7 +252,137 @@ const sendCode = async (req, res, next) => {
 //! Resend Code
 
 const resendCode = async (req, res, next) => {
-    // llamamos a las variables de entorno
-   
+    try {
+        // llamamos a las variables de entorno
+        const emailENV = process.env.EMAIL;
+        const passwordENV = process.env.PASSWORD;
+
+        const transporter = nodemailer.createTransport ({
+            service: "gmail",
+            auth: {
+                user: emailENV,
+                pass: passwordENV,
+            },
+        });
+
+        // buscamos al usuario por el email que nos trae la solicitud
+        const userSAve = await User.findOne({ email: req.body.email });
+
+        if(userSave) {
+            // creamos las opciones del mensaje
+            const mailOptions = {
+                from: emailENV,
+                to: req.body.email, // se lo enviamos al user registrado
+                subject: "Confirmation Code",
+                text: `Su codigo de confirmation es ${userSave.confirmationCode}, gracias por confiar en nosotros`,
+            };
+
+            //enviamos el email
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return res
+                    .status(409)
+                    .json({ error: "correo no enviado", message: error });
+                } else {
+                    return res.status(200).json({ user: userSave, resemd: true });
+                }
+            });
+            //Error no se encuentra al user por email
+            return res
+            .status(404)
+            .json({ error: "Error al enviar el dcodigo", message: error.message });
+        }
+    } catch (error) {
+        return res
+        .status(409)
+        .json({ error: "Error al enviar el codigo", message: error.message });
+    }
+};
+
+//! Check New User
+
+const checkNewUser = async (req, res, next ) => {
+    try {
+        // recibimos el email y  el confirmationCode de la solicitud
+
+        const { email, confirmationCode } = req.body;
+
+        //Buscamos al Usuario
+        const userExist = await User.findOne({ email });
+
+        // si el user no existe lanzamos un error
+        if (!userExist) {
+           return res
+           .status(404)
+           .json({ error: "user no encontrado", message: "checkea el correo"});
+        } else {
+            // si existe -> comprobamos los codigos
+            if (userExist.confirmationCode === confirmationCode ) {
+                // si es igual actualizamos el check del user
+                try {
+                    //actualizamos al user
+                    await userExist.updateOne({ check: true });
+
+                    // Buscamos a este user actualizado para enviar la respuesta
+                    const updateUser = await User.findOne({ email });
+
+                    return res.status(200).json({
+                        user: updateUser,
+                        testCheckUser: updateUser.check == true ? true : false,
+                    });
+                } catch (error) {
+                    return res
+                    .status(409)
+                    .json({ error: "Error al actualizar", message: error.message });
+                }
+            } else {
+                // si los codigos no coinciden borramos a este user
+
+                await User.findByIdAndDelete(userExist._id);
+
+                // si la imagen no es la que hay por defecto hay que borrarla
+                if (
+                    userExist.image !==
+                    "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png"
+                ) {
+                    deleteImgCloudinary(userExist.image);
+                }
+                // lanzamos la respuiesta avisando del borrado del user
+
+                return res.status(409).json({
+                    user: userExist,
+                    check: false,
+                    delete: (await User.findById(userExist._id))
+                        ? "user no borrado"
+                        : "user borrado",
+                });           
+            }
+        }
+    } catch (error) {
+        return res
+        .status(409)
+        .json({ error: "Error al checkear", message: error.message })
+    }
+};
+
+//! Login
+
+const login = async (req, res, next) => {
+    try {
+        // hacemos destructuring del email y la pass del req.body
+        const { email, password } = req.body;
+
+        // buscamos a este usuraio por el email
+        const userDB = await User.findOne({ email });
+
+        // 
+    } catch (error) {}
 }
 
+
+
+module.exports = {
+    registerLargo,
+    registerWithRedirect,
+    sendCode,
+}
