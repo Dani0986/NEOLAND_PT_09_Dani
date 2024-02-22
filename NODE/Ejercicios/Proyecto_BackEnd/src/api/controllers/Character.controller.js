@@ -1,18 +1,16 @@
-
-
 //! traemos la funcion de borrado de imagenes por si el usuario al subir un nuevo character tiene un error que esa imagen se borre
 
 const { deleteImgCloudinary } = require("../../middleware/file.middleware");
 const enumOk = require("../../utils/enumOk");
 
 //!------- Nos traemos el modelo
-
 const Character = require("../models/Character.model");
+const Comment = require("../models/Comment.model");
 const Games = require("../models/Games.model");
 const User = require("../models/User.model");
 
 
-//!--------------------- POST - CREATE --------------------
+//!--------------------- POST - CREATE 
 
 
 const create = async (req, res, next) => {
@@ -44,7 +42,6 @@ const create = async (req, res, next) => {
     }
 
     //!---------- GUARDAMOS EL CHARACTER CREADO
-    
     const saveCharacter = await newCharacter.save();
 
     // Comprobamos si el character se ha guardado para lanzar una respuesta
@@ -72,8 +69,7 @@ const create = async (req, res, next) => {
 };
 
 
-//!--------------------- GET - GET ALL --------------------
-
+//!--------------------- GET - GET ALL 
 
 const getAll = async (req, res, next) => {
   try {
@@ -197,9 +193,8 @@ const update = async (req, res, next) => {
             deleteImgCloudinary(oldImage);
         }
 
-       
-        //* TESTEAMOS EN TIEMPO REAL QUE ESTO SE HAYA REALIZADO CORRECTAMENTE */
-      
+        //** TESTEAMOS EN TIEMPO REAL QUE ESTO SE HAYA REALIZADO CORRECTAMENTE */
+    
 
         // Buscamos el elemento character YA actualizado mediante el id
         const characterByIdUpdate = await Character.findById(id);
@@ -261,7 +256,7 @@ const update = async (req, res, next) => {
   } catch (error) {
     return res
       .status(409)
-      .json({ error: "No se ha podido actualizar", message: error.message });
+      .json({ error: "No se ha podidio actualizar", message: error.message });
   }
 };
 
@@ -277,44 +272,80 @@ const deleteCharacter = async (req, res, next) => {
   try {
     // cogemos el id de los params
     const { id } = req.params;
+    // buscamos el character
 
-    // buscamos y borramos el character
-    const character = await Character.findByIdAndDelete(id);
+    const character = await Character.findById(id);
 
     if (character) {
-      // Si existe el character --> borramos los registros donde aparece
-      //! comprobamos si ese character ha sido borrado
-      const characterDelete = await Character.findById(id);
+      // si el character existe lo eliminamos
+      await Character.findByIdAndDelete(id);
 
-      //! --> borramos los registros de character en los arrys de movie donde aparece
+      const findCharacter = await Character.findById(id);
 
-      try {
-        // UpdateMany --> actualiza todos los registros que contengan en character el id
-        // 1º parametro es el filtro
-        // 2º acción --> sacar de characters el id de ese Character borrado
-        await Games.updateMany(
-          { characters: id },
-          { $pull: { characters: id } }
-        );
-
-        // verificamos que el character borrado no tengo la imagen por defecto para borrarla
+      if (!findCharacter) {
         character.image !==
           "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png" &&
           deleteImgCloudinary(character.image);
 
-        // Lanzamos una respuesta dependiendo de si se ha encontrado el character borrado
-        return res.status(characterDelete ? 409 : 200).json({
-          deleteTest: characterDelete ? false : true,
-        });
-      } catch (error) {
+        try {
+          // Actualizar movies que en su campo de characters tengan el id de este character borrado
+          await Games.updateMany(
+            { characters: id },
+            { $pull: { characters: id } }
+          );
+
+          // Actualizamos los users que hayan dado a me gusta al character
+          await User.updateMany(
+            { charactersFav: id },
+            { $pull: { charactersFav: id } }
+          );
+
+          try {
+            // Borrar comentarios que van dirigidos al character
+            await Comment.deleteMany({ recipientCharacter: id });
+
+            // Recorremos el array de comments del character y por cada comentario debemos actualizar al user creador del comentario
+            // y borrar de su array de postedComments el id de este comentario
+
+            // Como recorremos y hay asincornia hacemos un promise
+            Promise.all(
+              character.comments.map(async (comment) => {
+                // Por cada comentario actualizo al user creador del comentario
+                await User.updateOne(
+                  { postedComments: comment },
+                  { $pull: { postedComments: comment } }
+                );
+              })
+            ).then(async () => {
+              return res.status(200).json("Character borrado");
+            });
+          } catch (error) {
+            // error borrar comentarios
+            return res.status(409).json({
+              error: "Error al borrar los comentarios",
+              message: error.message,
+            });
+          }
+        } catch (error) {
+          // error al actualizar modelos
+          return res.status(409).json({
+            error: "Error al actualizar el User y el Character",
+            message: error.message,
+          });
+        }
+      } else {
+        // no se ha borrado
         return res.status(409).json({
           error: "Error al borrar el character",
-          message: error.message,
+          message: "Character no borrado",
         });
       }
     } else {
-      // lanzamos una respuesta 404 que el character no ha sido encontrado
-      return res.status(404).json("El character no ha sido encontrado");
+      // Error no existe el character
+      return res.status(409).json({
+        error: "Error al encontrar el character",
+        message: "El character no existe",
+      });
     }
   } catch (error) {
     return res.status(409).json({

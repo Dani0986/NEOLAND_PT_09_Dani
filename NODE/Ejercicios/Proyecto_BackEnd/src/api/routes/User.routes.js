@@ -1,17 +1,20 @@
-
 const { isAuth, isAuthAdmin } = require("../../middleware/auth.middleware");
 const { upload } = require("../../middleware/file.middleware");
 const {
-    registerLargo,
-    registerWithRedirect,
-    sendCode,
-    resendCode,
-    checkNewUser,
-    login,
-    autologin,
-    forgotPassword,
-    exampleAuth,
-    changePassword,
+  registerLargo,
+  registerWithRedirect,
+  sendCode,
+  resendCode,
+  checkNewUser,
+  login,
+  autoLogin,
+  forgotPassword,
+  sendPassword,
+  exampleAuth,
+  changePassword,
+  updateUser,
+  deleteUser,
+  addFavGames,
 } = require("../controllers/User.controllers");
 
 const UserRoutes = require("express").Router();
@@ -27,7 +30,7 @@ UserRoutes.post("/resend", resendCode);
 UserRoutes.post("/check", checkNewUser);
 
 UserRoutes.post("/login", login);
-UserRoutes.post("/autologin", autologin);
+UserRoutes.post("/autoLogin", autoLogin);
 
 UserRoutes.patch("/forgotPassword", forgotPassword); // Redirect sendPassword
 
@@ -40,7 +43,9 @@ UserRoutes.patch("/forgotPassword", forgotPassword); // Redirect sendPassword
 UserRoutes.get("/pruebas", [isAuthAdmin], exampleAuth);
 
 UserRoutes.patch("/changePassword", [isAuth], changePassword);
-
+UserRoutes.patch("/update", [isAuth], upload.single("image"), updateUser);
+UserRoutes.delete("/delete", [isAuth], deleteUser);
+UserRoutes.patch("/addLikeGames/:idGames", [isAuth], addFavGames);
 // -- controladores usados por redirect
 
 UserRoutes.post("/register/sendMail/:id", sendCode);
