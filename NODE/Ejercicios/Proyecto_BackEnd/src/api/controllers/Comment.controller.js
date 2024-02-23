@@ -7,7 +7,7 @@ const Comment = require("../models/Comment.model");
 const Games = require("../models/Movie.model");
 const User = require("../models/User.model");
 
-const cretaComment = async (req, res, next) => {
+const createComment = async (req, res, next) => {
     try {
     //traemos por params haciendo destructuring el id de quien va dirigido el comentario 
     const { idRecipient } = req.params;
@@ -225,14 +225,45 @@ const deleteComment = async (req, res, next) => {
                     await Games.findByIdAndUpdate(commentDB.recipientGames, {
                         $pull: { comments: id},
                     });
-                } catch (error) {}
-                }   catch (error) {} 
-                } catch (error) {}
 
-                } catch (error) {}
-            }
-    
-
+                    return res.status(200).json("comentario borrado");
+                } catch (error) {
+                    return res.status(409).json({
+                        error: 
+                        "Error al actualizar el game que ha recibido el comentario",
+                        message: error.message,
+                    });
+                }
+                }   catch (error) {
+                    return res.status(409).json({
+                        error: 
+                        "Error al actualizar el user que ha recibido el comentario",
+                        message: error.message,
+                    });
+                } 
+                } catch (error) {
+                    return res.status(409).json({
+                        error: 
+                        "Error al actualizar el user que ha recibido el comentario",
+                        message: error.message,
+                    });
+                }
+                } catch (error) {
+                    // error al actualizar el owner
+                    return res.status(409).json({
+                        error: "Error al actualizar el owner",
+                        message: error.message,
+                    });
+                }
+            } else {
+                // el comentario no existe
+            }  
         }
-    } catch (error) {}
-}
+    } catch (error) {
+        return res
+        .status(409)
+        .json({ error: "Error al borrar el comentario", message: error.message });
+    }
+};
+
+__esModule.exports = { createComment, deleteComment }
