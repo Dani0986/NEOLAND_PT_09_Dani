@@ -4,7 +4,7 @@
 
 const Character = require("../models/Character.model");
 const Comment = require("../models/Comment.model");
-const Games = require("../models/Movie.model");
+const Games = require("../models/Games.model");
 const User = require("../models/User.model");
 
 const createComment = async (req, res, next) => {
@@ -266,4 +266,4 @@ const deleteComment = async (req, res, next) => {
     }
 };
 
-__esModule.exports = { createComment, deleteComment }
+module.exports = { createComment, deleteComment };

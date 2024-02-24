@@ -76,6 +76,10 @@ const registerLargo = async (req, res, next) => {
               user: emailENV,
               pass: passwordENV,
             },
+            tls: {
+              // AÑADIR ESTA PARTE PARA QUE FUCNCIONES
+              rejectUnauthorized: false
+          }
           });
 
           // creamos las opciones del mensaje
