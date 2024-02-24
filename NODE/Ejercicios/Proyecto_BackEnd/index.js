@@ -15,6 +15,7 @@ connect();
 //! configurar cloudinary
 
 const { configCloudinary } = require("./src/middleware/file.middleware");
+configCloudinary();
 
 //! creamos servidor
 
