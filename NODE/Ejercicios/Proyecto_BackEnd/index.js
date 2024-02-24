@@ -38,7 +38,7 @@ const CharacterRoutes = require("./src/api/routes/Character.routes");
 app.use("/api/v1/character", CharacterRoutes);
 
 const GamesRoutes = require("./src/api/routes/Games.routes");
-app.use("/api/v1/movie", GamesRoutes);
+app.use("/api/v1/Games", GamesRoutes);
 
 const CommentRoutes = require("./src/api/routes/Comment.routes");
 app.use("/api/v1/comment", CommentRoutes);
