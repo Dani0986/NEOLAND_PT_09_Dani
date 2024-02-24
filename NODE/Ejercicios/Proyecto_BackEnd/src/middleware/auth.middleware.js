@@ -15,6 +15,7 @@ dotenv.config();
 
 //! ---------- esta funcion es para ver si estas autenticado (TOKEN VALIDO) -> independientemente del rol de ese user
 
+
 const isAuth = async (req, res, next) => {
   //** tenemos que quedarnos con el token que viene en el encabezado de la solicitud */
   //** hay que quitar la palabra BEARER que viene donde el token */
@@ -46,6 +47,7 @@ const isAuth = async (req, res, next) => {
       .json({ error: "Problemas con el token", message: error.message });
   }
 };
+
 
 //! ------- vamos a crear otra autorización solo para los admin, sino eres admin no tienes permiso
 
