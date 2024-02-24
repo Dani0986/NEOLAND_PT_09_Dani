@@ -1,18 +1,18 @@
 const Character = require("../models/Character.model");
 const Comment = require("../models/Comment.model");
-const Games = require("../models/Games.model");
+const Game = require("../models/Games.model");
 const User = require("../models/User.model");
 
 
 //!--------------------- POST - CREATE 
 
-const createGames = async (req, res, next) => {
+const createGame = async (req, res, next) => {
   console.log(req.body);
   try {
-    await Games.syncIndexes();
+    await Game.syncIndexes();
 
     // Creamos nueva instancia de Movie
-    const newGame = new Movie(req.body);
+    const newGame = new Game(req.body);
 
     // Guardamos ese registro en la db
     const saveGame = await newGame.save();
@@ -22,11 +22,11 @@ const createGames = async (req, res, next) => {
       return res.status(200).json(saveGame);
     } else {
       // Sino existe es que no se ha guardado --> 409
-      return res.status(409).json("No se ha podido crear la Movie");
+      return res.status(409).json("No se ha podido crear game");
     }
   } catch (error) {
     return res.status(409).json({
-      error: "Error en la creación de nueva Movie",
+      error: "Error en la creación de nuevo Game",
       message: error.message,
     });
   }
@@ -47,10 +47,10 @@ const toggleCharacters = async (req, res, next) => {
 
     // Buscamos los games a actualizar por el id
 
-    const gamesById = await Games.findById(id);
+    const gameById = await Game.findById(id);
 
     // Comprobamos si esta Games existe en la db y sino lanzamos un 404
-    if (gamesById) {
+    if (gameById) {
       // Cogemos lo traido por req.body y lo convertimos en array .split(",") --> js
       // Separando las posiciones del string
 
@@ -65,12 +65,12 @@ const toggleCharacters = async (req, res, next) => {
       Promise.all(
         arrayCharacters.map(async (character) => {
           console.log("character", character);
-          if (gamesById.characters.includes(character)) {
+          if (gameById.characters.includes(character)) {
             // Si lo incluye hay que quitarlo ( character al array de characters de Games)
             //** LO QUITAMOS PORQUE LO INCLUYE */
             try {
               // buscamos el game que queremos actualizar
-              await Games.findByIdAndUpdate(id, {
+              await Game.findByIdAndUpdate(id, {
                 // quitamos el character del array de characters
                 $pull: { characters: character },
               });
@@ -97,7 +97,7 @@ const toggleCharacters = async (req, res, next) => {
             //** LO AÑADIMOS */
             try {
               // actualizamos game añadiendole el character
-              await Games.findByIdAndUpdate(id, {
+              await Game.findByIdAndUpdate(id, {
                 $push: { characters: character },
               });
 
@@ -109,7 +109,7 @@ const toggleCharacters = async (req, res, next) => {
                 });
               } catch (error) {
                 return res.status(409).json({
-                  error: "Error al actualizar el character, añadirle la movie",
+                  error: "Error al actualizar el character, añadirle el game",
                   message: error.message,
                 });
               }
@@ -124,7 +124,7 @@ const toggleCharacters = async (req, res, next) => {
       ).then(async () => {
         return res
           .status(200)
-          .json(await Games.findById(id).populate("characters"));
+          .json(await Game.findById(id).populate("characters"));
       });
     } else {
       // Lanzamos un 404 porque no existe games a actualizar
@@ -139,22 +139,22 @@ const toggleCharacters = async (req, res, next) => {
 
 //!------------------------ DELETE 
 
-const deleteGames = async (req, res, next) => {
+const deleteGame = async (req, res, next) => {
   try {
     // traemos el id de gamese a borrar mediante destructuring de req.params
     const { id } = req.params;
 
     // Buscamogames por id para ver si existe
-    const gamesId = await Games.findById(id);
+    const gameId = await Game.findById(id);
 
-    if (gamesId) {
+    if (gameId) {
       // Procedemos a borrarla
 
-      await Games.findByIdAndDelete(id);
+      await Game.findByIdAndDelete(id);
 
       // Volvemos a buscar el game para ver si se ha borrado de forma correcta
 
-      const existGame = await Games.findById(id);
+      const existGame = await Game.findById(id);
 
       //Si  existGame no existe es correcto el borrado y procedemos a actualizar registros de datos
 
@@ -178,7 +178,7 @@ const deleteGames = async (req, res, next) => {
             // actualizando borrando de su array de postedComments el id de este comentario
 
             Promise.all(
-              gamesId.comments.map(async (comment) => {
+              gameId.comments.map(async (comment) => {
                 // Por cada comentario tengo que actualizar al dueño de este comentario
                 // borrando de su campo de postedComments este id del comentario
 
@@ -227,4 +227,4 @@ const deleteGames = async (req, res, next) => {
   }
 };
 
-module.exports = { createGames, toggleCharacters, deleteGames };
+module.exports = { createGame, toggleCharacters, deleteGame };
