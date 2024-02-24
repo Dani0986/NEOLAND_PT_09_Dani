@@ -2,7 +2,7 @@ const {
     createGames,
     toggleCharacters,
     deleteGames,
-  } = require("../controllers/Movie.controller");
+  } = require("../controllers/games.controller");
   
   const gamesRoutes = require("express").Router();
   
@@ -11,5 +11,5 @@ gamesRoutes.patch("/toggle/:id", toggleCharacters);
   
 gamesRoutes.delete("/delete/:id", deleteGames);
   
-  module.exports = gamesRoutes;
+module.exports = gamesRoutes;
   

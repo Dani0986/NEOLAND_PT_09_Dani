@@ -8,6 +8,7 @@ const GamesSchema = new mongoose.Schema(
     characters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character" }],
     released: { type: Boolean},
     image: { type: String, required: false },
+    score: { type: String},
   },
   {
     timestamps: true,

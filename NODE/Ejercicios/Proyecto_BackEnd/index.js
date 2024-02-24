@@ -43,6 +43,7 @@ app.use((error, req, res) => {
     return res
     .status(error.status || 500)
     .json(error.message || "Error inesperado");
+    
 });
 
 app.disable("x-powered-by");

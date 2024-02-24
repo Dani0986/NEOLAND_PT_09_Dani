@@ -47,10 +47,10 @@ const toggleCharacters = async (req, res, next) => {
 
     // Buscamos los games a actualizar por el id
 
-    const GamesById = await Games.findById(id);
+    const gamesById = await Games.findById(id);
 
     // Comprobamos si esta Games existe en la db y sino lanzamos un 404
-    if (GamesById) {
+    if (gamesById) {
       // Cogemos lo traido por req.body y lo convertimos en array .split(",") --> js
       // Separando las posiciones del string
 
@@ -65,7 +65,7 @@ const toggleCharacters = async (req, res, next) => {
       Promise.all(
         arrayCharacters.map(async (character) => {
           console.log("character", character);
-          if (GamesById.characters.includes(character)) {
+          if (gamesById.characters.includes(character)) {
             // Si lo incluye hay que quitarlo ( character al array de characters de Games)
             //** LO QUITAMOS PORQUE LO INCLUYE */
             try {
