@@ -5,7 +5,32 @@ const User = require("../models/User.model");
 const { deleteImgCloudinary } = require("../../middleware/file.middleware");
 
 //!--------------------- POST - CREATE 
+/*
+const createGame = async (req, res, next) => {
+  console.log(req.body);
+  try {
+    await Game.syncIndexes();
 
+    // Creamos nueva instancia de Movie
+    const newGame = new Game(req.body);
+
+    // Guardamos ese registro en la db
+    const saveGame = await newGame.save();
+
+    // Si existe es que ha guardado de forma correcta --> 200
+    if (saveGame) {
+      return res.status(200).json(saveGame);
+    } else {
+      // Sino existe es que no se ha guardado --> 409
+      return res.status(409).json("No se ha podido crear game");
+    }
+  } catch (error) {
+    return res.status(409).json({
+      error: "Error en la creación de nuevo game",
+      message: error.message,
+    });
+  }
+};*/
 const createGame = async (req, res, next) => {
   // guardamos la url de la imagen que se sube a cloudinary
   // los archivos (imagen) --> req.file
@@ -57,7 +82,7 @@ const createGame = async (req, res, next) => {
 
     req.file?.path && deleteImgCloudinary(catchImg);
     next(error);
-    return res.status(409).json("Error en el creado de game");
+    return res.status(409).json("Error en el creado de Game");
   }
 };
 
@@ -84,9 +109,9 @@ const toggleCharacters = async (req, res, next) => {
       // Separando las posiciones del string
 
       // Separamos por comas y convertimos en array
-      const arrayCharacters = characters.split(","); // -> ["12343432","72369469367"]
+      const arrayCharacters = characters.split(",") // -> ["12343432","72369469367"]
 
-      console.log("array characters", arrayCharacters);
+      console.log("array Characters", arrayCharacters);
 
       // Recorremos el array de characters que son Id para comprobar si estan en el game (sacarlos) o sino estan (meterlos)
 
@@ -256,4 +281,82 @@ const deleteGame = async (req, res, next) => {
   }
 };
 
-module.exports = { createGame, toggleCharacters, deleteGame };
+//!--------------------- GET - GET ALL 
+
+const getAll = async (req, res, next) => {
+  try {
+    // Traemos todos los elementos de la coleccion
+    const allGames = await Game.find();
+    // Find nos devuelve un array con todos los elementos coincidentes
+
+    if (allGames.length > 0) {
+      // Si hay registros lanzamos una respuesta correcta
+      return res.status(200).json(allGames);
+    } else {
+      // si no hay registros lanzamos una respuesta 404
+      return res.status(404).json("No se han encontrado personajes");
+    }
+  } catch (error) {
+    // capturtamos el error
+    return res
+      .status(409)
+      .json({ error: "Error al buscar personajes", message: error.message });
+  }
+};
+
+
+//!--------------------- GET - GET By ID --------------------
+
+
+const getById = async (req, res, next) => {
+  try {
+    // Hacemos destructuring del id traido por params
+    const { id } = req.params;
+
+    // Encontramos al character que tenga ese ID
+    //! POPULATE Nos permite obtener los datos de los campos populados
+    const gamesById = await Game.findById(id).populate("");
+
+    // Comprobamos si se ha encontrado el character
+    if (gamesById) {
+      return res.status(200).json(gamesById);
+    } else {
+      return res.status(404).json("No se ha encontrado el character");
+    }
+  } catch (error) {
+    return res
+      .status(409)
+      .json({ error: "Error al buscar por Id", message: error.message });
+  }
+};
+
+
+//!--------------------- GET - GET By NAME --------------------
+
+
+const getByName = async (req, res, next) => {
+  console.log(req);
+  try {
+    // Hacemos destructuring del name traido por params
+    const { name } = req.params;
+
+    // Buscamos al character que coincida en el name
+    const gameByName = await Game.find({ name });
+    console.log(gameByName);
+
+    // Si la longitud del array es mayor a 0 hay character con ese name y la respuesta es 200
+    if (gameByName.length > 0) {
+      return res.status(200).json(gameByName);
+    } else {
+      return res.status(404).json("No se han encontrado registros");
+    }
+  } catch (error) {
+    return res
+      .status(409)
+      .json({ error: "error durante la búsqueda", message: error.message });
+  }
+};
+
+
+
+module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName,  };

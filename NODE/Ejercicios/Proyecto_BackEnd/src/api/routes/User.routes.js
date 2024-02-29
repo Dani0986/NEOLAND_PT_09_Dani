@@ -15,6 +15,7 @@ const {
   updateUser,
   deleteUser,
   addFavGames,
+  getAll,
 } = require("../controllers/User.controllers");
 
 const UserRoutes = require("express").Router();
@@ -43,12 +44,12 @@ UserRoutes.patch("/forgotPassword", forgotPassword); // Redirect sendPassword
 UserRoutes.get("/pruebas", [isAuthAdmin], exampleAuth);
 
 UserRoutes.patch("/changePassword", [isAuth], changePassword);
-UserRoutes.patch("/update", [isAuth], upload.single("image"), updateUser);
+UserRoutes.patch("/update/:id", [isAuth], upload.single("image"), updateUser);
 UserRoutes.delete("/delete", [isAuth], deleteUser);
 UserRoutes.patch("/addLikeGames/:idGames", [isAuth], addFavGames);
 // -- controladores usados por redirect
 
 UserRoutes.post("/register/sendMail/:id", sendCode);
 UserRoutes.patch("/forgot/sendPassword/:id", sendPassword);
-
+UserRoutes.get("/getAll/", getAll);
 module.exports = UserRoutes;

@@ -12,7 +12,7 @@ const randomPassword = require("../../utils/randomPAssword");
 const randomCode = require("../../utils/randomCode");
 const enumOk = require("../../utils/enumOk");
 const Comment = require("../models/Comment.model");
-const Games = require("../models/Games.model");
+const Game = require("../models/Games.model");
 const Character = require("../models/Character.model");
 
 
@@ -166,7 +166,7 @@ const registerWithRedirect = async (req, res, next) => {
         if (userSave) {
           return res.redirect(
             307,
-            `http://localhost:8081/api/v1/user/register/sendMail/${userSave._id}`
+            `http://localhost:8080/api/v1/user/register/sendMail/${userSave._id}`
           );
         } else {
           // Error no se ha guardado correcto
@@ -224,6 +224,10 @@ const sendCode = async (req, res, next) => {
         user: emailENV,
         pass: passwordENV,
       },
+      tls: {
+        // AÑADIR ESTA PARTE PARA QUE FUCNCIONES
+        rejectUnauthorized: false
+    }
     });
 
     // creamos las opciones del mensaje
@@ -269,6 +273,10 @@ const resendCode = async (req, res, next) => {
         user: emailENV,
         pass: passwordENV,
       },
+      tls: {
+        // AÑADIR ESTA PARTE PARA QUE FUCNCIONES
+        rejectUnauthorized: false
+    }
     });
 
     // Buscamos al usuario por el email que nos trae la solicitud
@@ -466,7 +474,7 @@ const autoLogin = async (req, res, next) => {
 };
 
 
-//!  CAMBIO COBTRASEÑA NO LOGUEADO
+//!  CAMBIO CONTRASEÑA NO LOGUEADO
 
 
 const forgotPassword = async (req, res, next) => {
@@ -527,6 +535,10 @@ const sendPassword = async (req, res, next) => {
           user: emailENV,
           pass: passwordENV,
         },
+        tls: {
+          // AÑADIR ESTA PARTE PARA QUE FUCNCIONES
+          rejectUnauthorized: false
+      }
       });
 
       // creamos las opciones del mensaje
@@ -865,7 +877,7 @@ const deleteUser = async (req, res, next) => {
         // Actualizamos los registros de las movies que contengan el id en el campo de likes
         // La condicion es que en el campo de like aparezca el id del user
         // La accion es sacar del campo de likes este id
-        await Games.updateMany(
+        await Game.updateMany(
           { likes: req.user._id },
           { $pull: { likes: req.user._id } }
         );
@@ -930,7 +942,7 @@ const deleteUser = async (req, res, next) => {
                   );
 
                   //* Movies que tiene en comments este comentario
-                  await Games.updateMany(
+                  await Game.updateMany(
                     { comments: comment },
                     { $pull: { comments: comment } }
                   );
@@ -986,7 +998,7 @@ const deleteUser = async (req, res, next) => {
 };
 
 
-//!  TOGGLE LIKE FAV MOVIE 
+//!  TOGGLE LIKE FAV GAMES
 
 
 // Ruta autenticada
@@ -1016,17 +1028,17 @@ const addFavGames = async (req, res, next) => {
 
         // Sacamos de el game del array de likes el id del user
 
-        await Games.findByIdAndUpdate(idGames, {
+        await Game.findByIdAndUpdate(idGames, {
           $pull: { likes: _id },
         });
 
         //! ------------- respuesta
         return res.status(200).json({
           userUpdate: await User.findById(_id).populate(
-            "charactersFav gamesFav"
+            "characterFav gamesFav"
           ),
-          gamesUpdate: await Games.findById(idGames),
-          action: `pull idMovie: ${idGames}`,
+          gamesUpdate: await Game.findById(idGames),
+          action: `pull idGame: ${idGames}`,
         });
       } catch (error) {
         // Error al sacar el like
@@ -1047,16 +1059,16 @@ const addFavGames = async (req, res, next) => {
         });
 
         // Actualizamos games en su campo de likes añadir el id del user
-        await Games.findByIdAndUpdate(idGames, {
+        await Game.findByIdAndUpdate(idGames, {
           $push: { likes: _id },
         });
 
         //! una vez actualizados enviamos la respuesta
         return res.status(200).json({
           userUpdate: await User.findById(_id).populate(
-            "gamesFav charactersFav"
+            "gamesFav characterFav"
           ),
-          gamesUpdate: await Movie.findById(idGames),
+          gamesUpdate: await Game.findById(idGames),
           action: `push idGames: ${idGames}`,
         });
       } catch (error) {
@@ -1076,6 +1088,30 @@ const addFavGames = async (req, res, next) => {
   }
 };
 
+
+//! get All
+
+const getAll = async (req, res, next) => {
+  try {
+    // Traemos todos los elementos de la coleccion
+    const allUser = await User.find();
+    // Find nos devuelve un array con todos los elementos coincidentes
+
+    if (allUser.length > 0) {
+      // Si hay registros lanzamos una respuesta correcta
+      return res.status(200).json(allUser);
+    } else {
+      // si no hay registros lanzamos una respuesta 404
+      return res.status(404).json("No se han encontrado Users");
+    }
+  } catch (error) {
+    // capturtamos el error
+    return res
+      .status(409)
+      .json({ error: "Error al buscar users", message: error.message });
+  }
+};
+
 module.exports = {
   registerLargo,
   registerWithRedirect,
@@ -1091,4 +1127,5 @@ module.exports = {
   updateUser,
   deleteUser,
   addFavGames,
+  getAll,
 };

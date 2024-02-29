@@ -6,7 +6,7 @@ const enumOk = require("../../utils/enumOk");
 //!------- Nos traemos el modelo
 const Character = require("../models/Character.model");
 const Comment = require("../models/Comment.model");
-const Games = require("../models/Games.model");
+const Game = require("../models/Games.model");
 const User = require("../models/User.model");
 
 
@@ -103,7 +103,7 @@ const getById = async (req, res, next) => {
 
     // Encontramos al character que tenga ese ID
     //! POPULATE Nos permite obtener los datos de los campos populados
-    const characterById = await Character.findById(id).populate("movies");
+    const characterById = await Character.findById(id).populate("");
 
     // Comprobamos si se ha encontrado el character
     if (characterById) {
@@ -289,7 +289,7 @@ const deleteCharacter = async (req, res, next) => {
 
         try {
           // Actualizar movies que en su campo de characters tengan el id de este character borrado
-          await Games.updateMany(
+          await Game.updateMany(
             { characters: id },
             { $pull: { characters: id } }
           );
@@ -354,6 +354,8 @@ const deleteCharacter = async (req, res, next) => {
     });
   }
 };
+
+
 
 module.exports = {
   create,
