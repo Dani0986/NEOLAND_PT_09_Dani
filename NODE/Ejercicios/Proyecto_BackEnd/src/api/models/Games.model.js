@@ -10,7 +10,12 @@ const gameSchema = new mongoose.Schema(
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     image: { type: String, required: false },
+    games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+
   },
+  
   
   {
     timestamps: true,

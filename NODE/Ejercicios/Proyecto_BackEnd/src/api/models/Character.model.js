@@ -19,7 +19,7 @@ const CharacterSchema = new Schema(
     },
     image: { type: String, required: false },
     // Array de object id que hace referencia a mi MODELO movie -->
-    games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Games" }],
+    games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },

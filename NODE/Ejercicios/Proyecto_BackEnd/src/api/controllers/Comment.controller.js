@@ -76,7 +76,7 @@ const createComment = async (req, res, next) => {
         // creamos nueva instancia de comentario y la guardamos
         //  hay que actualizar el character que recibe el comentario
         // hay que actualizar el que realiza el comentario -- owner
-
+        console.log("entrando")
         // creamos nueva instancia
         const newComment = new Comment({
             ...req.body,
@@ -89,18 +89,18 @@ const createComment = async (req, res, next) => {
 
         if(savedComment) {
             // actualizamos user y character porque se ha guardado correctamente
-
+            console.log("entro0")
             try {
             // actualizamos owner
             await User.findByIdAndUpdate(req.user._id, {
                 $push: { postedComments: newComment._id},
                 });
-
+                console.log("entro1")
             // actualizamos el characterr que a recibidop el comentario
             await Character.findByIdAndUpdate(idRecipient, {
                 $push: { comments: newComment._id },
             });
-
+            console.log("entro")
             return res.status(200).json({
                 userOwner: await User.findById(req.user._id).populate(
                     "commentsByOther postedComments"

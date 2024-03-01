@@ -56,6 +56,8 @@ const UserSchema = new mongoose.Schema(
     characterFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character"}],
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // los que sigen al user
     followed: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}], // seguidos por el user
+    postedComments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
+    commentsByOther: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment"}],
 
 }, 
 {

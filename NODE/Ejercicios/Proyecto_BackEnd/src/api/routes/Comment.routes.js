@@ -7,7 +7,7 @@ const {
 
 const CommentRoutes = express.Router();
 
-CommentRoutes.post("/create/:idRecipient", [isAuth], createComment);
+CommentRoutes.post("/create/:idRecipient",[isAuth], createComment);
 CommentRoutes.delete("/delete/:id", deleteComment);
 
 module.exports = CommentRoutes;
