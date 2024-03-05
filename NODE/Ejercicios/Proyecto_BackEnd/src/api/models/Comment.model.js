@@ -19,16 +19,16 @@ const CommentSchema = new Schema(
     content: { type: String, required: true },
     // Array de ids de user que les gusta el comentario
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-
+    
     // Id del character al que va dirigido el comentario
     recipientCharacter: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Character",
     },
     // Id del game al que va dirigido el comentario
-    recipientGames: {
+    recipientGame: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Games",
+      ref: "Game",
     },
     // Id del user al que va dirigido el comentario
     recipientUser: {

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 //!--------- nos traemos de mongoose los squemas de datos
 const Schema = mongoose.Schema;
 
+
 //!---------> CREAMOS EL MODELO DE DATOS
 //* Tenemos que poner a cada clave el tipo de dato
 //* Definimos otras propiedades que limitan la información que se puede incluir esa clase --->

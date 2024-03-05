@@ -1,5 +1,5 @@
 //!-------- nos traemos UPLOAD (función de multer para subida de ficheros)
-
+const { isAuth, isAuthAdmin } = require("../../middleware/auth.middleware");
 const { upload } = require("../../middleware/file.middleware");
 
 //!-------- IMPORTAMOS LOS CONTROLADORES
@@ -11,7 +11,9 @@ const {
   getByName,
   update,
   deleteCharacter,
- 
+  addFavCharacter,
+  addFavGames,
+  updateGame
 } = require("../controllers/Character.controller");
 
 //!--------- CREAMOS UN ROUTER ESPECIFICO PARA CHARACTER --- al llamarlo disponemos de todas las rutas ---> será llamado en el index
@@ -35,6 +37,8 @@ CharacterRoutes.get("/getById/:id", getById);
 CharacterRoutes.get("/getByName/:name", getByName);
 CharacterRoutes.patch("/update/:id", upload.single("image"), update);
 CharacterRoutes.delete("/delete/:id", deleteCharacter);
-
+CharacterRoutes.patch("/addLikeCharacter/:idCharacter", [isAuth], addFavCharacter);
+CharacterRoutes.patch("/addFavGames/:idgame", [isAuth], addFavGames);
+CharacterRoutes.patch("/updateGame/:id", [isAuth], updateGame);
 
 module.exports = CharacterRoutes;

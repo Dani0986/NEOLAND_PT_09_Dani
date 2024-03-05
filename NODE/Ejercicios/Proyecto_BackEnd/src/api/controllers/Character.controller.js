@@ -356,6 +356,299 @@ const deleteCharacter = async (req, res, next) => {
 };
 
 
+//!  TOGGLE LIKE FAV GAMES
+
+
+// Ruta autenticada
+const addFavCharacter = async (req, res, next) => {
+  try {
+    // Pensar lo que vamos a actualizar
+    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
+    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
+
+    //** recibimos id de movie por req.params
+    //* En la ruta tendremos que añadir al path --> x/:idGames
+    const { idCharacter } = req.params;
+
+    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
+    const { _id, characterFav } = req.user;
+
+    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
+
+    if (characterFav.includes(idCharacter)) {
+      // Si lo incluye --> hay que sacarlo $PULL
+
+      try {
+        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
+        await User.findByIdAndUpdate(_id, {
+          $pull: { characterFav: idCharacter },
+        });
+
+        // Sacamos de el game del array de likes el id del user
+
+        await Character.findByIdAndUpdate(idCharacter, {
+          $pull: { likes: _id },
+        });
+
+        //! ------------- respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "characterFav"
+          ),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `pull idCharacter: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Error al sacar el like
+        return res.status(409).json({
+          error: "Error al sacar el like",
+          message: error.message,
+        });
+      }
+    } else {
+      // No se incluye el id en el array de gamesFav
+      // $PUSH --> añadir este id al array
+
+      try {
+        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
+        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
+        await User.findByIdAndUpdate(_id, {
+          $push: { characterFav: idCharacter },
+        });
+
+        // Actualizamos games en su campo de likes añadir el id del user
+        await Character.findByIdAndUpdate(idCharacter, {
+          $push: { likes: _id },
+        });
+
+        //! una vez actualizados enviamos la respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "characterFav"
+          ),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `push idCharacter: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Error al añadir el like
+        return res.status(409).json({
+          error: "Error al añadir el like",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Error general al añadir o quitar like a games
+    return res.status(409).json({
+      error: "Error general en el like de Character",
+      message: error.message,
+    });
+  }
+};
+
+
+
+//!  TOGGLE LIKE FAV 
+
+// Ruta autenticada
+const addFavGames = async (req, res, next) => {
+  try {
+    // Pensar lo que vamos a actualizar
+    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
+    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
+
+    //** recibimos id de movie por req.params
+    //* En la ruta tendremos que añadir al path --> x/:idGames
+    const { idGame } = req.params;
+
+    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
+    const { _id, gamesFav } = req.user;
+
+    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
+
+    if (gamesFav.includes(idGame)) {
+      // Si lo incluye --> hay que sacarlo $PULL
+
+      try {
+        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
+        await User.findByIdAndUpdate(_id, {
+          $pull: { gamesFav: idGame },
+        });
+
+        // Sacamos de el game del array de likes el id del user
+
+        await Game.findByIdAndUpdate(gamesFav, {
+          $pull: { likes: _id },
+        });
+
+        //! ------------- respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "gamesFav"
+          ),
+          GameUpdate: await Game.findById(idGame),
+          action: `pull idCharacter: ${idGame}`,
+        });
+      } catch (error) {
+        // Error al sacar el like
+        return res.status(409).json({
+          error: "Error al sacar el like",
+          message: error.message,
+        });
+      }
+    } else {
+      // No se incluye el id en el array de gamesFav
+      // $PUSH --> añadir este id al array
+
+      try {
+        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
+        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
+        await User.findByIdAndUpdate(_id, {
+          $push: { gamesFav: idGame },
+        });
+
+        // Actualizamos games en su campo de likes añadir el id del user
+        await Game.findByIdAndUpdate(idGame, {
+          $push: { likes: _id },
+        });
+
+        //! una vez actualizados enviamos la respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "gamesFav"
+          ),
+          GameUpdate: await Game.findById(idGame),
+          action: `push idCharacter: ${idGame}`,
+        });
+      } catch (error) {
+        // Error al añadir el like
+        return res.status(409).json({
+          error: "Error al añadir el like",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Error general al añadir o quitar like a games
+    return res.status(409).json({
+      error: "Error general en el like de Character",
+      message: error.message,
+    });
+  }
+};
+
+
+const updateGame = async (req, res, next) => {
+  try {
+    // comprobamos si en la solicitud hay una imagen (si hay nos van a cambiar la imagen del character)
+    let catchImage = req.file?.path;
+    await Character.syncIndexes();
+
+    // Traemos el ID de los params de este character a actualizar
+    const { id } = req.params;
+
+    // buscamos el character
+    const characterById = await Character.findById(id);
+
+    if (characterById) {
+      // guardamos la imagen que tiene el character en base de datos
+      const oldImage = characterById.image;
+
+      // Creamos un body custom con los datos , si los hay, del body
+      const bodyCustom = {
+        _id: characterById._id,
+        image: req.file?.path ? catchImage : oldImage,
+        name: req.body?.name ? req.body?.name : characterById.name,
+      };
+
+      // comprobamos si recibimos por el body el genero
+      if (req.body?.gender) {
+        // Si lo recibimos llamamos a la función de utils que valida el genero
+        const resultEnumOk = enumOk(req.body?.gender);
+        bodyCustom.gender = resultEnumOk.check
+          ? req.body?.gender
+          : characterById.gender;
+      }
+
+      try {
+        // busque por id el Character y lo actualize con el customBody
+        await Character.findByIdAndUpdate(id, bodyCustom);
+
+        // Miramos si han actualizado la imagen por si esto es asi, borrar la antigua
+        if (req.file?.path) {
+          // Si la imagen antigua es diferente a la que ponemos por defecto la borramos
+          oldImage !==
+            "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png" &&
+            deleteImgCloudinary(oldImage);
+        }
+
+        //** TESTEAMOS EN TIEMPO REAL QUE ESTO SE HAYA REALIZADO CORRECTAMENTE */
+    
+
+        // Buscamos el elemento character YA actualizado mediante el id
+        const characterByIdUpdate = await Character.findById(id);
+
+        // Cogemos el req.body y le sacamos las CLAVES para saber que elementos han actualizado
+        const elementUpdate = Object.keys(req.body);
+
+        // Creamos un objeto vacío donde vamos a meter este test
+        let test = {};
+
+        // Recorremos las claves del body y rellenamos el objeto test
+
+        elementUpdate.forEach((item) => {
+          // Compruebo el valor de las claves del body con los valores del character actualizado
+          if (req.body[item] === characterByIdUpdate[item]) {
+            test[item] = true;
+          } else {
+            test[item] = false;
+          }
+        });
+
+        // Comprobamos que la imagen del caracter Actualizado coincide con la imagen nueva si la hay
+        // Si coinciden creamos una copia de test con una nueva clave que será file en true y sino estará en false
+        if (catchImage) {
+          characterByIdUpdate.image === catchImage
+            ? (test = { ...test, file: true })
+            : (test = { ...test, file: false });
+        }
+
+        //** Comprobamos que ninguna clave del test este en false, si hay alguna lanzamos un 409 porque alguna
+        //**  clave no se ha actualizado de forma correcta , si estan todas en true lanzamos un 200 que esta todo correcto*/
+
+        let acc = 0;
+
+        for (const key in test) {
+          // si esto es false añadimos uno al contador
+          test[key] === false && acc++;
+        }
+
+        // si acc es mayor que 0 lanzamos error porque hay alguna clave en false y eso es que no se ha actualizado
+
+        if (acc > 0) {
+          return res.status(409).json({ dataTest: test, update: false });
+        } else {
+          return res
+            .status(200)
+            .json({ dataTest: test, update: characterByIdUpdate });
+        }
+      } catch (error) {
+        return res.status(409).json({
+          error: "No se ha podidio actualizar",
+          message: error.message,
+        });
+      }
+    } else {
+      // si el character con ese id no existe
+      return res.status(404).json("El character no ha sido encontrado");
+    }
+  } catch (error) {
+    return res
+      .status(409)
+      .json({ error: "No se ha podidio actualizar", message: error.message });
+  }
+};
+
 
 module.exports = {
   create,
@@ -364,4 +657,7 @@ module.exports = {
   getByName,
   update,
   deleteCharacter,
+  addFavCharacter,
+  addFavGames,
+  updateGame,
 };

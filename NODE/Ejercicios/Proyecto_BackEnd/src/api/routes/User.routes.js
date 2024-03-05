@@ -16,6 +16,7 @@ const {
   deleteUser,
   addFavGames,
   getAll,
+  addFavFollowers,
 } = require("../controllers/User.controllers");
 
 const UserRoutes = require("express").Router();

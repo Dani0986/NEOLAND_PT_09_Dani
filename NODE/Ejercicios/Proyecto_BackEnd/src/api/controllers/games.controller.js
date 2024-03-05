@@ -3,7 +3,7 @@ const Comment = require("../models/Comment.model");
 const Game = require("../models/Games.model");
 const User = require("../models/User.model");
 const { deleteImgCloudinary } = require("../../middleware/file.middleware");
-
+const enumOk = require("../../utils/enumOk");
 //!--------------------- POST - CREATE 
 /*
 const createGame = async (req, res, next) => {
@@ -132,7 +132,7 @@ const toggleCharacters = async (req, res, next) => {
               try {
                 // Buscamos el character y le quitamos a Games
                 await Character.findByIdAndUpdate(character, {
-                  $pull: { Games: id },
+                  $pull: { games: id },
                 });
               } catch (error) {
                 return res.status(409).json({
@@ -159,7 +159,7 @@ const toggleCharacters = async (req, res, next) => {
                 // Actualizamos nuestro character metiendo en el campo de Games en el game
 
                 await Character.findByIdAndUpdate(character, {
-                  $push: { Games: id },
+                  $push: { games: id },
                 });
               } catch (error) {
                 return res.status(409).json({
@@ -358,5 +358,119 @@ const getByName = async (req, res, next) => {
 };
 
 
+//!--------------------- PATCH - UPDATE --------------------
 
-module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName,  };
+
+const updateGame = async (req, res, next) => {
+  try {
+    // comprobamos si en la solicitud hay una imagen (si hay nos van a cambiar la imagen del character)
+    let catchImage = req.file?.path;
+    await Game.syncIndexes();
+
+    // Traemos el ID de los params de este character a actualizar
+    const { id } = req.params;
+
+    // buscamos el character
+    const gameById = await Game.findById(id);
+
+    if (gameById) {
+      // guardamos la imagen que tiene el character en base de datos
+      const oldImage = gameById.image;
+
+      // Creamos un body custom con los datos , si los hay, del body
+      const bodyCustom = {
+        _id: gameById._id,
+        image: req.file?.path ? catchImage : oldImage,
+        name: req.body?.name ? req.body?.name : gameById.name,
+      };
+
+      // comprobamos si recibimos por el body el genero
+      if (req.body?.gender) {
+        // Si lo recibimos llamamos a la función de utils que valida el genero
+        const resultEnumOk = enumOk(req.body?.gender);
+        bodyCustom.gender = resultEnumOk.check
+          ? req.body?.gender
+          : gameById.gender;
+      }
+
+      try {
+        // busque por id el Character y lo actualize con el customBody
+        await Game.findByIdAndUpdate(id, bodyCustom);
+
+        // Miramos si han actualizado la imagen por si esto es asi, borrar la antigua
+        if (req.file?.path) {
+          // Si la imagen antigua es diferente a la que ponemos por defecto la borramos
+          oldImage !==
+            "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png" &&
+            deleteImgCloudinary(oldImage);
+        }
+
+        //** TESTEAMOS EN TIEMPO REAL QUE ESTO SE HAYA REALIZADO CORRECTAMENTE */
+    
+
+        // Buscamos el elemento character YA actualizado mediante el id
+        const gameByIdUpdate = await Game.findById(id);
+
+        // Cogemos el req.body y le sacamos las CLAVES para saber que elementos han actualizado
+        const elementUpdate = Object.keys(req.body);
+
+        // Creamos un objeto vacío donde vamos a meter este test
+        let test = {};
+
+        // Recorremos las claves del body y rellenamos el objeto test
+
+        elementUpdate.forEach((item) => {
+          // Compruebo el valor de las claves del body con los valores del character actualizado
+          if (req.body[item] === gameByIdUpdate[item]) {
+            test[item] = true;
+          } else {
+            test[item] = false;
+          }
+        });
+
+        // Comprobamos que la imagen del caracter Actualizado coincide con la imagen nueva si la hay
+        // Si coinciden creamos una copia de test con una nueva clave que será file en true y sino estará en false
+        if (catchImage) {
+          gameByIdUpdate.image === catchImage
+            ? (test = { ...test, file: true })
+            : (test = { ...test, file: false });
+        }
+
+        //** Comprobamos que ninguna clave del test este en false, si hay alguna lanzamos un 409 porque alguna
+        //**  clave no se ha actualizado de forma correcta , si estan todas en true lanzamos un 200 que esta todo correcto*/
+
+        let acc = 0;
+
+        for (const key in test) {
+          // si esto es false añadimos uno al contador
+          test[key] === false && acc++;
+        }
+
+        // si acc es mayor que 0 lanzamos error porque hay alguna clave en false y eso es que no se ha actualizado
+
+        if (acc > 0) {
+          return res.status(409).json({ dataTest: test, update: false });
+        } else {
+          return res
+            .status(200)
+            .json({ dataTest: test, update: gameByIdUpdate });
+        }
+      } catch (error) {
+        return res.status(409).json({
+          error: "No se ha podido actualizar",
+          message: error.message,
+        });
+      }
+    } else {
+      // si el character con ese id no existe
+      return res.status(404).json("El game no ha sido encontrado");
+    }
+  } catch (error) {
+    return res
+      .status(409)
+      .json({ error: "No se ha podidio actualizar", message: error.message });
+  }
+};
+
+
+module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName, updateGame  };

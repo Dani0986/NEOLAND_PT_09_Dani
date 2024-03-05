@@ -4,7 +4,7 @@
 
 const Character = require("../models/Character.model");
 const Comment = require("../models/Comment.model");
-const Games = require("../models/Games.model");
+const Game = require("../models/Games.model");
 const User = require("../models/User.model");
 
 const createComment = async (req, res, next) => {
@@ -16,7 +16,7 @@ const createComment = async (req, res, next) => {
     // Buscamos a quien va dirigifdo el comentario
     const findUser = await User.findById(idRecipient); // -> si lo encuentro, el destinatario es este user
     const findCharacter = await Character.findById(idRecipient); // -> si lo encuenta, el destinatario es una character
-    const findGames = await Games.findById(idRecipient); // -> si lo encuentra, el destinatario es un game.
+    const findGame = await Game.findById(idRecipient); // -> si lo encuentra, el destinatario es un game.
 
 
     // todo ---- vamos a ver cual a encopntrado
@@ -76,7 +76,7 @@ const createComment = async (req, res, next) => {
         // creamos nueva instancia de comentario y la guardamos
         //  hay que actualizar el character que recibe el comentario
         // hay que actualizar el que realiza el comentario -- owner
-        console.log("entrando")
+        
         // creamos nueva instancia
         const newComment = new Comment({
             ...req.body,
@@ -89,18 +89,18 @@ const createComment = async (req, res, next) => {
 
         if(savedComment) {
             // actualizamos user y character porque se ha guardado correctamente
-            console.log("entro0")
+            
             try {
             // actualizamos owner
             await User.findByIdAndUpdate(req.user._id, {
                 $push: { postedComments: newComment._id},
                 });
-                console.log("entro1")
+                
             // actualizamos el characterr que a recibidop el comentario
             await Character.findByIdAndUpdate(idRecipient, {
                 $push: { comments: newComment._id },
             });
-            console.log("entro")
+            
             return res.status(200).json({
                 userOwner: await User.findById(req.user._id).populate(
                     "commentsByOther postedComments"
@@ -114,13 +114,13 @@ const createComment = async (req, res, next) => {
                     message: error.message,
                 });
             }
-        } else if (findGames) {
+        } else if (findGame) {
             //Creamos y guardamos comentario
             // actualizamos games y owner
 
             const newComment = new Comment({
                 ...req.body,
-                recipientGames: idRecipient,
+                recipientGame: idRecipient,
                 owner: req.user._id,
             });
 
@@ -134,7 +134,7 @@ const createComment = async (req, res, next) => {
                         $push: { postedComments: newComment._id},
                     });
                 
-                    await Games.findByIdAndUpdate(idRecipient, {
+                    await Game.findByIdAndUpdate(idRecipient, {
                         $push: { comments: newComment._id},
                     });
                     
@@ -180,15 +180,15 @@ const deleteComment = async (req, res, next) => {
     try {
         // obtenemos id de los params
         const { id } = req.params;
-
+        
         // Buscamos el comentario
         const commentDB = await Comment.findById(id);
-
+        console.log("Entro", commentDB);
         // verdicamos si existe para proceder a borrarlo
         if (commentDB) {
             // Lo borramos
             await Comment.findByIdAndDelete(id);
-
+            
             // Lo busccamos para ver si se borro correctamente
             const commentDelete = await Comment.findById(id);
 
@@ -205,7 +205,7 @@ const deleteComment = async (req, res, next) => {
                 console.log("All users", await User.find());
                 console.log(
                     "users que han dado ha me gusta al comentario",
-                    await User.find({ gamesFav: "poner aqui un game"}) //! - poner un gameFav
+                    await User.find({ gamesFav: "65dcdf90e7b85ceb29a5699b"}) //! - poner un gameFav
                 );
                 // actualizamos todos los usuarios que han dado ha me gusta el comentario borrado
                 await User.updateMany(
@@ -222,7 +222,7 @@ const deleteComment = async (req, res, next) => {
                         $pull: { comments: id},
                     });
                 try {
-                    await Games.findByIdAndUpdate(commentDB.recipientGames, {
+                    await Game.findByIdAndUpdate(commentDB.recipientGame, {
                         $pull: { comments: id},
                     });
 
@@ -255,10 +255,14 @@ const deleteComment = async (req, res, next) => {
                         message: error.message,
                     });
                 }
-            } else {
-                // el comentario no existe
-            }  
-        }
+            } 
+        } else {
+            // el comentario no existe
+            return res.status(404).json({
+                error: "No se a borrado comentario",
+                message: "El comentario no exite",
+            });
+        }  
     } catch (error) {
         return res
         .status(409)
