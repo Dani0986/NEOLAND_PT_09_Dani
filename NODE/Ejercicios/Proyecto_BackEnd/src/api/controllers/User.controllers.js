@@ -1112,6 +1112,96 @@ const getAll = async (req, res, next) => {
   }
 };
 
+//!  TOGGLE LIKE FAV GAMES
+
+
+// Ruta autenticada
+const addFavFollowers = async (req, res, next) => {
+  try {
+    // Pensar lo que vamos a actualizar
+    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
+    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
+
+    //** recibimos id de movie por req.params
+    //* En la ruta tendremos que añadir al path --> x/:idGames
+    const { idFollow } = req.params;
+
+    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
+    const { _id, followers } = req.user;
+
+    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
+
+    if (followers.includes(idFollow)) {
+      // Si lo incluye --> hay que sacarlo $PULL
+
+      try {
+        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
+        await User.findByIdAndUpdate(_id, {
+          $pull: { followers: idFollow },
+        });
+
+        // Sacamos de el game del array de likes el id del user
+
+        await User.findByIdAndUpdate(idFollow, {
+          $pull: { followed: _id },
+        });
+
+        //! ------------- respuesta
+        return res.status(200).json({
+          userUpdateFollow: await User.findById(_id).populate(
+            "followers followed"
+          ),
+          userUpdate: await User.findById(idFollow),
+          action: `pull idFollow: ${idFollow}`,
+        });
+      } catch (error) {
+        // Error al sacar el like
+        return res.status(409).json({
+          error: "Error al sacar el like",
+          message: error.message,
+        });
+      }
+    } else {
+      // No se incluye el id en el array de gamesFav
+      // $PUSH --> añadir este id al array
+
+      try {
+        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
+        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
+        await User.findByIdAndUpdate(_id, {
+          $push: { followers: idFollow },
+        });
+
+        // Actualizamos games en su campo de likes añadir el id del user
+        await User.findByIdAndUpdate(idFollow, {
+          $push: { followed: _id },
+        });
+
+        //! una vez actualizados enviamos la respuesta
+        return res.status(200).json({
+          userUpdateFollow: await User.findById(_id).populate(
+            "followers followed"
+          ),
+          userUpdate: await User.findById(idFollow),
+          action: `push idFollow: ${idFollow}`,
+        });
+      } catch (error) {
+        // Error al añadir el like
+        return res.status(409).json({
+          error: "Error al añadir el like",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Error general al añadir o quitar like a games
+    return res.status(409).json({
+      error: "Error general en el like de followers",
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   registerLargo,
   registerWithRedirect,
@@ -1128,4 +1218,5 @@ module.exports = {
   deleteUser,
   addFavGames,
   getAll,
+  addFavFollowers,
 };

@@ -650,6 +650,157 @@ const updateGame = async (req, res, next) => {
 };
 
 
+const createAuth = async (req, res, next) => {
+  // guardamos la url de la imagen que se sube a cloudinary
+  // los archivos (imagen) --> req.file
+
+  let catchImg = req.file?.path;
+
+  console.log("req body", req.body);
+  console.log("req file", req.file);
+
+  try {
+    //!-----> ACTUALIZAR INDEXES
+    // Los indexes de forman cuando la clave es unica
+    // Es importante por si es modificado posteriormente a la creacion del controlador
+    await Character.syncIndexes();
+
+    // Creamos una nueva instancia de Character con los datos del body
+
+    const newCharacter = new Character(req.body);
+
+    // Comprobamos si hay imagen para añadirla al Character creado
+    if (catchImg) {
+      newCharacter.image = catchImg;
+    } else {
+      // sino trae imagen la solicitud, le ponemos al character una imagen por defecto
+      newCharacter.image =
+        "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png";
+    }
+
+    //!---------- GUARDAMOS EL CHARACTER CREADO
+    const saveCharacter = await newCharacter.save();
+
+    // Comprobamos si el character se ha guardado para lanzar una respuesta
+    if (saveCharacter) {
+      //Si se ha guardado lanzamos una respuesta correcta con los datos del Character generados
+      return res.status(200).json(saveCharacter);
+    } else {
+      // si no se ha guardado hay un error y lo lanzamos en la respuesta
+      return res
+        .status(404)
+        .json("No se ha podido guaradar en la base de datos");
+    }
+  } catch (error) {
+    //! -----> solo entramos aqui en el catch cuando ha habido un error
+    /** SI HA HABIDO UN ERROR -----
+     * Tenemos que borrar la imagen en cloudinary porque se sube antes de que nos metamos en
+     * el controlador---> porque es un middleware que esta entre la peticion del cliente y el controlador
+     */
+    // comprobar si hay imagen en req.file porqe si es asi se ha subido a cloudinary y hay borrarla
+
+    req.file?.path && deleteImgCloudinary(catchImg);
+    next(error);
+    return res.status(409).json("Error en el creado del Character");
+  }
+};
+//! toggle
+
+const toggleGame = async (req, res, next) => {
+  try {
+    // Obtenemos el id del personaje de los parámetros de la solicitud
+    const { id } = req.params;
+
+    // Recogemos los juegos del cuerpo de la solicitud
+    const { games } = req.body;
+    console.log("games", games);
+
+    // Buscamos el personaje a actualizar por su id
+    const characterById = await Character.findById(id);
+
+    // Comprobamos si el personaje existe en la base de datos
+    if (characterById) {
+      // Convertimos los juegos recibidos en una matriz
+      const arrayGames = games.split(",");
+
+      console.log("array Games", arrayGames);
+
+      // Recorremos la matriz de juegos para verificar si están asociados al personaje
+      // y realizar las operaciones correspondientes
+      Promise.all(
+        arrayGames.map(async (game) => {
+          console.log("game", game);
+          if (characterById.games.includes(game)) {
+            // Si el juego está asociado al personaje, lo eliminamos
+            try {
+              // Actualizamos el personaje eliminando el juego de su lista de juegos
+              await Character.findByIdAndUpdate(id, {
+                $pull: { games: game },
+              });
+
+              try {
+                // Buscamos el juego y eliminamos la referencia al personaje
+                await Game.findByIdAndUpdate(game, {
+                  $pull: { characters: id },
+                });
+              } catch (error) {
+                return res.status(409).json({
+                  error: "Error al actualizar el juego, quitarle el personaje",
+                  message: error.message,
+                });
+              }
+            } catch (error) {
+              return res.status(409).json({
+                error: "Error al actualizar el personaje, quitarle el juego",
+                message: error.message,
+              });
+            }
+          } else {
+            // Si el juego no está asociado al personaje, lo agregamos
+            try {
+              // Actualizamos el personaje agregando el juego a su lista de juegos
+              await Character.findByIdAndUpdate(id, {
+                $push: { games: game },
+              });
+
+              try {
+                // Buscamos el juego y agregamos la referencia al personaje
+                await Game.findByIdAndUpdate(game, {
+                  $push: { characters: id },
+                });
+              } catch (error) {
+                return res.status(409).json({
+                  error: "Error al actualizar el juego, añadirle el personaje",
+                  message: error.message,
+                });
+              }
+            } catch (error) {
+              return res.status(409).json({
+                error: "Error al actualizar el personaje, añadirle el juego",
+                message: error.message,
+              });
+            }
+          }
+        })
+      ).then(async () => {
+        return res
+          .status(200)
+          .json(await Character.findById(id).populate("games"));
+      });
+    } else {
+      // Si el personaje no existe, respondemos con un error 404
+      return res
+        .status(404)
+        .json("Personaje no encontrado, prueba con otro id de personaje");
+    }
+  } catch (error) {
+    // Si ocurre algún error durante el proceso, respondemos con un error 409
+    return res.status(409).json({
+      error: "Error al actualizar el personaje",
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   create,
   getAll,
@@ -660,4 +811,6 @@ module.exports = {
   addFavCharacter,
   addFavGames,
   updateGame,
+  createAuth,
+  toggleGame,
 };

@@ -13,7 +13,9 @@ const {
   deleteCharacter,
   addFavCharacter,
   addFavGames,
-  updateGame
+  updateGame,
+  createAuth,
+  toggleGame,
 } = require("../controllers/Character.controller");
 
 //!--------- CREAMOS UN ROUTER ESPECIFICO PARA CHARACTER --- al llamarlo disponemos de todas las rutas ---> será llamado en el index
@@ -40,5 +42,6 @@ CharacterRoutes.delete("/delete/:id", deleteCharacter);
 CharacterRoutes.patch("/addLikeCharacter/:idCharacter", [isAuth], addFavCharacter);
 CharacterRoutes.patch("/addFavGames/:idgame", [isAuth], addFavGames);
 CharacterRoutes.patch("/updateGame/:id", [isAuth], updateGame);
-
+CharacterRoutes.post("/createAuth", upload.single("image"), [isAuth], createAuth);
+CharacterRoutes.patch("/toggleGame/:id", toggleGame);
 module.exports = CharacterRoutes;

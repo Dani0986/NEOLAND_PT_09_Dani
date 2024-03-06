@@ -23,6 +23,7 @@ const CharacterSchema = new Schema(
     games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+    year: {type: String, required: false},
   },
   // Para que salga la fecha de creacion
   {

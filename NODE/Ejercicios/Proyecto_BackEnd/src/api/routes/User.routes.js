@@ -53,4 +53,6 @@ UserRoutes.patch("/addLikeGames/:idGames", [isAuth], addFavGames);
 UserRoutes.post("/register/sendMail/:id", sendCode);
 UserRoutes.patch("/forgot/sendPassword/:id", sendPassword);
 UserRoutes.get("/getAll/", getAll);
+UserRoutes.patch("/addFavFollowers/:idFollow", [isAuth], addFavFollowers);
+
 module.exports = UserRoutes;

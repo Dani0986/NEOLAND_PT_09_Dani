@@ -8,7 +8,9 @@ const gameSchema = new mongoose.Schema(
     characters: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character" }],
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User"}],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-    image: { type: String, required: false },  
+    image: { type: String, required: false },
+    score: { type: String, required: false},
+    character: {type: String, required: false},
   },
   
   
