@@ -472,7 +472,7 @@ const updateGame = async (req, res, next) => {
   }
 };
 
-
+//! crear game auth
 
 const createGameAuth = async (req, res, next) => {
   try {
@@ -501,7 +501,7 @@ const createGameAuth = async (req, res, next) => {
         return res.status(200).json({
           userUpdate: await User.findById(_id).populate("charactersFav"),
           CharacterUpdate: await Character.findById(idCharacter),
-          action: `Remover like de character con ID: ${idCharacter}`,
+          action: `Remover like de character  ID: ${idCharacter}`,
         });
       } catch (error) {
         // Manejo de errores al sacar el like
@@ -547,4 +547,80 @@ const createGameAuth = async (req, res, next) => {
   }
 };
 
+
+//! like game
+
+// Ruta autenticada
+const addFavGame = async (req, res, next) => {
+  try {
+    // Recibimos el ID del personaje a dar like/dislike a través de req.params
+    const { idCharacter } = req.params;
+
+    // Extraemos el ID del usuario y su array de personajes favoritos del req.user
+    const { _id, charactersFav } = req.user;
+
+    // Verificamos si el ID del personaje está incluido en el array de personajes favoritos del usuario
+    if (charactersFav.includes(idCharacter)) {
+      // Si el personaje ya está en la lista de favoritos, lo sacamos (toggle dislike)
+
+      try {
+        // Sacamos el ID del personaje del array de personajes favoritos del usuario
+        await User.findByIdAndUpdate(_id, {
+          $pull: { charactersFav: idCharacter },
+        });
+
+        // Sacamos el ID del usuario del array de likes del personaje
+        await Character.findByIdAndUpdate(idCharacter, {
+          $pull: { likes: _id },
+        });
+
+        // Enviamos la respuesta con los datos actualizados
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate("charactersFav"),
+          CharacterUpdate: await Character.findById(idCharacter),
+          action: `Removed like from character with ID: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Manejo de errores al sacar el like
+        return res.status(409).json({
+          error: "Error removing like",
+          message: error.message,
+        });
+      }
+    } else {
+      // Si el personaje no está en la lista de favoritos, lo añadimos (toggle like)
+
+      try {
+        // Añadimos el ID del personaje al array de personajes favoritos del usuario
+        await User.findByIdAndUpdate(_id, {
+          $push: { charactersFav: idCharacter },
+        });
+
+        // Añadimos el ID del usuario al array de likes del personaje
+        await Character.findByIdAndUpdate(idCharacter, {
+          $push: { likes: _id },
+        });
+
+        // Enviamos la respuesta con los datos actualizados
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate("charactersFav"),
+          CharacterUpdate: await Character.findById(idCharacter),
+          action: `Added like to character with ID: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Manejo de errores al añadir el like
+        return res.status(409).json({
+          error: "Error adding like",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Manejo de errores generales
+    return res.status(409).json({
+      error: "General error in character like",
+      message: error.message,
+    });
+  }
+};
 module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName, updateGame, createGameAuth, addFavGame  };
