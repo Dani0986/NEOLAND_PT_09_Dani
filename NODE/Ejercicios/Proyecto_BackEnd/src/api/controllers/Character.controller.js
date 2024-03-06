@@ -459,14 +459,14 @@ const addFavGames = async (req, res, next) => {
 
     //** recibimos id de movie por req.params
     //* En la ruta tendremos que añadir al path --> x/:idGames
-    const { idGame } = req.params;
+    const { idCharacter } = req.params;
 
     // hacemos destructuring del req.user para obtener su id y su array de gamesFav
-    const { _id, gamesFav } = req.user;
+    const { _id, charactersFav } = req.user;
 
     //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
 
-    if (gamesFav.includes(idGame)) {
+    if (charactersFav.includes(idGame)) {
       // Si lo incluye --> hay que sacarlo $PULL
 
       try {
@@ -537,6 +537,7 @@ const addFavGames = async (req, res, next) => {
   }
 };
 
+//! Update Game
 
 const updateGame = async (req, res, next) => {
   try {
@@ -704,7 +705,7 @@ const createAuth = async (req, res, next) => {
     return res.status(409).json("Error en el creado del Character");
   }
 };
-//! toggle
+//! toggle Game
 
 const toggleGame = async (req, res, next) => {
   try {
