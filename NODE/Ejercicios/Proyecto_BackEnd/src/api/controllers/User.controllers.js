@@ -1088,6 +1088,95 @@ const addFavGames = async (req, res, next) => {
   }
 };
 
+//! toggle like Character
+
+// Ruta autenticada
+const addFavCharacters = async (req, res, next) => {
+  try {
+    // Pensar lo que vamos a actualizar
+    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
+    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
+
+    //** recibimos id de movie por req.params
+    //* En la ruta tendremos que añadir al path --> x/:idGames
+    const { idCharacter } = req.params;
+
+    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
+    const { _id, characterFav } = req.user;
+
+    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
+
+    if (characterFav.includes(idCharacter)) {
+      // Si lo incluye --> hay que sacarlo $PULL
+
+      try {
+        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
+        await User.findByIdAndUpdate(_id, {
+          $pull: { charactersFav: idCharacter },
+        });
+
+        // Sacamos de el game del array de likes el id del user
+
+        await Character.findByIdAndUpdate(characterFav, {
+          $pull: { likes: _id },
+        });
+
+        //! ------------- respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "characterFav gamesFav"
+          ),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `pull idCharacter: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Error al sacar el like
+        return res.status(409).json({
+          error: "Error al sacar el like",
+          message: error.message,
+        });
+      }
+    } else {
+      // No se incluye el id en el array de gamesFav
+      // $PUSH --> añadir este id al array
+
+      try {
+        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
+        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
+        await User.findByIdAndUpdate(_id, {
+          $push: { characterFav: idCharacter },
+        });
+
+        // Actualizamos games en su campo de likes añadir el id del user
+        await Character.findByIdAndUpdate(idCharacter, {
+          $push: { likes: _id },
+        });
+
+        //! una vez actualizados enviamos la respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "gamesFav characterFav"
+          ),
+          CharacterUpdate: await Character.findById(idCharacter),
+          action: `push idCharacter: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Error al añadir el like
+        return res.status(409).json({
+          error: "Error al añadir character",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Error general al añadir o quitar like a games
+    return res.status(409).json({
+      error: "Error general en el character",
+      message: error.message,
+    });
+  }
+};
+
 
 //! get All
 
@@ -1202,6 +1291,30 @@ const addFavFollowers = async (req, res, next) => {
   }
 };
 
+//! get By ID
+
+const getByIds = async (req, res, next) => {
+  try {
+    // Hacemos destructuring del id traido por params
+    const { id } = req.params;
+
+    // Encontramos al character que tenga ese ID
+    //! POPULATE Nos permite obtener los datos de los campos populados
+    const userById = await User.findById(id).populate("");
+
+    // Comprobamos si se ha encontrado el character
+    if (userById) {
+      return res.status(200).json(userById);
+    } else {
+      return res.status(404).json("No se ha encontrado el user");
+    }
+  } catch (error) {
+    return res
+      .status(409)
+      .json({ error: "Error al buscar por Id", message: error.message });
+  }
+};
+
 module.exports = {
   registerLargo,
   registerWithRedirect,
@@ -1219,4 +1332,6 @@ module.exports = {
   addFavGames,
   getAll,
   addFavFollowers,
+  addFavCharacters,
+  getByIds,
 };

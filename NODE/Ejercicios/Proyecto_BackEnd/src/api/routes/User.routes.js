@@ -17,6 +17,8 @@ const {
   addFavGames,
   getAll,
   addFavFollowers,
+  addFavCharacters,
+  getByIds,
 } = require("../controllers/User.controllers");
 
 const UserRoutes = require("express").Router();
@@ -54,5 +56,6 @@ UserRoutes.post("/register/sendMail/:id", sendCode);
 UserRoutes.patch("/forgot/sendPassword/:id", sendPassword);
 UserRoutes.get("/getAll/", getAll);
 UserRoutes.patch("/addFavFollowers/:idFollow", [isAuth], addFavFollowers);
-
+UserRoutes.patch("/addFavCharacters/:idCharacter", [isAuth], addFavCharacters);
+UserRoutes.get("/getById/:id", getByIds);
 module.exports = UserRoutes;

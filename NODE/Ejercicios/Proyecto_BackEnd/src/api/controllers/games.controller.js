@@ -557,16 +557,16 @@ const addFavGame = async (req, res, next) => {
     const { idCharacter } = req.params;
 
     // Extraemos el ID del usuario y su array de personajes favoritos del req.user
-    const { _id, charactersFav } = req.user;
+    const { _id, characterFav } = req.user;
 
     // Verificamos si el ID del personaje está incluido en el array de personajes favoritos del usuario
-    if (charactersFav.includes(idCharacter)) {
+    if (characterFav.includes(idCharacter)) {
       // Si el personaje ya está en la lista de favoritos, lo sacamos (toggle dislike)
 
       try {
         // Sacamos el ID del personaje del array de personajes favoritos del usuario
         await User.findByIdAndUpdate(_id, {
-          $pull: { charactersFav: idCharacter },
+          $pull: { characterFav: idCharacter },
         });
 
         // Sacamos el ID del usuario del array de likes del personaje
@@ -576,14 +576,14 @@ const addFavGame = async (req, res, next) => {
 
         // Enviamos la respuesta con los datos actualizados
         return res.status(200).json({
-          userUpdate: await User.findById(_id).populate("charactersFav"),
-          CharacterUpdate: await Character.findById(idCharacter),
-          action: `Removed like from character with ID: ${idCharacter}`,
+          userUpdate: await User.findById(_id).populate("characterFav"),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `Remover like de character con ID: ${idCharacter}`,
         });
       } catch (error) {
         // Manejo de errores al sacar el like
         return res.status(409).json({
-          error: "Error removing like",
+          error: "Error remover like",
           message: error.message,
         });
       }
@@ -593,7 +593,7 @@ const addFavGame = async (req, res, next) => {
       try {
         // Añadimos el ID del personaje al array de personajes favoritos del usuario
         await User.findByIdAndUpdate(_id, {
-          $push: { charactersFav: idCharacter },
+          $push: { characterFav: idCharacter },
         });
 
         // Añadimos el ID del usuario al array de likes del personaje
@@ -603,14 +603,14 @@ const addFavGame = async (req, res, next) => {
 
         // Enviamos la respuesta con los datos actualizados
         return res.status(200).json({
-          userUpdate: await User.findById(_id).populate("charactersFav"),
-          CharacterUpdate: await Character.findById(idCharacter),
-          action: `Added like to character with ID: ${idCharacter}`,
+          userUpdate: await User.findById(_id).populate("characterFav"),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `añadido like con character con ID: ${idCharacter}`,
         });
       } catch (error) {
         // Manejo de errores al añadir el like
         return res.status(409).json({
-          error: "Error adding like",
+          error: "Error añadir like",
           message: error.message,
         });
       }
@@ -618,7 +618,7 @@ const addFavGame = async (req, res, next) => {
   } catch (error) {
     // Manejo de errores generales
     return res.status(409).json({
-      error: "General error in character like",
+      error: "General error en crear like",
       message: error.message,
     });
   }
