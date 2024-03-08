@@ -997,6 +997,150 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+//! delete admin
+
+
+const deleteUserAdmin = async (req, res, next) => {
+  const allComments = [];
+
+  const { id } = req.params;
+
+  const user = await User.findById(id);
+
+  user.commentsByOther.forEach((comment) => {
+    allComments.push(comment);
+  });
+
+  user.postedComments.forEach((comment) => {
+    allComments.push(comment);
+  });
+
+  console.log("Todos comentarios", allComments);
+
+  try {
+  await User.findByIdAndDelete(user._id);
+
+  const existUser = await User.findById(user._id);
+  if (!existUser) {
+    // Borrado de imagen si no es la que hay por defecto
+    user.image !==
+      "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png" &&
+      deleteImgCloudinary(user.image);
+  
+  try {
+    await Game.updateMany(
+      { likes: user._id },
+      { $pull: { likes: user._id } }
+    );
+  
+    try {
+      // Actualizamos character que tenian en su array de likes el id del user
+      await Character.updateMany(
+        { likes: user._id },
+        { $pull: { likes: user._id } }
+      ); 
+    
+      try {
+        // Actualizamos users que le seguian
+        await User.updateMany(
+          { followed: user._id },
+          { $pull: { followed: user._id } }
+        );
+      
+        await User.updateMany(
+          { followers: user._id },
+          { $pull: { followers: user._id } }
+        ); 
+      
+        try {
+          // Borramos comentarios que iban dirigidos a este user borrado
+          await Comment.deleteMany({
+            recipientUser: user._id,
+          });
+
+          // Borramos comentarios de los que el user borrado es dueño (owner)
+          await Comment.deleteMany({
+            owner: user._id,
+          });
+
+          // Hemos borrado los comentarios, pero hay que actualizar los registros donde aparecen estos id de los comentarios borrados
+
+          //! Hacemos promise.all porque hay que recorrer el array de los comentarios y por cada uno realizar una serie de acciones:
+          //! actualizar registros donde aparece este id
+          //! User, Movie, Character
+
+          // Hasta que no hagas todo lo de dentro de la promesa no continues
+          Promise.all(
+            // recorremos array de id de comentarios
+            allComments.map(async (comment) => {
+              //! Por cada comentario
+              //* Actualizamos los user que tenian comentario del user borrado
+
+              await User.updateMany(
+                { commentsByOther: comment },
+                { $pull: { commentsByOther: comment } }
+              );
+
+              //* User que hicieron comentario al user borrado
+              await User.updateMany(
+                { postedComments: comment },
+                { $pull: { postedComments: comment } }
+              );
+
+              //* Movies que tiene en comments este comentario
+              await Game.updateMany(
+                { comments: comment },
+                { $pull: { comments: comment } }
+              );
+
+              //* Character que tienen en comments este comentario
+              await Character.updateMany(
+                { comments: comment },
+                { $pull: { comments: comment } }
+              );
+            })
+          ).then(async () => {
+            return res.status(200).json("User borrado");
+          });
+        } catch (error) {
+          // Error al borrar los comentarios
+          return res.status(409).json({
+            error: "Error borrando comentario",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        // Error actualizando seguidores y seguidos
+        return res.status(409).json({
+          error: "Error actualizando users",
+          message: error.message,
+        });
+      }
+    } catch (error) {
+      // Error actualizando characters
+      return res.status(409).json({
+        error: "Error actualizando characters",
+        message: error.message,
+      });
+    }
+  } catch (error) {
+    // Error al actualizar peliculas
+    return res.status(409).json({
+      error: "Error actualizando games",
+      message: error.message,
+    });
+  }
+  } else {
+  // Error user no borrado
+  return res.status(409).json({ error: "Error en el borrado" });
+  }
+  } catch (error) {
+  return res.status(409).json({
+  error: "Error general borrando el user",
+  message: error.message,
+    });
+  }
+};
 
 //!  TOGGLE LIKE FAV GAMES
 
@@ -1334,4 +1478,5 @@ module.exports = {
   addFavFollowers,
   addFavCharacters,
   getByIds,
+  deleteUserAdmin,
 };

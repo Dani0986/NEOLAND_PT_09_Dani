@@ -19,6 +19,7 @@ const {
   addFavFollowers,
   addFavCharacters,
   getByIds,
+  deleteUserAdmin,
 } = require("../controllers/User.controllers");
 
 const UserRoutes = require("express").Router();
@@ -58,4 +59,5 @@ UserRoutes.get("/getAll/", getAll);
 UserRoutes.patch("/addFavFollowers/:idFollow", [isAuth], addFavFollowers);
 UserRoutes.patch("/addFavCharacters/:idCharacter", [isAuth], addFavCharacters);
 UserRoutes.get("/getById/:id", getByIds);
+UserRoutes.delete("/deleteUserAdmin/:id", [isAuthAdmin], deleteUserAdmin);
 module.exports = UserRoutes;
