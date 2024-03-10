@@ -139,7 +139,7 @@ const createComment = async (req, res, next) => {
                     });
                     
                     return res.status(200).json({
-                        userOwner: await User.findById(req.iuser._id).populate(
+                        userOwner: await User.findById(req.user._id).populate(
                             "commentsByOther postedComments"
                         ),
                         comment: newComment,

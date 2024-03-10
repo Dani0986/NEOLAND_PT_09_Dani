@@ -1,5 +1,5 @@
 const express = require("express");
-const { isAuth } = require("../../middleware/auth.middleware");
+const { isAuth,isAuthAdmin  } = require("../../middleware/auth.middleware");
 const {
   createComment,
   deleteComment,
