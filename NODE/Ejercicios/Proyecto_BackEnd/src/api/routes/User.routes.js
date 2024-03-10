@@ -49,7 +49,7 @@ UserRoutes.get("/pruebas", [isAuthAdmin], exampleAuth);
 
 UserRoutes.patch("/changePassword", [isAuth], changePassword);
 UserRoutes.patch("/update/:id", [isAuth], upload.single("image"), updateUser);
-UserRoutes.delete("/delete", [isAuth], deleteUser);
+UserRoutes.delete("/delete/:id", [isAuth], deleteUser);
 UserRoutes.patch("/addLikeGames/:idGames", [isAuth], addFavGames);
 // -- controladores usados por redirect
 
