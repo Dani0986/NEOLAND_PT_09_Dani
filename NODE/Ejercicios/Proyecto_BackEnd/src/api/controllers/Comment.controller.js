@@ -11,6 +11,7 @@ const createComment = async (req, res, next) => {
     try {
     //traemos por params haciendo destructuring el id de quien va dirigido el comentario 
     const { idRecipient } = req.params;
+    
 
     //! el comentario va dirigido a un registro ya sea User, Character, Movie
     // Buscamos a quien va dirigifdo el comentario
@@ -173,6 +174,67 @@ const createComment = async (req, res, next) => {
     }
 };
 
+const createCommentGame = async (req, res, next) => {
+    try {
+        const { idRecipient } = req.params;
+
+        const findGame = await Game.findById(idRecipient);
+
+        if (findGame) {
+            // Crear un nuevo comentario
+            const newComment = new Comment({
+                ...req.body,
+                recipientGame: idRecipient,
+                owner: req.user._id,
+            });
+
+            // Guardar el comentario
+            const savedComment = await newComment.save();
+
+            if (savedComment) {
+                // Actualizar el juego con el nuevo comentario
+                try {
+                    await Game.findByIdAndUpdate(idRecipient, {
+                        $push: { comments: newComment._id },
+                    });
+
+                    // Devolver la respuesta con el comentario guardado
+                    return res.status(200).json({
+                        userOwner: await User.findById(req.user._id).populate(
+                            "commentsByOther postedComments"
+                        ),
+                        comment: newComment,
+                    });
+                } catch (error) {
+                    // Manejar errores al actualizar el juego
+                    return res.status(409).json({
+                        error: "Error al actualizar el juego",
+                        message: error.message,
+                    });
+                }
+            } else {
+                // Manejar errores si no se pudo guardar el comentario
+                return res.status(409).json({
+                    error: "Error al guardar el comentario",
+                    message: "No se ha guardado el comentario",
+                });
+            }
+        } else {
+            // Manejar el caso en que el destinatario no exista en ninguna colección
+            return res.status(404).json({
+                error: "El idRecipient no pertenece a ningún registro",
+                message: "El destinatario no existe",
+            });
+        }
+    } catch (error) {
+        // Manejar errores generales
+        return res.status(409).json({
+            error: "Error al crear el comentario",
+            message: error.message,
+        });
+    }
+};
+
 
 //!-------------------------- DELETE 
 
@@ -270,4 +332,4 @@ const deleteComment = async (req, res, next) => {
     }
 };
 
-module.exports = { createComment, deleteComment };
+module.exports = { createComment, deleteComment, createCommentGame };
