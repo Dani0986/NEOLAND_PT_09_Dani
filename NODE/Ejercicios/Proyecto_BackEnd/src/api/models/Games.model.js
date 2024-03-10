@@ -11,8 +11,8 @@ const gameSchema = new mongoose.Schema(
     image: { type: String, required: false },
     score: { type: String, required: false},
     character: {type: String, required: false},
-    gamesFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game"}],
-    characterFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character"}],
+   /* gamesFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game"}],
+    characterFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character"}],*/
   },
   
   

@@ -7,12 +7,16 @@ const {
     getByName,
     updateGame,
     createGameAuth,
-    addFavGame,
+    addFavGames,
+    update,
+
   } = require("../controllers/games.controller");
   
   const { isAuth, isAuthAdmin } = require("../../middleware/auth.middleware");
   const { upload } = require("../../middleware/file.middleware")
-  const gamesRoutes = require("express").Router();
+  
+  const express = require("express");
+  const gamesRoutes = express.Router();
   
 gamesRoutes.post("/create/", upload.single("image"), createGame);
 gamesRoutes.patch("/toggle/:id", toggleCharacters);
@@ -22,7 +26,9 @@ gamesRoutes.get("/getByName/:name", getByName);
 gamesRoutes.delete("/delete/:id", deleteGame);
 gamesRoutes.patch("/update/:id", [isAuth], upload.single("image"), updateGame);
 gamesRoutes.post("/createGameAuth/", upload.single("image"), createGameAuth);
-gamesRoutes.patch("/likes/:idgame", [isAuth], addFavGame);
+gamesRoutes.patch("/likes/:idGame", [isAuth], addFavGames);
+gamesRoutes.patch("/update/:id", upload.single("image"), update);
+
 
 module.exports = gamesRoutes;
   

@@ -9,6 +9,7 @@
 
 const User = require("../api/models/User.model");
 const Character = require("../api/models/Character.model");
+const Game = require("../api/models/Games.model")
 const { verifyToken } = require("../utils/token");
 
 const dotenv = require("dotenv");
