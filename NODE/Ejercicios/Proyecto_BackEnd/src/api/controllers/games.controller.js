@@ -504,177 +504,10 @@ const createGameAuth = async (req, res, next) => {
   }
 };
 
-/*
 
-//! like game
-
-// Ruta autenticada
-const addFavGame = async (req, res, next) => {
-  try {
-    // Recibimos el ID del personaje a dar like/dislike a través de req.params
-    const { idCharacter } = req.params;
-
-    // Extraemos el ID del usuario y su array de personajes favoritos del req.user
-    const { _id, characterFav } = req.user;
-
-    // Verificamos si el ID del personaje está incluido en el array de personajes favoritos del usuario
-    if (characterFav.includes(idCharacter)) {
-      // Si el personaje ya está en la lista de favoritos, lo sacamos (toggle dislike)
-
-      try {
-        // Sacamos el ID del personaje del array de personajes favoritos del usuario
-        await User.findByIdAndUpdate(_id, {
-          $pull: { characterFav: idCharacter },
-        });
-
-        // Sacamos el ID del usuario del array de likes del personaje
-        await Character.findByIdAndUpdate(idCharacter, {
-          $pull: { likes: _id },
-        });
-
-        // Enviamos la respuesta con los datos actualizados
-        return res.status(200).json({
-          userUpdate: await User.findById(_id).populate("characterFav"),
-          characterUpdate: await Character.findById(idCharacter),
-          action: `Remover like de character con ID: ${idCharacter}`,
-        });
-      } catch (error) {
-        // Manejo de errores al sacar el like
-        return res.status(409).json({
-          error: "Error remover like",
-          message: error.message,
-        });
-      }
-    } else {
-      // Si el personaje no está en la lista de favoritos, lo añadimos (toggle like)
-
-      try {
-        // Añadimos el ID del personaje al array de personajes favoritos del usuario
-        await User.findByIdAndUpdate(_id, {
-          $push: { characterFav: idCharacter },
-        });
-
-        // Añadimos el ID del usuario al array de likes del personaje
-        await Character.findByIdAndUpdate(idCharacter, {
-          $push: { likes: _id },
-        });
-
-        // Enviamos la respuesta con los datos actualizados
-        return res.status(200).json({
-          userUpdate: await User.findById(_id).populate("characterFav"),
-          characterUpdate: await Character.findById(idCharacter),
-          action: `añadido like con character con ID: ${idCharacter}`,
-        });
-      } catch (error) {
-        // Manejo de errores al añadir el like
-        return res.status(409).json({
-          error: "Error añadir like",
-          message: error.message,
-        });
-      }
-    }
-  } catch (error) {
-    // Manejo de errores generales
-    return res.status(409).json({
-      error: "General error en crear like",
-      message: error.message,
-    });
-  }
-};*/
 
 //!  TOGGLE LIKE FAV GAMES
 
-
-// Ruta autenticada
-const addFavCharacter = async (req, res, next) => {
-  try {
-    // Pensar lo que vamos a actualizar
-    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
-    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
-
-    //** recibimos id de movie por req.params
-    //* En la ruta tendremos que añadir al path --> x/:idGames
-    const { idCharacter } = req.params;
-
-    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
-    const { _id, characterFav } = req.user;
-
-    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
-
-    if (characterFav.includes(idCharacter)) {
-      // Si lo incluye --> hay que sacarlo $PULL
-
-      try {
-        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
-        await User.findByIdAndUpdate(_id, {
-          $pull: { characterFav: idCharacter },
-        });
-
-        // Sacamos de el game del array de likes el id del user
-
-        await Character.findByIdAndUpdate(idCharacter, {
-          $pull: { likes: _id },
-        });
-
-        //! ------------- respuesta
-        return res.status(200).json({
-          userUpdate: await User.findById(_id).populate(
-            "characterFav"
-          ),
-          characterUpdate: await Character.findById(idCharacter),
-          action: `pull idCharacter: ${idCharacter}`,
-        });
-      } catch (error) {
-        // Error al sacar el like
-        return res.status(409).json({
-          error: "Error al sacar el like",
-          message: error.message,
-        });
-      }
-    } else {
-      // No se incluye el id en el array de gamesFav
-      // $PUSH --> añadir este id al array
-
-      try {
-        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
-        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
-        await User.findByIdAndUpdate(_id, {
-          $push: { characterFav: idCharacter },
-        });
-
-        // Actualizamos games en su campo de likes añadir el id del user
-        await Character.findByIdAndUpdate(idCharacter, {
-          $push: { likes: _id },
-        });
-
-        //! una vez actualizados enviamos la respuesta
-        return res.status(200).json({
-          userUpdate: await User.findById(_id).populate(
-            "characterFav"
-          ),
-          characterUpdate: await Character.findById(idCharacter),
-          action: `push idCharacter: ${idCharacter}`,
-        });
-      } catch (error) {
-        // Error al añadir el like
-        return res.status(409).json({
-          error: "Error al añadir el like",
-          message: error.message,
-        });
-      }
-    }
-  } catch (error) {
-    // Error general al añadir o quitar like a games
-    return res.status(409).json({
-      error: "Error general en el like de Character",
-      message: error.message,
-    });
-  }
-};
-
-
-
-//!  TOGGLE LIKE FAV 
 
 // Ruta autenticada
 const addFavGame = async (req, res, next) => {
@@ -688,11 +521,11 @@ const addFavGame = async (req, res, next) => {
     const { idGame } = req.params;
 
     // hacemos destructuring del req.user para obtener su id y su array de gamesFav
-    const { _id, charactersFav } = req.user;
+    const { _id, gamesFav } = req.user;
 
     //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
 
-    if (charactersFav.includes(idGame)) {
+    if (gamesFav.includes(idGame)) {
       // Si lo incluye --> hay que sacarlo $PULL
 
       try {
@@ -703,17 +536,17 @@ const addFavGame = async (req, res, next) => {
 
         // Sacamos de el game del array de likes el id del user
 
-        await Game.findByIdAndUpdate(gamesFav, {
+        await Game.findByIdAndUpdate(idGame, {
           $pull: { likes: _id },
         });
 
         //! ------------- respuesta
         return res.status(200).json({
           userUpdate: await User.findById(_id).populate(
-            "gamesFav"
+            "characterFav gamesFav"
           ),
-          GameUpdate: await Game.findById(idGame),
-          action: `pull idCharacter: ${idGame}`,
+          gameUpdate: await Game.findById(idGame),
+          action: `pull idGame: ${idGame}`,
         });
       } catch (error) {
         // Error al sacar el like
@@ -741,10 +574,10 @@ const addFavGame = async (req, res, next) => {
         //! una vez actualizados enviamos la respuesta
         return res.status(200).json({
           userUpdate: await User.findById(_id).populate(
-            "gamesFav"
+            "characterFav gamesFav"
           ),
-          GameUpdate: await Game.findById(idGame),
-          action: `push idCharacter: ${idGame}`,
+          gameUpdate: await Game.findById(idGame),
+          action: `push idGame: ${idGame}`,
         });
       } catch (error) {
         // Error al añadir el like
@@ -763,4 +596,5 @@ const addFavGame = async (req, res, next) => {
   }
 };
 
-module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName, updateGame, createGameAuth, addFavGame, addFavCharacter  };
+
+module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName, updateGame, createGameAuth, addFavGame,  };

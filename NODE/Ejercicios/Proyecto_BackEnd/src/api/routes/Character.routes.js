@@ -39,7 +39,7 @@ CharacterRoutes.get("/getById/:id", getById);
 CharacterRoutes.get("/getByName/:name", getByName);
 CharacterRoutes.patch("/update/:id", upload.single("image"), update);
 CharacterRoutes.delete("/delete/:id", deleteCharacter);
-CharacterRoutes.patch("/addLikeCharacter/:idCharacter", [isAuth], addFavCharacter);
+CharacterRoutes.patch("/Like/:idCharacter", [isAuth], addFavCharacter);
 CharacterRoutes.patch("/addFavGames/:idgame", [isAuth], addFavGames);
 CharacterRoutes.patch("/updateGame/:id", [isAuth], updateGame);
 CharacterRoutes.post("/createAuth", upload.single("image"), [isAuth], createAuth);

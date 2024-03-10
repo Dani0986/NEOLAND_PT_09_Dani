@@ -24,6 +24,8 @@ const CharacterSchema = new Schema(
     likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     year: {type: String, required: false},
+    gamesFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game"}],
+    characterFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character"}],
 
   },
   // Para que salga la fecha de creacion

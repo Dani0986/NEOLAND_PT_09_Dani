@@ -8,7 +8,6 @@ const {
     updateGame,
     createGameAuth,
     addFavGame,
-    addFavCharacter
   } = require("../controllers/games.controller");
   
   const { isAuth, isAuthAdmin } = require("../../middleware/auth.middleware");
@@ -23,7 +22,7 @@ gamesRoutes.get("/getByName/:name", getByName);
 gamesRoutes.delete("/delete/:id", deleteGame);
 gamesRoutes.patch("/update/:id", [isAuth], upload.single("image"), updateGame);
 gamesRoutes.post("/createGameAuth/", upload.single("image"), createGameAuth);
-gamesRoutes.patch("/addFavGames/:idgame", [isAuth], addFavGame);
-gamesRoutes.patch("/addFavCharacters/:idCharacter", [isAuth], addFavCharacter);
+gamesRoutes.patch("/likes/:idgame", [isAuth], addFavGame);
+
 module.exports = gamesRoutes;
   
