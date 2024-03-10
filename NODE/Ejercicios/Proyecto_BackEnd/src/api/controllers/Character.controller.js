@@ -459,7 +459,7 @@ const addFavGames = async (req, res, next) => {
 
     //** recibimos id de movie por req.params
     //* En la ruta tendremos que añadir al path --> x/:idGames
-    const { idCharacter } = req.params;
+    const { idGame } = req.params;
 
     // hacemos destructuring del req.user para obtener su id y su array de gamesFav
     const { _id, charactersFav } = req.user;
@@ -649,6 +649,8 @@ const updateGame = async (req, res, next) => {
       .json({ error: "No se ha podidio actualizar", message: error.message });
   }
 };
+
+//! crear Auth
 
 
 const createAuth = async (req, res, next) => {

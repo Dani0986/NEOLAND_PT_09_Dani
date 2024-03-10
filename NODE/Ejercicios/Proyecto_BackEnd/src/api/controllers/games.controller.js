@@ -5,32 +5,7 @@ const User = require("../models/User.model");
 const { deleteImgCloudinary } = require("../../middleware/file.middleware");
 const enumOk = require("../../utils/enumOk");
 //!--------------------- POST - CREATE 
-/*
-const createGame = async (req, res, next) => {
-  console.log(req.body);
-  try {
-    await Game.syncIndexes();
 
-    // Creamos nueva instancia de Movie
-    const newGame = new Game(req.body);
-
-    // Guardamos ese registro en la db
-    const saveGame = await newGame.save();
-
-    // Si existe es que ha guardado de forma correcta --> 200
-    if (saveGame) {
-      return res.status(200).json(saveGame);
-    } else {
-      // Sino existe es que no se ha guardado --> 409
-      return res.status(409).json("No se ha podido crear game");
-    }
-  } catch (error) {
-    return res.status(409).json({
-      error: "Error en la creación de nuevo game",
-      message: error.message,
-    });
-  }
-};*/
 const createGame = async (req, res, next) => {
   // guardamos la url de la imagen que se sube a cloudinary
   // los archivos (imagen) --> req.file
@@ -475,78 +450,61 @@ const updateGame = async (req, res, next) => {
 //! crear game auth
 
 const createGameAuth = async (req, res, next) => {
+  // guardamos la url de la imagen que se sube a cloudinary
+  // los archivos (imagen) --> req.file
+
+  let catchImg = req.file?.path;
+
+  console.log("req body", req.body);
+  console.log("req file", req.file);
+
   try {
-    // Recibimos el ID del personaje a dar like/dislike a través de req.params
-    const { idCharacter } = req.params;
+    //!-----> ACTUALIZAR INDEXES
+    // Los indexes de forman cuando la clave es unica
+    // Es importante por si es modificado posteriormente a la creacion del controlador
+    await Game.syncIndexes();
 
-    // Extraemos el ID del usuario y su array de personajes favoritos del req.user
-    const { _id, charactersFav } = req.user;
+    // Creamos una nueva instancia de Character con los datos del body
 
-    // Verificamos si el ID del personaje está incluido en el array de personajes favoritos del usuario
-    if (charactersFav.includes(idCharacter)) {
-      // Si el personaje ya está en la lista de favoritos, lo sacamos (toggle dislike)
+    const newGame = new Game(req.body);
 
-      try {
-        // Sacamos el ID del personaje del array de personajes favoritos del usuario
-        await User.findByIdAndUpdate(_id, {
-          $pull: { charactersFav: idCharacter },
-        });
-
-        // Sacamos el ID del usuario del array de likes del personaje
-        await Character.findByIdAndUpdate(idCharacter, {
-          $pull: { likes: _id },
-        });
-
-        // Enviamos la respuesta con los datos actualizados
-        return res.status(200).json({
-          userUpdate: await User.findById(_id).populate("charactersFav"),
-          CharacterUpdate: await Character.findById(idCharacter),
-          action: `Remover like de character  ID: ${idCharacter}`,
-        });
-      } catch (error) {
-        // Manejo de errores al sacar el like
-        return res.status(409).json({
-          error: "Error remover like",
-          message: error.message,
-        });
-      }
+    // Comprobamos si hay imagen para añadirla al Character creado
+    if (catchImg) {
+      newGame.image = catchImg;
     } else {
-      // Si el personaje no está en la lista de favoritos, lo añadimos (toggle like)
+      // sino trae imagen la solicitud, le ponemos al character una imagen por defecto
+      newGame.image =
+        "https://res.cloudinary.com/dhkbe6djz/image/upload/v1689099748/UserFTProyect/tntqqfidpsmcmqdhuevb.png";
+    }
 
-      try {
-        // Añadimos el ID del personaje al array de personajes favoritos del usuario
-        await User.findByIdAndUpdate(_id, {
-          $push: { charactersFav: idCharacter },
-        });
+    //!---------- GUARDAMOS EL CHARACTER CREADO
+    const saveGame = await newGame.save();
 
-        // Añadimos el ID del usuario al array de likes del personaje
-        await Character.findByIdAndUpdate(idCharacter, {
-          $push: { likes: _id },
-        });
-
-        // Enviamos la respuesta con los datos actualizados
-        return res.status(200).json({
-          userUpdate: await User.findById(_id).populate("charactersFav"),
-          CharacterUpdate: await Character.findById(idCharacter),
-          action: `: ${idCharacter}`,
-        });
-      } catch (error) {
-        // Manejo de errores al añadir el like
-        return res.status(409).json({
-          error: "Error añadir like",
-          message: error.message,
-        });
-      }
+    // Comprobamos si el character se ha guardado para lanzar una respuesta
+    if (saveGame) {
+      //Si se ha guardado lanzamos una respuesta correcta con los datos del Character generados
+      return res.status(200).json(saveGame);
+    } else {
+      // si no se ha guardado hay un error y lo lanzamos en la respuesta
+      return res
+        .status(404)
+        .json("No se ha podido guaradar en la base de datos");
     }
   } catch (error) {
-    // Manejo de errores generales
-    return res.status(409).json({
-      error: "General error en character like",
-      message: error.message,
-    });
+    //! -----> solo entramos aqui en el catch cuando ha habido un error
+    /** SI HA HABIDO UN ERROR -----
+     * Tenemos que borrar la imagen en cloudinary porque se sube antes de que nos metamos en
+     * el controlador---> porque es un middleware que esta entre la peticion del cliente y el controlador
+     */
+    // comprobar si hay imagen en req.file porqe si es asi se ha subido a cloudinary y hay borrarla
+
+    req.file?.path && deleteImgCloudinary(catchImg);
+    next(error);
+    return res.status(409).json("Error en el creado de Game");
   }
 };
 
+/*
 
 //! like game
 
@@ -622,5 +580,187 @@ const addFavGame = async (req, res, next) => {
       message: error.message,
     });
   }
+};*/
+
+//!  TOGGLE LIKE FAV GAMES
+
+
+// Ruta autenticada
+const addFavCharacter = async (req, res, next) => {
+  try {
+    // Pensar lo que vamos a actualizar
+    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
+    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
+
+    //** recibimos id de movie por req.params
+    //* En la ruta tendremos que añadir al path --> x/:idGames
+    const { idCharacter } = req.params;
+
+    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
+    const { _id, characterFav } = req.user;
+
+    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
+
+    if (characterFav.includes(idCharacter)) {
+      // Si lo incluye --> hay que sacarlo $PULL
+
+      try {
+        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
+        await User.findByIdAndUpdate(_id, {
+          $pull: { characterFav: idCharacter },
+        });
+
+        // Sacamos de el game del array de likes el id del user
+
+        await Character.findByIdAndUpdate(idCharacter, {
+          $pull: { likes: _id },
+        });
+
+        //! ------------- respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "characterFav"
+          ),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `pull idCharacter: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Error al sacar el like
+        return res.status(409).json({
+          error: "Error al sacar el like",
+          message: error.message,
+        });
+      }
+    } else {
+      // No se incluye el id en el array de gamesFav
+      // $PUSH --> añadir este id al array
+
+      try {
+        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
+        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
+        await User.findByIdAndUpdate(_id, {
+          $push: { characterFav: idCharacter },
+        });
+
+        // Actualizamos games en su campo de likes añadir el id del user
+        await Character.findByIdAndUpdate(idCharacter, {
+          $push: { likes: _id },
+        });
+
+        //! una vez actualizados enviamos la respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "characterFav"
+          ),
+          characterUpdate: await Character.findById(idCharacter),
+          action: `push idCharacter: ${idCharacter}`,
+        });
+      } catch (error) {
+        // Error al añadir el like
+        return res.status(409).json({
+          error: "Error al añadir el like",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Error general al añadir o quitar like a games
+    return res.status(409).json({
+      error: "Error general en el like de Character",
+      message: error.message,
+    });
+  }
 };
-module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName, updateGame, createGameAuth, addFavGame  };
+
+
+
+//!  TOGGLE LIKE FAV 
+
+// Ruta autenticada
+const addFavGame = async (req, res, next) => {
+  try {
+    // Pensar lo que vamos a actualizar
+    // --> 1) Games --> array likes --> necesitamos el id de este game (req.params) -- id user (middleware req.user)
+    // --> 2) User --> array gamesFav --> necesitamos id de este game (req.params) -- id user (middleware req.user)
+
+    //** recibimos id de movie por req.params
+    //* En la ruta tendremos que añadir al path --> x/:idGames
+    const { idGame } = req.params;
+
+    // hacemos destructuring del req.user para obtener su id y su array de gamesFav
+    const { _id, charactersFav } = req.user;
+
+    //* TOGGLE -- hay que ver si este id esta incluido en el array de gamesFav del user --> para sacarlo o meterlo
+
+    if (charactersFav.includes(idGame)) {
+      // Si lo incluye --> hay que sacarlo $PULL
+
+      try {
+        // Sacamos del user del array de gamesFav el id de la games que le ha dado ha me gusta
+        await User.findByIdAndUpdate(_id, {
+          $pull: { gamesFav: idGame },
+        });
+
+        // Sacamos de el game del array de likes el id del user
+
+        await Game.findByIdAndUpdate(gamesFav, {
+          $pull: { likes: _id },
+        });
+
+        //! ------------- respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "gamesFav"
+          ),
+          GameUpdate: await Game.findById(idGame),
+          action: `pull idCharacter: ${idGame}`,
+        });
+      } catch (error) {
+        // Error al sacar el like
+        return res.status(409).json({
+          error: "Error al sacar el like",
+          message: error.message,
+        });
+      }
+    } else {
+      // No se incluye el id en el array de gamesFav
+      // $PUSH --> añadir este id al array
+
+      try {
+        // Actualizamos el user añadiendo en el campo de gamesFav el id de games
+        // findByIdAndUpdate --> 1) id del registro que queremos actualizar 2) Accion pull, push
+        await User.findByIdAndUpdate(_id, {
+          $push: { gamesFav: idGame },
+        });
+
+        // Actualizamos games en su campo de likes añadir el id del user
+        await Game.findByIdAndUpdate(idGame, {
+          $push: { likes: _id },
+        });
+
+        //! una vez actualizados enviamos la respuesta
+        return res.status(200).json({
+          userUpdate: await User.findById(_id).populate(
+            "gamesFav"
+          ),
+          GameUpdate: await Game.findById(idGame),
+          action: `push idCharacter: ${idGame}`,
+        });
+      } catch (error) {
+        // Error al añadir el like
+        return res.status(409).json({
+          error: "Error al añadir el like",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    // Error general al añadir o quitar like a games
+    return res.status(409).json({
+      error: "Error general en el like de Character",
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { createGame, toggleCharacters, deleteGame, getAll, getById, getByName, updateGame, createGameAuth, addFavGame, addFavCharacter  };
