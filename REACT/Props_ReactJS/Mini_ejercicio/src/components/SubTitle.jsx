@@ -1,14 +1,13 @@
 
 
 import PropTypes from 'prop-types'; // Importa PropTypes
-import styles from './SubTitle.css';
+import './SubTitle.css';
 
-const SubTitle = ({ text }) => {
-  return <h2 className={styles.subtitle}>{text}</h2>;
+export const SubTitle = ({ text }) => {
+  return <h2>{text}</h2>;
 };
 
 SubTitle.propTypes = {
   text: PropTypes.string, // Valida que text sea una string (opcional)
 };
 
-export default SubTitle;

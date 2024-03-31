@@ -1,12 +1,11 @@
 import PropTypes from 'prop-types'; // Importa PropTypes
-import styles from './Paragraph.module.css';
+import  './Paragraph.css';
 
-const Paragraph = ({ text }) => {
-  return <p className={styles.paragraph}>{text}</p>;
+export const Paragraph = ({ text }) => {
+  return <p>{text}</p>;
 };
 
 Paragraph.propTypes = {
   text: PropTypes.string, // Valida que text sea una string (opcional)
 };
 
-export default Paragraph;
