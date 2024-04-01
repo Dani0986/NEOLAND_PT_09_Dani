@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import styles from './Main.css';
+import './Main.css';
 
 export const Main = ({ children }) => {
-  return <main className={styles.main}>{children}</main>;
+  return <main>{children}</main>;
 };
 
 

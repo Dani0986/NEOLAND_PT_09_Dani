@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import styles from './Paragraph.module.css';
+import  './Paragraph.css';
 
 export const Paragraph = ({ text }) => {
-  return <p className={styles.paragraph}>{text}</p>;
+  return <p>{text}</p>;
 };
 
 Paragraph.propTypes = {
