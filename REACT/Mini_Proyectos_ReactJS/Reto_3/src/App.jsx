@@ -1,35 +1,81 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import { hobbies } from './data/hobbies';
+import { Idiomas } from './Components/Idiomas/Idiomas';
+import { Peliculas } from './Components/Peliculas/Pelicula';
+import { Read } from './Components/Read/Read';
+import { SongsHeard } from './Components/SongHeard/SongHeard';
+import { Sports } from './Components/Sports/Sports';
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const data = hobbies;
+ 
+   return (
+     <>
+     <h1>Mis Hobbies</h1>
+       <div>
+       <h2>Idiomas</h2>
+       {data.languages.map((item) => (
+         <Idiomas
+         key={item.id}
+         idioma={item.language}
+         wrlevel={item.wrlevel}
+         splevel={item.splevel}
+         />
+       ))}
+       </div>
+       <div>
+         <h2>Películas</h2>
+         {data.movies.map((item) =>(
+           <Peliculas
+           key={item.name}
+           nombre={item.name}
+           tipo={item.type}
+           genero={item.genre}
+           puntuacion={item.vote}
+           />
+         ))}
+       </div>
+       <div>
+         <h2>Libros</h2>
+         {data.read.map((item) =>(
+           <Read
+           key={item.id}
+           titulo={item.title}
+           autorN={item.authorName}
+           autorS={item.authorSurname}          
+           genero={item.genre} 
+           fechaP={item.dateOfPublication}
+           fechaA={item.authorBirthDate}
+           image={item.bookImage}
+           />
+         ))}
+       </div>
+       <div>
+         <h2>Música</h2>
+         {data.songsHeard.map((item) =>(
+           <SongsHeard
+           key={item.id}
+           song={item.song}
+           artist={item.artist}
+           genre={item.genre}          
+           />
+         ))}
+       </div>
+       <div>
+         <h2>Deportes</h2>
+         {data.sports.map((item) =>(
+           <Sports
+           key={item.id}
+           name={item.name}
+           indoor={item.indoor}
+           favoriteTeam={item.favoriteTeam}          
+           />
+         ))}
+       </div>
+ 
+ 
+     </>
+   )
+ }
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App

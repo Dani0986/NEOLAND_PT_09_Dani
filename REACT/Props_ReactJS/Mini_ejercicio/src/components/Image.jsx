@@ -1,7 +1,7 @@
 
 
 import PropTypes from 'prop-types'; // Importa PropTypes
-import  './Image.css'; // Asegúrate de que la ruta sea correcta
+import  './image.css'; // Asegúrate de que la ruta sea correcta
 
 
 export const Image = ({ src, alt, width, height }) => {
