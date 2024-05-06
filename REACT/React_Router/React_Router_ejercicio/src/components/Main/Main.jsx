@@ -1,13 +1,23 @@
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import "./main.css";
 
-const Main = ({ children }) => {
-  return <main>{children}</main>;
-};
+export const Main = () => {
+  return (
+    <main className="main">
+          <>
+      <h2>Home Page</h2>
 
-export default Main;
+      <p>App ejemplo sobre React Router</p>
 
-Main.propTypes = {
-    children: PropTypes.string, // Valida que text sea una string (opcional)
-  };
-  
-  
+      <ul>
+        <li>
+          <p>
+            <span>Visita la página de héroes:</span>
+            <Link to="heroes">Heroes</Link>
+          </p>
+        </li>
+      </ul>
+    </>
+    </main>
+  )
+}
