@@ -15,9 +15,15 @@ console.log(reverseArray); // Output: [5, 4, 3, 2, 1]
 */
 
 const arr = ['J','K','Q','A',]
-//let initIndex = 0;
-//let endIndex = arr[arr.length - 1];
 
-for (let initIndex = 0, endIndex = array.length-1 ; initIndex < endIndex) {
-    const element = array[index];
+
+function customReverse (array) {
+    for (let initIndex = 0, endIndex = array.length - 1; initIndex < endIndex; initIndex++, endIndex--) {
+    const element = array[initIndex];
+    array[initIndex] = array[endIndex];
+    array[endIndex] = element;
 }
+ return array
+}
+
+console.log(customReverse(arr));
