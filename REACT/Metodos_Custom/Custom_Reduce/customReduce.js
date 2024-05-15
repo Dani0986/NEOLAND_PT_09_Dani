@@ -24,3 +24,4 @@ console.log(sum); //  15
 // Concatenar todos los elementos como una cadena
 const concatenar = customReduce(arr, (accumulator, currentValue) => accumulator + currentValue.toString(), '');
 console.log(concatenar); // 12345'
+
