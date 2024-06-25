@@ -33,7 +33,7 @@ const CharacterRoutes = express.Router();
 //  * clave quiero que el midddleware upload me lo suba a cloudinary para este disponible cuando entre
 //  * al controlador mediante la req.file.path ===> esto es igual a la URL de la imagen en cloudinary
 
-CharacterRoutes.post("/create", upload.single("image"), create);
+CharacterRoutes.post("/create/", upload.single("image"), create);
 CharacterRoutes.get("/getAll/", getAll);
 CharacterRoutes.get("/getById/:id", getById);
 CharacterRoutes.get("/getByName/:name", getByName);
