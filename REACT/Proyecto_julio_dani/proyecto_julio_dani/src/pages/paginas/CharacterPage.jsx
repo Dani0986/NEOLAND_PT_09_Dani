@@ -6,11 +6,11 @@ import { useCharacter } from '../hooks/useCharacter';
 import { useGames } from '../hooks/useGames';
 
 export const CharacterPage = () => {
-  //*Destructuramos los contextos y generamos los estados,
+  //*Destructuramos los contextos y generamos los estados
   const { user, logout } = useAuth();
   const [fotoPerfil, setFotoPerfil] = useState('');
   const [inputs, setInputs] = useState({
-   //* con los datos imputs que necesitaremos poblar con un usestate
+    //* Datos que necesitamos para poblar con useState
     Juego: '',
     Personaje: '',
     Año: '',
@@ -18,36 +18,36 @@ export const CharacterPage = () => {
     Usuario: ''
   });
 
-  //*llamamos al context  PARA PODER BUSCAR SU ID Y AÑADIRLE EL Charaacter
-  const Character = useCharacter(); 
-  const Games = useGames(); // Usar el contexto de coches (aunque no se usa en este componente)
+  //*Llamamos al contexto para poder buscar su ID y añadirle el Character
+  const characters = useCharacter(); 
+  const games = useGames(); // Usar el contexto de juegos (aunque no se usa en este componente)
 
-//* usamos useeffect parra buscar el character que tenga asociado el correo en el localstorage
+  //* Usamos useEffect para buscar el Character que tenga asociado el correo en el localStorage
   useEffect(() => {
     const encontrarCharacter = () => {
-      const characterEncontrado = Character.find(Character => Character.Email === user.correo);
-      //* si hay, que siempre habrá
+      const characterEncontrado = characters.find(character => character.Email === user.correo);
+      //* Si hay, que siempre habrá
       if (characterEncontrado) {
         setInputs(prevState => ({
-          //* traemos el id y se lo ponemos al input character, así se añade el Character al user
+          //* Traemos el ID y se lo ponemos al input Usuario, así se añade el Character al user
           ...prevState,
-          Conductores: characterEncontrado._id
+          Usuario: characterEncontrado._id
         }));
-        //* y la imagen que usamos en el header
+        //* Y la imagen que usamos en el header
         setFotoPerfil(characterEncontrado.Imagen);
       } else {
         console.log('Character no encontrado');
       }
     };
-//* Y SI HAY CONDUCTOR, PUES SE LLAMA A LA FUNCIÓN
-    if (Character.length > 0) {
+    //* Y si hay Characters, pues se llama a la función
+    if (characters.length > 0) {
       encontrarCharacter();
     }
-    //* esto cambiara cuando cambiemos el correo en el localstorage
-  }, [Character, user.correo]);
+    //* Esto cambiará cuando cambiemos el correo en el localStorage
+  }, [characters, user.correo]);
 
-  //* cuando cambia el input, nos vamso al usestate de los inputs a coger l oque teníamos ... y añadir
-  //* esto l oañadimos en el manejo del input
+  //* Cuando cambia el input, nos vamos al useState de los inputs a coger lo que teníamos ... y añadir
+  //* Esto lo añadimos en el manejo del input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInputs(prevState => ({
@@ -55,17 +55,18 @@ export const CharacterPage = () => {
       [name]: value
     }));
   };
-//* LE PONEMOS UN HANDLESUBMIT PARA QUE NO HAGA LO DEFAULT, SI NO LO QUE LE PIDA 
-//* que en este caso es ir con axios al endpoint de crear coches pasándole
-//* los datos de los  inputs, para que lo cree
+
+  //* Le ponemos un handleSubmit para que no haga lo default, sino lo que le pidamos
+  //* Que en este caso es ir con axios al endpoint de crear characters pasándole
+  //* Los datos de los inputs, para que lo cree
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/api/v1/character/create', inputs);
+      const response = await axios.post('http://localhost:8081/api/v1/characters/create', inputs);
       console.log('Character registrado:', response.data);
-//* después que salga un alert de character añadido
+      //* Después que salga un alert de character añadido
       window.alert('Character añadido correctamente');
-      //* y que nos lelve a a home de vuelta
+      //* Y que nos lleve a home de vuelta
       window.location.href = '/autorizado/home';
     } catch (error) {
       console.error('Error al registrar Character:', error);
@@ -103,11 +104,11 @@ export const CharacterPage = () => {
           </Link>
         </div>
       </header>
-      {/* //* LE PONEMOS UN HANDLESUBMIT PARA QUE NO HAGA LO DEFAULT, SI NO LO QUE LE PIDA */}
+      {/* //* LE PONEMOS UN HANDLESUBMIT PARA QUE NO HAGA LO DEFAULT, SINO LO QUE LE PIDAMOS */}
       <form onSubmit={handleSubmit}>
-    {/* //* VAMOS PINTANDO EL INPUT DE DATOS DEL CHARACTER 
-    //* QUE CUANDO CAMBIE SE UNE AL HANDLECHANGE DE ARRIBA Y SE UNE A LOS CAMPOS QUE CREAMOS
-    //* ARRIBA EN EL USESTATE*/}
+        {/* //* VAMOS PINTANDO EL INPUT DE DATOS DEL CHARACTER
+        //* QUE CUANDO CAMBIE SE UNE AL HANDLECHANGE DE ARRIBA Y SE UNE A LOS CAMPOS QUE CREAMOS
+        //* ARRIBA EN EL USESTATE*/}
         <label>Juego:</label>
         <input type="text" name="Juego" value={inputs.Juego} onChange={handleChange} required />
         <br />
@@ -120,7 +121,7 @@ export const CharacterPage = () => {
         <label>URL de la Imagen:</label>
         <input type="url" name="Imagen" value={inputs.Imagen} onChange={handleChange} required />
         <br />
-        <button type="submit">Registrar Usuario</button>
+        <button type="submit">Registrar Character</button>
       </form>
     </div>
   );

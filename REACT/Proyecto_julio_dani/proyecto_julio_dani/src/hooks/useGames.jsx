@@ -1,6 +1,9 @@
-import { useContext } from "react";
+import { useFetch } from "./index.jsx"
 
-import { gamesContext } from "../context/gamesContext";
-
-//* generamos un customhook para usar el context
-export const useMultas = () => useContext(gamesContext);
+export const useGames = () => {
+    const useGetAllGames = async ()=>{
+        useFetch("http://localhost:8080/api/v1/games/getAllGames")
+    }
+    console.log("AllGames", useGetAllGames)
+  return {useGetAllGames}
+  }

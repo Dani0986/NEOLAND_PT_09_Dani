@@ -22,14 +22,14 @@ const Button = styled.button`
   }
 `;
 
-export const RegistroPage = () =>{
+export const RegistroPage = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [image, setImage] = useState(null); 
+  const [image, setImage] = useState(null);
 
-  //* UN PERSONALIZADO QUE HACE LAS EQUIVALENCIAS ENTRE L OQUE RECIBE PRO INPUTS Y L OQUE MANDA AL
- //* ENDPOINT DE REGISTRO. ES ASINCRONO PORQUE LO TRAE DE ABAJO DE LOS INPUT
- //* LO HACE CON UNA FUNCIÓN DE JAVASCRIPT FORMADATA AUE CONSTRUYE CLAVES VALOR
+  //* UN PERSONALIZADO QUE HACE LAS EQUIVALENCIAS ENTRE LO QUE RECIBE POR INPUTS Y LO QUE MANDA AL
+  //* ENDPOINT DE REGISTRO. ES ASINCRONO PORQUE LO TRAE DE ABAJO DE LOS INPUT
+  //* LO HACE CON UNA FUNCIÓN DE JAVASCRIPT FORMADATA QUE CONSTRUYE CLAVES VALOR
   const onSubmitCustom = async (data) => {
     try {
       const formData = new FormData();
@@ -42,14 +42,14 @@ export const RegistroPage = () =>{
       formData.append('Imagen', image); 
       formData.append('Nacimiento', data.Nacimiento); 
 
-   //* Y MANDA TODO EL FORMADATA AL ENDPOINT CON LOS HEADERS Y L OQUE HA IDO ÑADIENDO 
-   //* CON AXIOS CON MÉTODO POST
+      //* Y MANDA TODO EL FORMADATA AL ENDPOINT CON LOS HEADERS Y LO QUE HA IDO AÑADIENDO 
+      //* CON AXIOS CON MÉTODO POST
       await axios.post('http://localhost:8081/api/v1/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-   //* Y TE MANDA AL LOGIN
+      //* Y TE MANDA AL LOGIN
       navigate('/login');
     } catch (error) {
       console.error('Error al registrar:', error);
@@ -66,8 +66,8 @@ export const RegistroPage = () =>{
       <div id="logoentrada" style={{ marginTop: "75px " }}>
         <img src="" alt="Captura de pantalla" />
       </div>
-  {/* //* LE METO EL SUBMITCUSOTM A LSO INPUT Y LOS CREO CON EL HOOK DE REACKT-HOOK-FORM USEFORM 
-  //* EL REGISTER LO REGISTRA*/}
+      {/* //* LE METO EL SUBMITCUSTOM A LOS INPUT Y LOS CREO CON EL HOOK DE REACT-HOOK-FORM USEFORM 
+      //* EL REGISTER LOS REGISTRA*/}
       <form onSubmit={handleSubmit(onSubmitCustom)}>
         <div className="form-group" id="primerinputlogin">
           <label htmlFor="Nombre">Nombre</label>
@@ -91,7 +91,7 @@ export const RegistroPage = () =>{
         </div>
         <div className="form-group">
           <label htmlFor="Email">Correo</label>
-          <input type="text" id="Email" {...register("Email", { required: 'Email obligatorio' })} />
+          <input type="email" id="Email" {...register("Email", { required: 'Email obligatorio' })} />
           {errors.Email && <p>{errors.Email.message}</p>}
         </div>
         <div className="form-group">
@@ -109,7 +109,7 @@ export const RegistroPage = () =>{
           <label htmlFor="Imagen">Imagen</label>
           <input type="file" id="Imagen" onChange={handleImageChange} />
         </div>
-          <Button type="submit" id="botonentrar">Regístrate</Button>
+        <Button type="submit" id="botonentrar">Regístrate</Button>
         <br />
         {"o "}
         <Link to="/login" id="linkregistro">
