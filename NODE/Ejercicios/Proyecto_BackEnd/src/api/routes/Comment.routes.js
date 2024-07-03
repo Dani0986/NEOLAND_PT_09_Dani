@@ -11,4 +11,5 @@ const CommentRoutes = express.Router();
 CommentRoutes.post("/create/:idRecipient",[isAuth], createComment);
 CommentRoutes.delete("/delete/:id", deleteComment);
 CommentRoutes.post("/createCommentGame/:idRecipient",[isAuthAdmin], createCommentGame);
+gamesRoutes.get("/getAll/", getAll);
 module.exports = CommentRoutes;
