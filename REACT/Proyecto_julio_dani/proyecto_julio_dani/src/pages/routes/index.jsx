@@ -1,1 +1,0 @@
-export {PagesRoutes} from "./PagesRoutes";
