@@ -4,6 +4,7 @@ const {
   createComment,
   deleteComment,
   createCommentGame,
+  getAllComment,
 } = require("../controllers/Comment.controller");
 
 const CommentRoutes = express.Router();
@@ -11,5 +12,5 @@ const CommentRoutes = express.Router();
 CommentRoutes.post("/create/:idRecipient",[isAuth], createComment);
 CommentRoutes.delete("/delete/:id", deleteComment);
 CommentRoutes.post("/createCommentGame/:idRecipient",[isAuthAdmin], createCommentGame);
-gamesRoutes.get("/getAll/", getAll);
+CommentRoutes.get("/getAllComment/", getAllComment);
 module.exports = CommentRoutes;
